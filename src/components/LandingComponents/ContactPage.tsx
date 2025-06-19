@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import video from "../../assets/videos/glass-wave.mp4";
+
 const Contact: React.FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
   
     useEffect(() => {
+      // fallback play() call if needed
       videoRef.current?.play().catch(() => {
         console.warn('Autoplay blocked');
       });
@@ -42,7 +44,7 @@ const Contact: React.FC = () => {
           muted
           playsInline                 /* <-- standard prop */
           webkit-playsinline="true"  /* <-- lower-case for older iOS */
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         > <source src={video} type="video/mp4" />
         </video>
 

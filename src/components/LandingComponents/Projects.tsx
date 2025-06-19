@@ -46,7 +46,7 @@ const Projects = () => {
                     : 'text-gray-500 hover:text-gray-700 pl-4'
                 }`}
                 onClick={() => setActiveProject(idx)}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
               >
@@ -70,10 +70,8 @@ const Projects = () => {
             // The point where the next project's image starts becoming visible.
             const projectEnd = projectStart + slotSize;
 
-            // A small fraction of the slot to use for the fade transition.
-            // 0.2 means the fade will take up 20% of the project's scroll slot.
-            // Feel free to tweak this value (e.g., to 0.1 for a faster fade or 0.3 for a slower one).
-            const FADE_DURATION_FACTOR = 0.2;
+
+            const FADE_DURATION_FACTOR = 0.1;
             const fadeDuration = slotSize * FADE_DURATION_FACTOR;
 
             // eslint-disable-next-line react-hooks/rules-of-hooks

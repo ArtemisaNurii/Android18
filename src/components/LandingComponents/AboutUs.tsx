@@ -83,9 +83,9 @@ const AboutUsPage: React.FC = () => {
 
           {/* --- CHANGE 3: Add the target class 'gsap-fade-in' --- */}
           <div className="max-w-3xl mx-auto gsap-fade-in">
-            <p className="text-gray-600 leading-relaxed text-base lg:text-lg">
+            {/* <p className="text-gray-600 leading-relaxed text-base lg:text-lg">
               Our partnership and certification programs offer unparalleled opportunities for businesses to collaborate with our expert team—driving impactful results in custom software development, digital transformation, and beyond.
-            </p>
+            </p> */}
           </div>
         </section>
 

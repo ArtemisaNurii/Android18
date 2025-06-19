@@ -52,7 +52,7 @@ const Testimonials: React.FC = () => {
           muted
           playsInline                 /* <-- standard prop */
           webkit-playsinline="true"  /* <-- lower-case for older iOS */
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         > <source src={video} type="video/mp4" />
         </video>
       {/* Dark overlay for readability */}

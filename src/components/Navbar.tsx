@@ -97,7 +97,7 @@ const NavbarVariant = () => {
                 <button
                   key={id}
                   onClick={() => handleClick(id)}
-                  className="text-white text-2xl font-semibold hover:text-gray-400 transition"
+                  className="text-white text-2xl  hover:text-gray-400 transition"
                 >
                   {label}
                 </button>

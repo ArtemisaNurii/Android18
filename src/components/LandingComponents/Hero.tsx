@@ -52,18 +52,18 @@ const Hero: React.FC = () => {
         <main className="grid md:grid-cols-2 items-center gap-8 w-full">
           {/* Left column */}
           <div className="max-w-xl">
-            <h1 className="text-6xl lg:text-7xl leading-tight text-center md:text-left">
+            <h1 className="text-6xl lg:text-7xl  max-sm:text-6xl leading-tight text-center md:text-left">
               CODEVIDER
             </h1>
-            <p className="text-4xl mt-4 text-center md:text-left">
+            <p className="text-4xl mt-4 text-center md:text-left max-sm:text-2xl">
               Launch your journey here and experience inspiration without bounds.
             </p>
           </div>
 
           {/* Right column */}
-          <div className="md:justify-self-end w-full">
+          <div className="md:justify-self-end   w-full">
             <div className="max-w-sm flex flex-col items-center gap-y-6 md:items-start">
-              <p className="text-base text-gray-300 text-center md:text-left">
+              <p className="text-base text-gray-300 text-center md:text-left  max-sm:hidden ">
                 Join us in crafting a digital experience that truly distinguishes you from others
               </p>
               <button className="bg-white text-black font-semibold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
