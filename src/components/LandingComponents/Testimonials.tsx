@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Marquee from 'react-fast-marquee';
 import sarah from '../../assets/images/sarah.jpg';
 import james from '../../assets/images/james.jpg';
@@ -34,17 +34,27 @@ const testimonials: Testimonial[] = [
 ];
 
 const Testimonials: React.FC = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+  
+    useEffect(() => {
+      // fallback play() call if needed
+      videoRef.current?.play().catch(() => {
+        console.warn('Autoplay blocked');
+      });
+    }, []);
   return (
     <section className="relative overflow-hidden py-32 px-6 md:px-20 text-white">
       {/* Video Background with slight blur */}
       <video
-        className="absolute inset-0 w-full h-full object-cover filter blur-sm"
-        autoPlay
-        loop
-        muted
-      >
-        <source src={video} type="video/mp4" />
-      </video>
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline                 /* <-- standard prop */
+          webkit-playsinline="true"  /* <-- lower-case for older iOS */
+          className="w-full h-full object-cover"
+        > <source src={video} type="video/mp4" />
+        </video>
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/60" />
 

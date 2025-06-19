@@ -1,14 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import video from "../../assets/videos/glass-wave.mp4";
+import poster from "../../assets/images/poster.png"
 
 const Hero: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [loaded, setLoaded] = useState(false);
 
+  // once the video can play, flip loaded to true
   useEffect(() => {
-    // fallback play() call if needed
-    videoRef.current?.play().catch(() => {
-      console.warn('Autoplay blocked');
-    });
+    const v = videoRef.current;
+    if (!v) return;
+
+    function onCanPlay() {
+      setLoaded(true);
+      v.play().catch(() => {});
+    }
+    v.addEventListener('canplay', onCanPlay);
+    return () => v.removeEventListener('canplay', onCanPlay);
   }, []);
   return (
     <div className="relative w-full h-screen overflow-hidden font-sans text-white">
@@ -19,10 +27,12 @@ const Hero: React.FC = () => {
           autoPlay
           loop
           muted
-          playsInline                 /* <-- standard prop */
-          webkit-playsinline="true"  /* <-- lower-case for older iOS */
+          playsInline
+          webkit-playsinline="true"
+          poster={poster}
           className="w-full h-full object-cover"
-        > <source src={video} type="video/mp4" />
+        >
+          <source src={video} type="video/mp4" />
         </video>
       </div>
 

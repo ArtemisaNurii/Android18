@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import video from "../../assets/videos/glass-wave.mp4";
-
 const Contact: React.FC = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+  
+    useEffect(() => {
+      videoRef.current?.play().catch(() => {
+        console.warn('Autoplay blocked');
+      });
+    }, []);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -30,12 +36,14 @@ const Contact: React.FC = () => {
       <section className="relative h-screen overflow-hidden py-20 px-6 md:px-20">
         {/* Video Background */}
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          ref={videoRef}
           autoPlay
           loop
           muted
-        >
-          <source src={video} type="video/mp4" />
+          playsInline                 /* <-- standard prop */
+          webkit-playsinline="true"  /* <-- lower-case for older iOS */
+          className="w-full h-full object-cover"
+        > <source src={video} type="video/mp4" />
         </video>
 
         {/* Overlay to ensure readability */}
@@ -112,7 +120,7 @@ const Contact: React.FC = () => {
               Let's talk
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+          <div className=" grid md:grid-cols-3 gap-8 text-sm">
             <div>
               <p className="font-semibold">Codevider</p>
             </div>
