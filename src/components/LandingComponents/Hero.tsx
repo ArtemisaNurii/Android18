@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import video from "../../assets/videos/glass-wave.mp4";
 
 const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // fallback play() call if needed
+    videoRef.current?.play().catch(() => {
+      console.warn('Autoplay blocked');
+    });
+  }, []);
   return (
     <div className="relative w-full h-screen overflow-hidden font-sans text-white">
       {/* Video background */}
       <div className="absolute inset-0 z-0 w-full h-full">
-        <video autoPlay loop muted className="w-full h-full object-cover">
-          <source src={video} type="video/mp4" />
+      <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline                 /* <-- standard prop */
+          webkit-playsinline="true"  /* <-- lower-case for older iOS */
+          className="w-full h-full object-cover"
+        > <source src={video} type="video/mp4" />
         </video>
       </div>
 
