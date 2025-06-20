@@ -67,14 +67,14 @@ const Process: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-sm uppercase text-[#] mb-2">Process</p>
-          <h2 className="text-4xl font-bold text-gray-800">
+          <h2 className="text-4xl lg:text-5xl  text-gray-900 ">
             Our Project Life Cycle
           </h2>
         </div>
 
         <div className="relative" ref={containerRef}>
           <motion.div
-            className="absolute left-1/2 transform -translate-x-1/2 top-0 w-1 bg-gray-300"
+            className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[2px] bg-gray-300 max-md:hidden"
             style={{ height: lineHeight }}
           />
 
@@ -84,13 +84,13 @@ const Process: React.FC = () => {
               <div key={idx} className="relative mb-16">
                 <div
                   className={
-                    `absolute top-0 left-1/2 w-4 h-4 bg-gray-300 opacity/30 rounded-full transform -translate-x-1/2`
+                    `absolute top-0 left-1/2 w-4 h-4 bg-gray-300 opacity/30 rounded-full transform -translate-x-1/2 max-md:hidden`
                   }
                 />
 
                 <motion.div
                   className={
-                    `w-full md:w-1/2 px-6 py-8 bg-white-70 rounded-2xl  ` +
+                    `w-full md:w-1/2 px-6 py-4 bg-white-70 rounded-2xl  ` +
                     (isLeft
                       ? 'md:ml-auto md:text-right'
                       : 'md:mr-auto md:text-left')
@@ -100,10 +100,10 @@ const Process: React.FC = () => {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
                 >
-                  <span className="inline-block bg-indigo-100 text-[#071e30] text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block bg-indigo-100 text-[#071e30] text-xs   px-3 py-1 rounded-full mb-3">
                     {step.duration}
                   </span>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-2xl font- text-gray-900 mb-2">
                     {step.title}
                   </h3>
                   <p className="text-gray-600 mb-4">{step.description}</p>
@@ -111,8 +111,7 @@ const Process: React.FC = () => {
                   <ul className="space-y-2">
                     {step.bullets.map((bullet, i) => (
                       <li key={i} className="flex items-start">
-                        <CheckCircle className="flex-shrink-0 mt-1 w-5 h-5 text-[#071e30]" />
-                        <span className="ml-2 text-gray-700">{bullet}</span>
+                       
                       </li>
                     ))}
                   </ul>

@@ -108,13 +108,13 @@ export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
 // Header and ProductCard components remain unchanged. They are correct.
 export const Header: React.FC = () => (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full text-center">
-      <h1 className="text-2xl md:text-7xl font-bold text-black">
+                <p className="text-sm  uppercase tracking-wide text-gray-500 pb-10">PROJECTS</p>
+
+      <h1 className="text-2xl md:text-5xl font-normal text-black">
         The Ultimate <br /> development company
       </h1>
       <p className="max-w-2xl mx-auto text-base md:text-xl mt-8 text-black">
-        We build beautiful products with the latest technologies and frameworks. We
-        are a team of passionate developers and designers that love to build
-        amazing products. Here are some of our later projects.
+        We build beautiful products with the latest technologies and frameworks. Here are some of our latest  projects.
       </p>
     </div>
 );

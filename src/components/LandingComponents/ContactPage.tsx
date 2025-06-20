@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import video from "../../assets/videos/glass-wave.mp4";
+// import video from "../../assets/videos/glass-wave.mp4";
+// import Silk from '../AnimatedBackground';
+import Spline from '@splinetool/react-spline';
 
 const Contact: React.FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
-  
+      const [loaded, setLoaded] = useState(false);
+      const handleSplineLoad = () => {
+        setLoaded(true);
+      };
     useEffect(() => {
       // fallback play() call if needed
       videoRef.current?.play().catch(() => {
@@ -35,33 +40,35 @@ const Contact: React.FC = () => {
   return (
     <div>
       {/* Contact Section with Video Background */}
-      <section className="relative h-screen overflow-hidden py-20 px-6 md:px-20">
-        {/* Video Background */}
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline                 /* <-- standard prop */
-          webkit-playsinline="true"  /* <-- lower-case for older iOS */
-          className="absolute inset-0 w-full h-full object-cover"
-        > <source src={video} type="video/mp4" />
-        </video>
+      <section className="relative sm:h-screen overflow-hidden py-20 px-6 pb-12 md:px-20">        {/* Video Background */}
+        {/* <div className="absolute inset-0 z-0 w-full h-full">
 
-        {/* Overlay to ensure readability */}
-        <div className="absolute inset-0 bg-black/50" />
+
+<Silk
+  speed={5}
+  scale={0.8}
+  color="#0c1422"
+  noiseIntensity={0}
+  rotation={4.5}
+/>      </div> */}
+ <div className="absolute inset-0 z-0 w-full h-full">
+        <Spline
+          scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
+          onLoad={handleSplineLoad}
+        />
+      </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-6xl mx-auto text-white">
           <p className="uppercase text-sm text-gray-300 mb-4">Contact Us</p>
-          <h2 className="text-4xl font-semibold mb-16">
+          <h2 className="text-4xl max-sm:text-3xl  mb-16">
             Share your business objectives with us, <br />
             and let's collaborate to craft something extraordinary
           </h2>
 
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl"
+            className="grid grid-cols-1 md:grid-cols-1 max-sm:flex max-sm:flex-col max-sm:gap-10 gap-6 max-w-3xl"
           >
             <input
               type="text"
@@ -103,8 +110,8 @@ const Contact: React.FC = () => {
             </select>
             <button
               type="submit"
-              className="col-span-2 bg-white text-black py-3 text-center font-medium transition-all rounded-md hover:brightness-110"
-            >
+               className="col-span-2 bg-white text-black py-4 mb-8 sm:mb-0 text-center font-base  transition-all rounded-md hover:brightness-110"
+              >
               Send Message
             </button>
           </form>
@@ -112,26 +119,25 @@ const Contact: React.FC = () => {
       </section>
 
       {/* Footer unchanged */}
-      <footer className="bg-white text-black py-12 px-6 md:px-20">
-        <div className="max-w-6xl mx-auto flex flex-col gap-12">
+      <footer className="bg-white my-4 text-black py-4 sm:py-10 px-6 md:px-20">      <div className="max-w-6xl mx-auto flex flex-col gap-12">
           <div className="flex flex-col md:flex-row justify-between items-center border-b pb-8">
-            <p className="text-center md:text-left mb-4 md:mb-0">
+            <p className="text-center max-sm:text-sm md:text-left mb-4 md:mb-0">
               Stay updated on our latest developments, insights, and opportunities by following us on LinkedIn.
             </p>
-            <button className="border border-black px-6 py-2 hover:bg-black hover:text-white transition-all">
+            <button className="border border-black max-sm:w-full px-6 py-2 hover:bg-black hover:text-white transition-all">
               Let's talk
             </button>
           </div>
-          <div className=" grid md:grid-cols-3 gap-8 text-sm">
-            <div>
-              <p className="font-semibold">Codevider</p>
+          <div>
             </div>
+          <div className=" grid md:grid-cols-2 max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:gap-10 gap-8 text-sm">
+           
             <div>
               <p className="font-semibold mb-2">Company</p>
               <ul className="space-y-1">
                 <li>About Us</li>
                 <li>Services</li>
-                <li>Case Studies</li>
+                <li>Projects</li>
               </ul>
             </div>
             <div>
@@ -144,6 +150,10 @@ const Contact: React.FC = () => {
             </div>
           </div>
         </div>
+        <div className="mt-12 border-t pt-4">
+          <p className="text-center text-sm">&copy; 2025 Codevider. All rights reserved.</p>
+        </div>
+
       </footer>
     </div>
   );

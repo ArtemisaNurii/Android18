@@ -1,15 +1,17 @@
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import React from "react";
+// src/components/Loader.tsx
 
-export default function DotOrbitLoader() {
+import React from 'react';
+
+const Loader: React.FC = () => {
   return (
-    <div className="w-screen h-screen bg-[#090707] flex items-center justify-center">
-  <div className=" w-64 h-64">
-    <DotLottieReact
-      src="https://lottie.host/7104d49a-bded-4ee2-9d21-c73e85118cc1/4z0N9CmsLn.lottie"
-      loop
-      autoplay
-    /> </div>
+    <div className="flex items-center justify-center min-h-screen bg-black">
+      <div className="flex space-x-2">
+        <span className="w-3 h-3 rounded-full bg-white animate-dot-pulse-0" />
+        <span className="w-3 h-3 rounded-full bg-white animate-dot-pulse-1" />
+        <span className="w-3 h-3 rounded-full bg-white animate-dot-pulse-2" />
+      </div>
     </div>
   );
-}
+};
+
+export default Loader;

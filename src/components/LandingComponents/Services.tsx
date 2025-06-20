@@ -17,8 +17,8 @@ const servicesData: ServicesData = [
     title: 'Custom Software Development',
     description: (
       <>
-        Tailor-made web and mobile applications built with <strong className="font-semibold text-gray-800">React, Angular, Vue,</strong>
-        <strong className="font-semibold text-gray-800"> Node.js,</strong> or <strong className="font-semibold text-gray-800">Python</strong>
+        Tailor-made web and mobile applications built withReact, Angular, Vue,
+        Node.js, orPython
         to fit your exact business requirements.
       </>
     ),
@@ -28,8 +28,8 @@ const servicesData: ServicesData = [
     title: 'Full-Stack Engineering',
     description: (
       <>
-        End-to-end development covering both <strong className="font-semibold text-gray-800">front-end</strong>
-        and <strong className="font-semibold text-gray-800">back-end</strong>—from UI components and state management to scalable APIs and databases.
+        End-to-end development covering bothfront-end
+        andback-end—from UI components and state management to scalable APIs and databases.
       </>
     ),
   },
@@ -38,8 +38,8 @@ const servicesData: ServicesData = [
     title: 'Mobile App Development',
     description: (
       <>
-        Native and cross-platform mobile experiences using <strong className="font-semibold text-gray-800">Swift</strong>,
-        <strong className="font-semibold text-gray-800"> Kotlin</strong>, or <strong className="font-semibold text-gray-800">React Native</strong>
+        Native and cross-platform mobile experiences usingSwift,
+        Kotlin, orReact Native
         to engage users on iOS and Android.
       </>
     ),
@@ -49,9 +49,9 @@ const servicesData: ServicesData = [
     title: 'DevOps & Cloud Deployment',
     description: (
       <>
-        Automated CI/CD pipelines, containerization with <strong className="font-semibold text-gray-800">Docker</strong>
-        & <strong className="font-semibold text-gray-800">Kubernetes</strong>, plus cloud setup on AWS, Azure, or GCP for
-        <strong className="font-semibold text-gray-800">scalability</strong> and <strong className="font-semibold text-gray-800">reliability</strong>.
+        Automated CI/CD pipelines, containerization withDocker
+        &Kubernetes, plus cloud setup on AWS, Azure, or GCP for
+       scalability andreliability.
       </>
     ),
   },
@@ -61,7 +61,7 @@ const servicesData: ServicesData = [
     description: (
       <>
         Rigorous testing strategies—unit, integration, and end-to-end—to ensure your software is
-        <strong className="font-semibold text-gray-800">bug-free</strong> and <strong className="font-semibold text-gray-800">production-ready</strong>.
+       bug-free andproduction-ready.
       </>
     ),
   },
@@ -71,7 +71,7 @@ const servicesData: ServicesData = [
     description: (
       <>
         User-centered design services, from wireframes to high-fidelity prototypes, ensuring
-        <strong className="font-semibold text-gray-800">intuitive</strong>, <strong className="font-semibold text-gray-800">engaging</strong> interfaces.
+       intuitive,engaging interfaces.
       </>
     ),
   },
@@ -120,11 +120,11 @@ const ServicesPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative bg-white mt-20 font-sans py-48 px-4 sm:px-6 lg:px-8">
+    <div id="services" className="relative bg-white mt-20 font-sans py-48 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto text-center mb-16">
         <p className="text-sm font-bold text-gray-500 tracking-widest mb-2">SERVICES</p>
-        <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900">
-          How CodeVider Powers Your Tech
+        <h1 className="text-4xl lg:text-5xl  max-sm:text-2xl  text-gray-900">
+          How Codevider Powers Your Tech
         </h1>
       </div>
 
@@ -133,8 +133,8 @@ const ServicesPage: React.FC = () => {
       <div ref={containerRef} className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
         {servicesData.map((service) => (
           <div key={service.number} className="service-card flex flex-col items-start p-6 bg-white rounded-lg ">
-            <p className="text-sm font-bold text-blue-900 mb-4">{service.number}</p>
-            <h2 className="text-3xl font-medium text-gray-900 mb-4">
+            <p className="text-sm font- text-blue-900 mb-4">{service.number}</p>
+            <h2 className="text-3xl max-sm:text-2xl text-gray-900 mb-4">
               {service.title}
             </h2>
             <p className="text-gray-600 leading-relaxed text-base">

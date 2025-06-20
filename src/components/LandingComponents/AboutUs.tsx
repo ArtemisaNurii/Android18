@@ -41,7 +41,7 @@ const AboutUsPage: React.FC = () => {
 
   return (
     // Added a container for the effect context
-    <div className="bg-white text-gray-800 mt-20 font-sans py-20 px-4 sm:px-6 lg:px-8">
+    <div id='about' className="bg-white text-gray-800 mt-20  py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section 1: Who we are */}
@@ -49,14 +49,14 @@ const AboutUsPage: React.FC = () => {
           
           {/* --- CHANGE 3: Add the target class 'gsap-fade-in' --- */}
           <div className="col-span-1 gsap-fade-in">
-            <p className="text-sm font-bold text-gray-500 tracking-widest mb-4">ABOUT US</p>
-            <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900">
+            <p className="text-sm font-medium text-gray-500 tracking-widest mb-4">ABOUT US</p>
+            <h1 className="text-4xl lg:text-5xl max-sm:text-2xl  text-gray-900">
               Who we are: Our story and mission
             </h1>
           </div>
 
           {/* --- CHANGE 3: Add the target class 'gsap-fade-in' --- */}
-          <div className="col-span-1 md:col-span-2 text-gray-600 leading-relaxed space-y-6 text-base lg:text-lg gsap-fade-in">
+          <div className="col-span-1  md:col-span-2 text-gray-600 leading-relaxed space-y-6 text-base lg:text-lg gsap-fade-in">
             <p>
               CodeVider is a professional web development outsourcing company based in Tirana, Albania, founded in 2019. We specialize in delivering high-quality, cost-effective software solutions—from custom web and mobile applications to full-stack development—to help businesses accelerate time-to-market and achieve technological excellence. 
             </p>

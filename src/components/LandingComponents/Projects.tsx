@@ -1,131 +1,181 @@
+// components/Projects.jsx
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
+// --- Data (using more distinct images for clarity) ---
+const projects = [
+  { name: 'Pasho Toska', description: 'CEO & Founder', category: 'E-Commerce',  image:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=987&auto=format&fit=crop' },
+  { name: 'Ervin Ziko', description: 'Managing Partner', category: 'Service',  image:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=987&auto=format&fit=crop' },
+  { name: 'Altin Luli', description: 'Co-Founder', category: 'Technology',   image:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=987&auto=format&fit=crop' },
+  { name: 'Erion Domi', description: 'Co-Founder', category: 'Partnership',  image:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=987&auto=format&fit=crop' },
+];
+
+// --- Sub-Components for Elegance and Structure ---
+
+// Elegant Left-side navigation item
+const ProjectItem = ({ name, description, isActive }) => {
+  return (
+    <motion.div
+      className="relative w-full p-4 pl-8 cursor-pointer"
+      animate={{ scale: isActive ? 1.05 : 1, x: isActive ? 10 : 0 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+    >
+      {/* Animated Border for active state */}
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            className="absolute left-0 top-0 h-full w-[1px] bg-blue-900 rounded-full"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1, transition: { duration: 0.4, ease: 'easeOut' } }}
+            exit={{ scaleY: 0, transition: { duration: 0.3, ease: 'easeIn' } }}
+            style={{ originY: 0.5 }}
+          />
+        )}
+      </AnimatePresence>
+      
+      {/* Animated Text Opacity */}
+      <motion.h3 
+        className="text-xl font-thin"
+        animate={{ color: isActive ? '#111827' : '#6B7280' }} // gray-900 vs gray-500
+        transition={{ duration: 0.3 }}
+      >
+        {name}
+      </motion.h3>
+      <motion.p 
+        className="text-sm"
+        animate={{ color: isActive ? '#374151' : '#9CA3AF' }} // gray-700 vs gray-400
+        transition={{ duration: 0.3 }}
+      >
+        {description}
+      </motion.p>
+    </motion.div>
+  );
+};
+
+// Right-side image card with smoother animations
+const ProjectImage = ({ project, idx, scrollYProgress }) => {
+  const slotSize = 1 / projects.length;
+  const projectStart = idx * slotSize;
+  const projectEnd = projectStart + slotSize;
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [projectStart, projectStart + slotSize * 0.15, projectEnd - slotSize * 0.15, projectEnd],
+    [0, 1, 1, 0]
+  );
+  
+  const scale = useTransform(
+    scrollYProgress,
+    [projectStart, projectStart + slotSize * 0.15, projectEnd - slotSize * 0.15, projectEnd],
+    [0.85, 1, 1, 0.85]
+  );
+  
+  const y = useTransform(
+    scrollYProgress,
+    [projectStart, projectEnd],
+    ['20vh', '-20vh']
+  );
+
+  return (
+    <motion.div
+      className="absolute inset-0 flex items-center justify-center"
+      style={{ opacity, scale, y }}
+    >
+      <div className="relative w-4/5 h-4/5  shadow-xl overflow-hidden">
+        {/* Subtle Ken Burns Effect on the image */}
+        <motion.img 
+          src={project.image} 
+          alt={project.name} 
+          className="w-full h-full object-cover"
+          style={{ scale: 1.15 }} // Start slightly zoomed in
+          animate={{ scale: 1 }} // Zoom out to normal over a long duration
+          transition={{ duration: 16, ease: 'linear' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <div className="absolute bottom-10 left-10 text-white">
+          <h3 className="text-4xl font-light mb-2">{project.name}</h3>
+          <p className="text-lg opacity-80">{project.category}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// --- Main Component ---
 const Projects = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
   const [activeProject, setActiveProject] = useState(0);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  const projects = [
-    { name: 'Pasho Toska', description: 'CEO & Founder', category: 'E-Commerce',  image:'https://images.unsplash.com/photo-1606002830191-c1b4f20e6cda?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-    { name: 'Ervin Ziko', description: 'Managing Partner', category: 'Service',  image:'https://images.unsplash.com/photo-1606002830191-c1b4f20e6cda?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-    { name: 'Altin Luli', description: 'Co-Founder', category: 'Technology',  image:'https://images.unsplash.com/photo-1606002830191-c1b4f20e6cda?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-    { name: 'Erion Domi', description: 'Co-Founder', category: 'Healthcare', image:'https://images.unsplash.com/photo-1606002830191-c1b4f20e6cda?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  ];
-
-  const projectProgress = useTransform(scrollYProgress, [0, 1], [0, projects.length - 1]);
   useEffect(() => {
-    const unsubscribe = projectProgress.on('change', (p) => setActiveProject(Math.round(p)));
+    const unsubscribe = scrollYProgress.on('change', (latest) => {
+      const newActiveProject = Math.min(projects.length - 1, Math.floor(latest * projects.length));
+      setActiveProject(newActiveProject);
+    });
     return () => unsubscribe();
-  }, [projectProgress]);
+  }, [scrollYProgress]);
+
+  const scrollToProject = (index) => {
+    if (!containerRef.current) return;
+    const totalHeight = containerRef.current.scrollHeight - containerRef.current.clientHeight;
+    const targetScroll = (totalHeight * index) / (projects.length - 1);
+    
+    window.scrollTo({
+      top: containerRef.current.offsetTop + targetScroll,
+      behavior: 'smooth',
+    });
+  };
 
   return (
-    <div ref={containerRef} className="min-h-[400vh] bg-gray-900">
-      <div className="sticky top-0 h-screen flex">
-        {/* Left Side */}
-        <div className="w-1/2 bg-gray-50 flex flex-col justify-center items-start p-12 space-y-12">
-          <motion.h1
-            className="text-sm tracking-wide text-gray-400 uppercase"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            OUR FOUNDERS 
-          </motion.h1>
+    // Reverted to original light/dark split theme
+    <div 
+      ref={containerRef} 
+      className="relative bg-gray-50" // Light bg for the container
+      style={{ height: `${projects.length * 120}vh` }} // Added a bit more height for smoother scroll
+    >
+      <div className="sticky top-0 h-screen flex overflow-hidden">
+        {/* Left Side: Navigation */}
+        <div className="w-1/2 flex flex-col justify-center items-start p-12">
+            <motion.h1
+              className="text-2xl lg:text-3xl  text-gray-300 tracking-widest  uppercase mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              Our Founders
+            </motion.h1>
 
-          <div className="space-y-8 w-full">
-            {projects.map((project, idx) => (
-              <motion.div
-                key={idx}
-                className={`cursor-pointer transition-all duration-300 ${
-                  activeProject === idx
-                    ? 'text-gray-900 border-l-4 border-blue-900 pl-6 scale-105'
-                    : 'text-gray-500 hover:text-gray-700 pl-4'
-                }`}
-                onClick={() => setActiveProject(idx)}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                <h3 className="text-xl font-semibold">{project.name}</h3>
-                <p className="text-sm">{project.description}</p>
-              </motion.div>
-            ))}
-          </div>
+            <div className="w-full max-w-md space-y-4">
+              {projects.map((project, idx) => (
+                <div key={idx} onClick={() => scrollToProject(idx)}>
+                  <ProjectItem 
+                    name={project.name}
+                    description={project.description}
+                    isActive={activeProject === idx}
+                  />
+                </div>
+              ))}
+            </div>
         </div>
 
-        {/* Right Side */}
-        <div className="w-1/2 bg-gradient-to-br from-black via-black to-[#071e30] relative overflow-hidden">
-        
-          {projects.map((project, idx) => {
-            // Each project gets an equal "slot" of the total scroll progress.
-            const slotSize = 1 / projects.length;
-            
-            // The point where the project's image should be fully visible.
-            const projectStart = idx * slotSize; 
-            
-            // The point where the next project's image starts becoming visible.
-            const projectEnd = projectStart + slotSize;
-
-
-            const FADE_DURATION_FACTOR = 0.1;
-            const fadeDuration = slotSize * FADE_DURATION_FACTOR;
-
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const imageY = useTransform(
-              scrollYProgress,
-              [projectStart, projectEnd],
-              ['100%', '0%']
-            );
-            
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const imageOpacity = useTransform(
-              scrollYProgress,
-              [
-                projectStart - fadeDuration, // Start fading in
-                projectStart,              // Fully visible
-                projectEnd - fadeDuration,   // Start fading out
-                projectEnd,                  // Fully faded out
-              ],
-              [0, 1, 1, 0] // Opacity values
-            );
-
-            return (
-              <motion.div
-                key={idx}
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ y: imageY, opacity: imageOpacity }}
-              >
-                <div className="relative w-4/5 h-4/5 rounded-2xl shadow-2xl overflow-hidden">
-                  <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <motion.div
-                    className="absolute bottom-8 left-8 text-white"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: activeProject === idx ? 1 : 0,
-                      y: activeProject === idx ? 0 : 20,
-                    }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <h3 className="text-3xl font-light mb-1">{project.name}</h3>
-                    <p className="text-md opacity-80">{project.category}</p>
-                  </motion.div>
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Right Side: Visuals */}
+        <div className="w-1/2 bg-gradient-to-br from-black via-black to-[#071e30] relative">
+          {projects.map((project, idx) => (
+            <ProjectImage key={idx} project={project} idx={idx} scrollYProgress={scrollYProgress} />
+          ))}
 
           {/* Progress Indicator */}
-          <div className="absolute top-8 right-8 text-white">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 1 }}>
-              <span className="text-lg font-light">
-                {String(activeProject + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+          <div className="absolute top-8 right-8 text-white font-mono">
+              <span className="text-xl">
+                {String(activeProject + 1).padStart(2, '0')}
               </span>
-            </motion.div>
+              <span className="text-xl text-gray-500">
+                {' / '}{String(projects.length).padStart(2, '0')}
+              </span>
           </div>
         </div>
       </div>

@@ -1,75 +1,54 @@
 import React, { useEffect, useRef, useState } from 'react';
-import video from "../../assets/videos/glass-wave.mp4";
-import poster from "../../assets/images/poster.png"
+import { gsap } from 'gsap';
+import Spline from '@splinetool/react-spline';
 
 const Hero: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
-  // once the video can play, flip loaded to true
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
+  const handleSplineLoad = () => {
+    setLoaded(true);
+  };
 
-    function onCanPlay() {
-      setLoaded(true);
-      v.play().catch(() => {});
-    }
-    v.addEventListener('canplay', onCanPlay);
-    return () => v.removeEventListener('canplay', onCanPlay);
-  }, []);
+  useEffect(() => {
+    if (!loaded || !contentRef.current) return;
+
+    gsap.fromTo(
+      contentRef.current,
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 0.2 }
+    );
+  }, [loaded]);
+
   return (
     <div className="relative w-full h-screen overflow-hidden font-sans text-white">
-      {/* Video background */}
       <div className="absolute inset-0 z-0 w-full h-full">
-      <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          webkit-playsinline="true"
-          poster={poster}
-          className="w-full h-full object-cover"
-        >
-          <source src={video} type="video/mp4" />
-        </video>
+        <Spline
+          scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
+          onLoad={handleSplineLoad}
+        />
       </div>
 
-      {/* Blurred overlay */}
-      <div className="absolute inset-0 z-10 bg-black bg-opacity-20 backdrop-blur-sm"></div>
-
-      {/* Content overlay */}
       <div
-        className="
-          relative z-20 flex flex-col
-          items-center justify-center    /* mobile: center both axes */
-          md:items-start md:justify-end /* desktop: original bottom/right */
-          h-full max-w-7xl mx-auto
-          px-8 md:px-16 py-8
-        "
+        ref={contentRef}
+        className="absolute inset-0 z-10 flex flex-col items-center justify-center md:items-start md:justify-end max-w-7xl mx-auto px-8 md:px-16 pb-16 opacity-0"
       >
-        <main className="grid md:grid-cols-2 items-center gap-8 w-full">
-          {/* Left column */}
-          <div className="max-w-xl">
-            <h1 className="text-6xl lg:text-7xl  max-sm:text-6xl leading-tight text-center md:text-left">
-              CODEVIDER
+        <main className="grid md:grid-cols-2 items-center gap-36 w-full">
+          <div className="max-w-3xl text-left">
+            <h1 className="text-4xl lg:text-5xl font-normal leading-tight">
+              Strategic Softwares for Sustainable Growth.
             </h1>
-            <p className="text-4xl mt-4 text-center md:text-left max-sm:text-2xl">
-              Launch your journey here and experience inspiration without bounds.
-            </p>
           </div>
-
-          {/* Right column */}
-          <div className="md:justify-self-end   w-full">
-            <div className="max-w-sm flex flex-col items-center gap-y-6 md:items-start">
-              <p className="text-base text-gray-300 text-center md:text-left  max-sm:hidden ">
-                Join us in crafting a digital experience that truly distinguishes you from others
-              </p>
-              <button className="bg-white text-black font-semibold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
-                Our services
-              </button>
-            </div>
+          <div className="max-w-md flex flex-col gap-y-6">
+            <p className="text-base text-gray-300 leading-tight">
+              Join us in crafting a digital experience that truly distinguishes you from others
+            </p>
+            <button
+              id="services"
+              className="bg-white text-black font-medium py-3 px-8 rounded-md hover:brightness-110 transition-all"
+            >
+              Our services
+            </button>
           </div>
         </main>
       </div>
