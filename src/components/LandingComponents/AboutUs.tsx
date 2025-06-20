@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ToolMarquee from './Marquee';
 
-// --- CHANGE 1: Register the ScrollTrigger plugin with GSAP ---
+gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutUsPage: React.FC = () => {

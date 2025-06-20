@@ -120,31 +120,55 @@ const ServicesPage: React.FC = () => {
   }, []);
 
   return (
-    <div id="services" className="relative bg-white mt-20 font-sans py-48 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto text-center mb-16">
-        <p className="text-sm font-bold text-gray-500 tracking-widest mb-2">SERVICES</p>
-        <h1 className="text-4xl lg:text-5xl  max-sm:text-2xl  text-gray-900">
-          How Codevider Powers Your Tech
-        </h1>
-      </div>
-
-
-      {/* Services Grid */}
-      <div ref={containerRef} className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-        {servicesData.map((service) => (
-          <div key={service.number} className="service-card flex flex-col items-start p-6 bg-white rounded-lg ">
-            <p className="text-sm font- text-blue-900 mb-4">{service.number}</p>
-            <h2 className="text-3xl max-sm:text-2xl text-gray-900 mb-4">
-              {service.title}
-            </h2>
-            <p className="text-gray-600 leading-relaxed text-base">
-              {service.description}
-            </p>
-          </div>
-        ))}
-      </div>
+    <div
+    id="services"
+    className="relative bg-white mt-20 font-sans px-4 sm:px-6 lg:px-8"
+  >
+    <div className="max-w-7xl mx-auto text-center mb-16">
+      <p className="text-sm font-bold text-gray-500 tracking-tight mb-2">
+        SERVICES
+      </p>
+      <h1 className="text-4xl lg:text-5xl max-sm:text-2xl text-gray-900">
+        How Codevider Powers Your Tech
+      </h1>
     </div>
-  );
+
+    {/* Services Grid */}
+    <div
+      ref={containerRef}
+      className="
+        services-grid
+        grid
+        grid-cols-1
+        md:grid-cols-2
+        lg:grid-cols-3
+        gap-x-8
+        gap-y-16
+        max-w-7xl       
+        mx-auto          
+        justify-items-center /* center each card */
+        px-2 sm:px-4 lg:px-0  /* smaller side padding on mobile */
+      "
+    >
+      {servicesData.map((service) => (
+        <div
+          key={service.number}
+          className="service-card flex flex-col p-6 bg-white rounded-lg w-full"
+        >
+          <p className="text-sm font-bold text-blue-900 mb-4">
+            {service.number}
+          </p>
+          <h2 className="text-3xl max-sm:text-2xl text-gray-900 mb-4">
+            {service.title}
+          </h2>
+          <p className="text-gray-600 leading-relaxed text-base">
+            {service.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 };
 
 export default ServicesPage;

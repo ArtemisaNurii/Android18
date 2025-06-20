@@ -1,12 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Spline from '@splinetool/react-spline';
+// 1. Import the 'Application' type from the Spline runtime for type safety
+import { Application } from '@splinetool/runtime';
 
 const Hero: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
-  const handleSplineLoad = () => {
+  // 2. Create a ref to hold the Spline application instance
+  const splineApp = useRef<Application | null>(null);
+  
+  // 3. Create a ref for the component's container to be observed
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Updated onLoad handler to capture the Spline application instance
+  const handleSplineLoad = (spline: Application) => {
+    // 4. Store the Spline application object in our ref
+    splineApp.current = spline;
     setLoaded(true);
   };
 
@@ -20,12 +31,49 @@ const Hero: React.FC = () => {
     );
   }, [loaded]);
 
+  // 5. useEffect to set up the Intersection Observer
+  useEffect(() => {
+    // Ensure both the spline app and the container are available
+    if (!splineApp.current || !containerRef.current) return;
+    
+    // Create the observer
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // entry.isIntersecting is a boolean that is true if the element is in the viewport
+        if (entry.isIntersecting) {
+          // If the component is visible, play the Spline animation
+          console.log('Spline in view, playing animation.');
+          splineApp.current?.play();
+        } else {
+          // If the component is not visible, stop the Spline animation
+          console.log('Spline out of view, stopping animation.');
+          splineApp.current?.stop();
+        }
+      },
+      {
+        // threshold determines how much of the element must be visible to trigger the callback
+        // 0.5 means 50% of the element needs to be visible
+        threshold: 0.5,
+      }
+    );
+
+    // Start observing the component's container
+    observer.observe(containerRef.current);
+
+    // Cleanup function: Disconnect the observer when the component unmounts
+    return () => {
+      observer.disconnect();
+    };
+    
+  }, [loaded]); // This effect runs once the Spline scene is loaded
+
   return (
-    <div className="relative w-full h-screen overflow-hidden font-sans text-white">
+    // Attach the container ref to the root element we want to observe
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden font-sans text-white">
       <div className="absolute inset-0 z-0 w-full h-full">
         <Spline
           scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
-          onLoad={handleSplineLoad}
+          onLoad={handleSplineLoad} // Use the updated handler
         />
       </div>
 

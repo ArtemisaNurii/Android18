@@ -90,7 +90,7 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
         animate={isHidden ? 'hidden' : 'visible'}
         variants={{ visible: { y: 0 }, hidden: { y: '-100%' } }}
         transition={{ duration: 0.35, ease: 'easeInOut' }}
-        className={`fixed w-full top-0 z-50 backdrop-blur-sm transition-colors duration-300 ${isTransparent ? 'bg-transparent' : 'bg-black/80 shadow-md'}`}
+        className={`fixed w-full top-0 z-50 backdrop-blur-sm transition-colors duration-300 ${isTransparent ? 'bg-transparent' : 'bg-black shadow-md'}`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between h-16">
           <img src={logo} alt="Logo" className="h-8" />
@@ -124,9 +124,8 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
             animate={{ y: '0%' }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            // CHANGE: The main container now lays out its children (list and footer) vertically.
-            // The padding-top is only to account for the navbar space. `gap10` was invalid and removed.
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col p-6 pt-20"
+        
+            className="fixed inset-0 z-40 bg-black backdrop-blur-md flex flex-col p-6 pt-20"
           >
             {/* CHANGE: This list now grows to fill available space AND centers its content vertically */}
             <motion.ul
