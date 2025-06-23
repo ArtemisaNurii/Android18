@@ -8,6 +8,7 @@ import { Application } from '@splinetool/runtime';
 import sarah from '../../assets/images/sarah.jpg';
 import james from '../../assets/images/james.jpg';
 import lisa from '../../assets/images/lisa.jpg';
+import Silk from '../AnimatedBackground';
 
 interface Testimonial {
   name: string;
@@ -87,10 +88,19 @@ const Testimonials: React.FC = () => {
     // 5. Attach the container ref to the root element we want to observe
     <section ref={containerRef} className="relative overflow-hidden py-32 px-6 md:px-20 text-white">
       <div className="absolute inset-0 z-0 w-full h-full">
-        <Spline
+        {/* <Spline
           scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
           onLoad={handleSplineLoad} // Use the updated handler
+        /> */}
+            <div className="absolute inset-0 z-0 w-full h-full">
+        <Silk
+          speed={8}
+          scale={0.9}
+          color="#152238"
+          noiseIntensity={0}
+          rotation={5.5}
         />
+      </div>
       </div>
       
       {/* Dark overlay for readability */}

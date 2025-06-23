@@ -1,5 +1,6 @@
 // pages/index.tsx
 import { useEffect, useRef, useState } from 'react';
+import Lenis from '@studio-freight/lenis'; // <--- 1. IMPORT LENIS
 
 import Hero from '@/components/LandingComponents/Hero';
 import ServicesPage from '@/components/LandingComponents/Services';
@@ -22,28 +23,41 @@ const Index = () => {
   const teamRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
 
-  // This state now controls the loader's visibility.
   const [isPageLoading, setPageLoading] = useState(true);
 
-  // This effect runs once after the page content has been mounted.
-  // This is where we tell the loader that the content is ready.
   useEffect(() => {
-    // We use a short timeout to ensure the browser has had a moment to paint the Hero.
-    // You can adjust this timing. 200ms is usually enough.
     const timer = setTimeout(() => {
       setPageLoading(false);
     }, 200);
 
     return () => clearTimeout(timer);
-  }, []); // The empty array [] ensures this runs only once.
+  }, []);
+
+  // 2. ADD THIS USEEFFECT HOOK FOR SMOOTH SCROLLING
+  useEffect(() => {
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2, // speed
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easing function
+    });
+
+    // This function will be called on every animation frame
+    function raf(time: number) {
+      lenis.raf(time); // Update Lenis's scroll position
+      requestAnimationFrame(raf); // Request the next frame
+    }
+
+    // Start the animation loop
+    requestAnimationFrame(raf);
+
+    // Clean up the instance when the component unmounts
+    return () => {
+      lenis.destroy();
+    };
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
-    // NO background class here. The Hero component itself should have its own background.
     <div className="relative min-h-screen">
-      {/*
-        FIX: The page content is rendered IMMEDIATELY.
-        The Loader is rendered ON TOP of the content.
-      */}
       <Loader isLoading={isPageLoading} />
 
       <div className="relative z-10">

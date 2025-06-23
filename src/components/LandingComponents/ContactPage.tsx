@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Application } from '@splinetool/runtime';
+import Silk from '../AnimatedBackground';
 
 // Lazy load the Spline component
 const LazySpline = lazy(() => import('@splinetool/react-spline'));
@@ -56,9 +57,8 @@ const Contact: React.FC = () => {
   return (
     <div>
       <section ref={containerRef} className="relative sm:h-screen overflow-hidden py-20 px-6 pb-12 md:px-20">
-        {/* Spline Background */}
-        {/* FIX 1: Added 'pointer-events-none' to prevent the Spline from capturing scroll and mouse events */}
-        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
+    
+        {/* <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           {isSplineVisible && (
             <Suspense fallback={null}>
               <LazySpline
@@ -70,7 +70,17 @@ const Contact: React.FC = () => {
               />
             </Suspense>
           )}
-        </div>
+        </div> */}
+                    <div className="absolute inset-0 z-0 w-full h-full">
+        <Silk
+          speed={8}
+          scale={0.9}
+          color="#152238"
+          noiseIntensity={0}
+          rotation={5.5}
+        />
+      </div>
+      <div className="absolute inset-0 z-10 bg-black/30 backdrop-blur-sm"></div>
 
         {/* Content */}
         <div  id='contact' className="relative z-10 max-w-6xl mx-auto text-white">

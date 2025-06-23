@@ -99,6 +99,18 @@
 
   body {
     @apply bg-background text-foreground;
-    
+  }
+
+  /* ---- Lenis Smooth Scroll Styles ---- */
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto; /* De-activate native smooth scroll */
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none; /* Fix iframe pointer events on scroll */
   }
 }
