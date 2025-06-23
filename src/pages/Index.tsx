@@ -21,26 +21,38 @@ const Index = () => {
   const testimonialsRef = useRef<HTMLElement>(null);
   const teamRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
+  // This state now controls the loader's visibility.
+  const [isPageLoading, setPageLoading] = useState(true);
+
+  // This effect runs once after the page content has been mounted.
+  // This is where we tell the loader that the content is ready.
   useEffect(() => {
-    /* your existing IntersectionObserver code */
-  }, []);
+    // We use a short timeout to ensure the browser has had a moment to paint the Hero.
+    // You can adjust this timing. 200ms is usually enough.
+    const timer = setTimeout(() => {
+      setPageLoading(false);
+    }, 200);
 
-  if (isLoading) {
-    return <Loader onFinish={() => setIsLoading(false)} />;
-  }
+    return () => clearTimeout(timer);
+  }, []); // The empty array [] ensures this runs only once.
 
   return (
-    <div className="relative min-h-screen "> {/* Use black to match loader */}
-      <div className="relative z-10 transition-opacity duration-500 ease-in opacity-100">
+    // NO background class here. The Hero component itself should have its own background.
+    <div className="relative min-h-screen">
+      {/*
+        FIX: The page content is rendered IMMEDIATELY.
+        The Loader is rendered ON TOP of the content.
+      */}
+      <Loader isLoading={isPageLoading} />
+
+      <div className="relative z-10">
         <NavbarVariant
           sections={{
             About: aboutRef,
             Services: servicesRef,
             Projects: projectsRef,
             Process: processRef,
-            // Contact: contactRef,
           }}
         />
 

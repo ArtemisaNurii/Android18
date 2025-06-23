@@ -103,7 +103,12 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
 
             {/* Logo */}
             <div className="flex-shrink-0">
-              <img src={logo} alt="Logo" className="h-8 w-auto" />
+              <img onClick={(e)=>{
+                const homeRef = document.getElementById('hero');
+                if (homeRef) {
+                  homeRef.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }} src={logo} alt="Logo" className="h-8 w-auto cursor-pointer" />
             </div>
 
             {/* Desktop Navigation Links (Centered) */}
@@ -129,10 +134,12 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
               {/* Desktop CTA Button */}
               <div className="hidden md:block">
                 <a
-                  href="#contact" // Assuming you have a contact section
+                  href="#contact"
                   onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(sections.Contact); // Or your relevant section
+                const contactRef = document.getElementById('contact');
+                if (contactRef) {
+                  contactRef.scrollIntoView({ behavior: 'smooth' });
+                }
                   }}
                   className="px-4 py-2 text-white border border-white/50 rounded-md text-sm font-medium transition-colors hover:bg-white hover:text-black"
                 >

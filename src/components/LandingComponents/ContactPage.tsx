@@ -14,9 +14,18 @@ const Contact: React.FC = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // FIX 2: Control animation based on visibility to improve performance
         if (entry.isIntersecting) {
-          console.log('Contact section in view, loading Spline.');
-          setIsSplineVisible(true);
+          // If it's the first time intersecting, load the Spline scene
+          if (!isSplineVisible) {
+            console.log('Contact section in view, loading Spline.');
+            setIsSplineVisible(true);
+          }
+          // If the Spline app is loaded, play the animation
+          splineApp.current?.play();
+        } else {
+          // If the section is not in view and the Spline app is loaded, stop the animation
+          splineApp.current?.stop();
         }
       },
       { threshold: 0.1 }
@@ -24,7 +33,7 @@ const Contact: React.FC = () => {
 
     observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isSplineVisible]); // Dependency array ensures logic runs correctly around state changes
 
   const [form, setForm] = useState({
     name: '',
@@ -48,14 +57,15 @@ const Contact: React.FC = () => {
     <div>
       <section ref={containerRef} className="relative sm:h-screen overflow-hidden py-20 px-6 pb-12 md:px-20">
         {/* Spline Background */}
-        <div className="absolute inset-0 z-0 w-full h-full">
+        {/* FIX 1: Added 'pointer-events-none' to prevent the Spline from capturing scroll and mouse events */}
+        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           {isSplineVisible && (
             <Suspense fallback={null}>
               <LazySpline
                 scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
                 onLoad={(spline) => {
                   splineApp.current = spline;
-                  spline.play();
+                  // No need to call play() here, the IntersectionObserver will handle it
                 }}
               />
             </Suspense>
@@ -63,7 +73,7 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-6xl mx-auto text-white">
+        <div  id='contact' className="relative z-10 max-w-6xl mx-auto text-white">
           <p className="uppercase text-sm text-gray-300 mb-4">Contact Us</p>
           <h2 className="text-4xl max-sm:text-3xl mb-16">
             Codevider Is Just a Message Away <br /> from Your Next Big Move
@@ -136,9 +146,13 @@ const Contact: React.FC = () => {
             <div>
               <p className="font-semibold mb-2">Company</p>
               <ul className="space-y-1">
-                <li>About Us</li>
-                <li>Services</li>
-                <li>Projects</li>
+                <li><a href="#about">About Us</a></li>
+                <li>
+                  <a href="#services-section">Services</a>
+                </li>
+                <li>
+                  <a href="#projects">Projects</a>
+                </li>
               </ul>
             </div>
             <div>

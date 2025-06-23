@@ -124,7 +124,8 @@ const ServicesPage: React.FC = () => {
 
   return (
     <div
-    id="services"
+    id="services-section"
+
     className="relative bg-white my-20  "
   >
     <div className="max-w-8xl mx-auto text-center mb-16">
@@ -138,6 +139,7 @@ const ServicesPage: React.FC = () => {
 
     {/* Services Grid */}
     <div
+
   ref={containerRef}
   className="
     services-grid

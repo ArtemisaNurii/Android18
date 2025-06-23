@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
 
   return (
     // Attach the container ref to the root element we want to observe
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden font-sans text-white">
+    <div ref={containerRef} id='hero' className="relative w-full h-screen overflow-hidden font-sans text-white">
       <div className="absolute inset-0 z-0 w-full h-full">
         <Spline
           scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
@@ -97,6 +97,12 @@ const Hero: React.FC = () => {
             <button
               id="services"
               className="bg-white w-full text-black font-medium py-3 px-8 hover:brightness-110 transition-all"
+              onClick={() => {
+              const servicesSection = document.getElementById('services-section');
+              if (servicesSection) {
+                servicesSection.scrollIntoView({ behavior: 'smooth' });
+              }
+              }}
             >
               Our services
             </button>
