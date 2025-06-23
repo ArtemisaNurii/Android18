@@ -86,7 +86,7 @@ const Hero: React.FC = () => {
           <div className="max-w-4xl text-left">
             <h1 className="text-4xl lg:text-5xl font-normal tracking-normal leading-tight">
               Strategic Softwares for Sustainable Growth.    
-              Codevider is Your Partner
+            
 
             </h1>
           </div>
