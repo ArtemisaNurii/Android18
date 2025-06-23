@@ -14,17 +14,6 @@ type ServicesData = ServiceItem[];
 const servicesData: ServicesData = [
   {
     number: '1',
-    title: 'Custom Software Development',
-    description: (
-      <>
-        Tailor-made web and mobile applications built withReact, Angular, Vue,
-        Node.js, orPython
-        to fit your exact business requirements.
-      </>
-    ),
-  },
-  {
-    number: '2',
     title: 'Full-Stack Engineering',
     description: (
       <>
@@ -34,13 +23,26 @@ const servicesData: ServicesData = [
     ),
   },
   {
-    number: '3',
-    title: 'Mobile App Development',
+    number: '2',
+    title: 'Mobile  Development',
     description: (
       <>
-        Native and cross-platform mobile experiences usingSwift,
-        Kotlin, orReact Native
+        Native and cross-platform mobile experiences using Swift,
+        Kotlin, or React Native
         to engage users on iOS and Android.
+      </>
+    ),
+  },
+
+
+
+  {
+    number: '3',
+    title: 'QA & Testing',
+    description: (
+      <>
+        Rigorous testing strategies—unit, integration, and end-to-end—to ensure your software is
+       bug-free andproduction-ready.
       </>
     ),
   },
@@ -57,21 +59,22 @@ const servicesData: ServicesData = [
   },
   {
     number: '5',
-    title: 'QA & Testing',
-    description: (
-      <>
-        Rigorous testing strategies—unit, integration, and end-to-end—to ensure your software is
-       bug-free andproduction-ready.
-      </>
-    ),
-  },
-  {
-    number: '6',
     title: 'UI/UX Design',
     description: (
       <>
         User-centered design services, from wireframes to high-fidelity prototypes, ensuring
        intuitive,engaging interfaces.
+      </>
+    ),
+  },
+  {
+    number: '6',
+    title: 'Custom Software Development',
+    description: (
+      <>
+        Tailor-made web and mobile applications built withReact, Angular, Vue,
+        Node.js, orPython
+        to fit your exact business requirements.
       </>
     ),
   },
@@ -122,38 +125,37 @@ const ServicesPage: React.FC = () => {
   return (
     <div
     id="services"
-    className="relative bg-white mt-20 font-sans px-4 sm:px-6 lg:px-8"
+    className="relative bg-white my-20  "
   >
-    <div className="max-w-7xl mx-auto text-center mb-16">
+    <div className="max-w-8xl mx-auto text-center mb-16">
       <p className="text-sm font-bold text-gray-500 tracking-tight mb-2">
         SERVICES
       </p>
-      <h1 className="text-4xl lg:text-5xl max-sm:text-2xl text-gray-900">
+      <h1 className="text-4xl lg:text-4xl max-sm:text-2xl text-gray-900">
         How Codevider Powers Your Tech
       </h1>
     </div>
 
     {/* Services Grid */}
     <div
-      ref={containerRef}
-      className="
-        services-grid
-        grid
-        grid-cols-1
-        md:grid-cols-2
-        lg:grid-cols-3
-        gap-x-8
-        gap-y-16
-        max-w-7xl       
-        mx-auto          
-        justify-items-center /* center each card */
-        px-2 sm:px-4 lg:px-0  /* smaller side padding on mobile */
-      "
-    >
-      {servicesData.map((service) => (
+  ref={containerRef}
+  className="
+    services-grid
+    grid
+    grid-cols-1
+    md:grid-cols-2
+    lg:grid-cols-3
+    gap-x-8
+    gap-y-16
+    max-w-7xl
+    mx-auto
+    justify-items-center
+    px-6 sm:px-4 lg:px-0
+  "
+>{servicesData.map((service) => (
         <div
           key={service.number}
-          className="service-card flex flex-col p-6 bg-white rounded-lg w-full"
+          className="service-card flex flex-col p-6 bg-white s w-full"
         >
           <p className="text-sm font-bold text-blue-900 mb-4">
             {service.number}
@@ -161,7 +163,7 @@ const ServicesPage: React.FC = () => {
           <h2 className="text-3xl max-sm:text-2xl text-gray-900 mb-4">
             {service.title}
           </h2>
-          <p className="text-gray-600 leading-relaxed text-base">
+          <p className="text-gray-600 leading-relaxed text-base text-pretty">
             {service.description}
           </p>
         </div>

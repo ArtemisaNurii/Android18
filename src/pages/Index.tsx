@@ -8,7 +8,7 @@ import Testimonials from '@/components/LandingComponents/Testimonials';
 import Process from '@/components/LandingComponents/Process';
 import Contact from '@/components/LandingComponents/ContactPage';
 import HeroParallaxDemo from '@/components/LandingComponents/Team';
-import DotOrbitLoader from '@/components/Loader/Loader';
+import Loader from '@/components/Loader/Loader';
 import NavbarVariant from '@/components/Navbar';
 import AboutUsPage from '@/components/LandingComponents/AboutUs';
 
@@ -23,31 +23,24 @@ const Index = () => {
   const contactRef = useRef<HTMLElement>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fade-in observer...
   useEffect(() => {
     /* your existing IntersectionObserver code */
   }, []);
 
-  // Loader timeout...
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) return <DotOrbitLoader />;
+  if (isLoading) {
+    return <Loader onFinish={() => setIsLoading(false)} />;
+  }
 
   return (
-    <div className="relative min-h-screen bg-inherit">
-      <div className="relative z-10">
-        {/* Pass an object mapping link names → refs */}
+    <div className="relative min-h-screen "> {/* Use black to match loader */}
+      <div className="relative z-10 transition-opacity duration-500 ease-in opacity-100">
         <NavbarVariant
           sections={{
             About: aboutRef,
             Services: servicesRef,
             Projects: projectsRef,
             Process: processRef,
-   
-            Contact: contactRef,
+            // Contact: contactRef,
           }}
         />
 

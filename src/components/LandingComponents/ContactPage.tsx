@@ -1,20 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Spline from '@splinetool/react-spline';
-// 1. Import the 'Application' type for type safety with the Spline instance
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Application } from '@splinetool/runtime';
 
+// Lazy load the Spline component
+const LazySpline = lazy(() => import('@splinetool/react-spline'));
+
 const Contact: React.FC = () => {
-  const [loaded, setLoaded] = useState(false);
-  
-  // 2. Create refs for the Spline app and the container element to be observed
+  const [isSplineVisible, setIsSplineVisible] = useState(false);
   const splineApp = useRef<Application | null>(null);
   const containerRef = useRef<HTMLElement | null>(null);
 
-  // 3. Update the onLoad handler to capture the Spline application instance
-  const handleSplineLoad = (spline: Application) => {
-    splineApp.current = spline;
-    setLoaded(true);
-  };
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          console.log('Contact section in view, loading Spline.');
+          setIsSplineVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const [form, setForm] = useState({
     name: '',
@@ -34,57 +44,29 @@ const Contact: React.FC = () => {
     console.log('Form submitted:', form);
   };
 
-  // 4. useEffect to set up the Intersection Observer
-  useEffect(() => {
-    // Wait until the Spline scene and the container are ready
-    if (!splineApp.current || !containerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // If the section is visible, play the Spline animation
-          console.log('Contact Spline in view, playing.');
-          splineApp.current?.play();
-        } else {
-          // If the section is not visible, stop the animation to save resources
-          console.log('Contact Spline out of view, stopping.');
-          splineApp.current?.stop();
-        }
-      },
-      {
-        // Trigger when at least 10% of the section is visible
-        threshold: 0.1,
-      }
-    );
-
-    // Start observing the container
-    observer.observe(containerRef.current);
-
-    // Cleanup function to disconnect the observer on unmount
-    return () => {
-      observer.disconnect();
-    };
-
-  }, [loaded]); // Dependency array ensures this runs once Spline is loaded
-
   return (
     <div>
-      {/* 5. Attach the container ref to the section we want to observe */}
       <section ref={containerRef} className="relative sm:h-screen overflow-hidden py-20 px-6 pb-12 md:px-20">
         {/* Spline Background */}
         <div className="absolute inset-0 z-0 w-full h-full">
-          <Spline
-            scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
-            onLoad={handleSplineLoad}
-          />
+          {isSplineVisible && (
+            <Suspense fallback={null}>
+              <LazySpline
+                scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
+                onLoad={(spline) => {
+                  splineApp.current = spline;
+                  spline.play();
+                }}
+              />
+            </Suspense>
+          )}
         </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-6xl mx-auto text-white">
           <p className="uppercase text-sm text-gray-300 mb-4">Contact Us</p>
           <h2 className="text-4xl max-sm:text-3xl mb-16">
-            Share your business objectives with us, <br />
-            and let's collaborate to craft something extraordinary
+            Codevider Is Just a Message Away <br /> from Your Next Big Move
           </h2>
 
           <form
@@ -139,7 +121,7 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer unchanged */}
+      {/* Footer */}
       <footer className="bg-white my-4 text-black py-4 sm:py-10 px-6 md:px-20">
         <div className="max-w-6xl mx-auto flex flex-col gap-12">
           <div className="flex flex-col md:flex-row justify-between items-center border-b pb-8">
@@ -150,8 +132,7 @@ const Contact: React.FC = () => {
               Let's talk
             </button>
           </div>
-          <div></div>
-          <div className=" grid md:grid-cols-2 max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:gap-10 gap-8 text-sm">
+          <div className="grid md:grid-cols-2 max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:gap-10 gap-8 text-sm">
             <div>
               <p className="font-semibold mb-2">Company</p>
               <ul className="space-y-1">
@@ -178,4 +159,4 @@ const Contact: React.FC = () => {
   );
 };
 
- export default Contact;
+export default Contact;

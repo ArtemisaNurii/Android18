@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import React, { useState, useEffect, RefObject, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
@@ -9,52 +8,56 @@ interface NavbarProps {
   sections: Record<string, RefObject<HTMLElement>>;
 }
 
-const menuContainerVariants = {
+// Framer Motion variants for the mobile menu list items
+const listContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
       delayChildren: 0.2,
     },
   },
 };
 
-const menuItemVariants = {
-  hidden: { opacity: 0, y: -20, scale: 0.95 },
+const listItemVariants = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      ease: [0.42, 0, 0.58, 1], // Your preferred easing
-      duration: 0.3,
+      ease: 'circOut',
+      duration: 0.4,
     },
   },
 };
 
 
 const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
+  // All state and logic hooks are preserved from your original component
   const [isHidden, setIsHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isTransparent, setIsTransparent] = useState(true);
-  const NAVBAR_HEIGHT = 64;
+  const NAVBAR_HEIGHT = 80; // Adjusted for new padding
 
   const line1 = useRef<HTMLDivElement>(null);
   const line2 = useRef<HTMLDivElement>(null);
   const menuTl = useRef<gsap.core.Timeline>();
 
+  // GSAP timeline for hamburger icon animation (unchanged)
   useEffect(() => {
     menuTl.current = gsap.timeline({ paused: true })
       .to(line1.current, { y: 4, rotation: 45, duration: 0.3, ease: 'power2.inOut' }, 0)
       .to(line2.current, { y: -4, rotation: -45, duration: 0.3, ease: 'power2.inOut' }, 0);
   }, []);
 
+  // Effect to control mobile menu open/close state (unchanged)
   useEffect(() => {
     mobileOpen ? menuTl.current?.play() : menuTl.current?.reverse();
     document.body.style.overflow = mobileOpen ? 'hidden' : 'auto';
   }, [mobileOpen]);
 
+  // Scroll handling logic to hide/show navbar and manage transparency (unchanged)
   useEffect(() => {
     let lastScroll = window.scrollY;
     const handleScroll = () => {
@@ -69,90 +72,141 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    handleScroll(); // Initial check
     return () => {
         window.removeEventListener('scroll', handleScroll);
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = 'auto'; // Cleanup on unmount
     };
   }, [sections]);
 
+  // Navigation click handler (unchanged)
   const handleNavClick = (ref: RefObject<HTMLElement>) => {
     setMobileOpen(false);
     setTimeout(() => {
       ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 150);
+    }, 150); // Delay allows menu to start closing before scroll
   };
 
   return (
     <>
+      {/* --- Main Navbar --- */}
       <motion.nav
         initial="visible"
         animate={isHidden ? 'hidden' : 'visible'}
         variants={{ visible: { y: 0 }, hidden: { y: '-100%' } }}
         transition={{ duration: 0.35, ease: 'easeInOut' }}
-        className={`fixed w-full top-0 z-50 backdrop-blur-sm transition-colors duration-300 ${isTransparent ? 'bg-transparent' : 'bg-black shadow-md'}`}
+        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500
+          ${isTransparent ? 'bg-transparent' : 'bg-black backdrop-blur-md '}`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between h-16">
-          <img src={logo} alt="Logo" className="h-8" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
 
-          <ul className="hidden md:flex space-x-6">
-            {Object.entries(sections).map(([label, ref]) => (
-              <li key={label}>
-                <button onClick={() => handleNavClick(ref)} className="text-white hover:text-gray-200 font-light transition-colors">
-                  {label}
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <img src={logo} alt="Logo" className="h-8 w-auto" />
+            </div>
+
+            {/* Desktop Navigation Links (Centered) */}
+            <div className="hidden md:flex md:justify-center md:flex-1">
+              <ul className="flex items-center space-x-8">
+                {Object.entries(sections).map(([label, ref]) => (
+                  <li key={label}>
+                    <button
+                      onClick={() => handleNavClick(ref)}
+                      className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300 group"
+                    >
+                      {label}
+                      {/* Animated underline effect */}
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Desktop CTA & Mobile Menu Trigger */}
+            <div className="flex items-center">
+              {/* Desktop CTA Button */}
+              <div className="hidden md:block">
+                <a
+                  href="#contact" // Assuming you have a contact section
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(sections.Contact); // Or your relevant section
+                  }}
+                  className="px-4 py-2 text-white border border-white/50 rounded-md text-sm font-medium transition-colors hover:bg-white hover:text-black"
+                >
+                  Get In Touch
+                </a>
+              </div>
+
+              {/* Mobile Menu Hamburger Button */}
+              <div className="md:hidden">
+                <button
+                  className="relative w-8 h-8 flex flex-col justify-center items-center"
+                  onClick={() => setMobileOpen(o => !o)}
+                  aria-label="Toggle menu"
+                >
+                  <div ref={line1} className="absolute w-6 h-0.5 bg-white" style={{ transform: 'translateY(-4px)' }}></div>
+                  <div ref={line2} className="absolute w-6 h-0.5 bg-white" style={{ transform: 'translateY(4px)' }}></div>
                 </button>
-              </li>
-            ))}
-          </ul>
-          
-          <button
-            className="md:hidden relative w-8 h-8 flex flex-col justify-center items-center"
-            onClick={() => setMobileOpen(o => !o)}
-            aria-label="Toggle menu"
-          >
-            <div ref={line1} className="absolute w-6 h-0.5 bg-white" style={{ transform: 'translateY(-4px)' }}></div>
-            <div ref={line2} className="absolute w-6 h-0.5 bg-white" style={{ transform: 'translateY(4px)' }}></div>
-          </button>
+              </div>
+            </div>
+
+          </div>
         </div>
       </motion.nav>
 
+      {/* --- Mobile Menu Overlay --- */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             key="mobile-menu"
-            initial={{ y: '-100%' }}
-            animate={{ y: '0%' }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        
-            className="fixed inset-0 z-40 bg-black backdrop-blur-md flex flex-col p-6 pt-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 z-40 bg-black backdrop-blur-lg flex flex-col p-6"
           >
-            {/* CHANGE: This list now grows to fill available space AND centers its content vertically */}
+            {/* Top padding to clear the navbar area */}
+            <div className="h-20 flex-shrink-0" />
+            
+            {/* Centered navigation links */}
             <motion.ul
-              className="flex flex-col justify-center space-y-4 flex-grow"
-              variants={menuContainerVariants}
+              className="flex flex-col items-center justify-center flex-grow space-y-6 text-center"
+              variants={listContainerVariants}
               initial="hidden"
               animate="visible"
             >
               {Object.entries(sections).map(([label, ref]) => (
                 <motion.li key={label} >
-                  {/* FIX: Removed the massive `pt-24` and `items-center` from the button itself.
-                      Added a reasonable `py-2` for a better click target. */}
                   <button
                     onClick={() => handleNavClick(ref)}
-                    className="block w-full text-left text-white/90 hover:text-white py-2 text-3xl font-light transition-colors"
+                    className="block text-gray-300 hover:text-white py-2 text-3xl font-light transition-colors"
                   >
                     {label}
                   </button>
                 </motion.li>
               ))}
             </motion.ul>
+
+            {/* Mobile CTA Button and Footer */}
             <motion.div 
-              className="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 0.6 } }}
+              className="flex-shrink-0 pb-8 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.5, duration: 0.4 } }}
             >
-              © Codevide 2025
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(sections.Contact);
+                  }}
+                  className="inline-block w-full max-w-xs px-6 py-3 mb-8 text-white  rounded-md text-lg font-medium transition-colors hover:bg-white hover:text-black"
+                >
+                  Get In Touch
+                </a>
+                <p className="text-gray-500 text-sm">© Codevide 2025</p>
             </motion.div>
           </motion.div>
         )}

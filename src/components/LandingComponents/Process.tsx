@@ -60,7 +60,7 @@ const Process: React.FC = () => {
     target: containerRef,
     offset: ['start end', 'end start'],
   });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const lineHeight = useTransform(scrollYProgress, [0, 0.85], ['0%', '100%']);
 
   return (
     <section className="bg-gray-50 py-24 px-6 lg:px-20">

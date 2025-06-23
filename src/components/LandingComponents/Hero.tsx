@@ -73,27 +73,30 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0 w-full h-full">
         <Spline
           scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
-          onLoad={handleSplineLoad} // Use the updated handler
+          onLoad={handleSplineLoad} 
         />
       </div>
 
       <div
         ref={contentRef}
-        className="absolute inset-0 z-10 flex flex-col items-center justify-center md:items-start md:justify-end max-w-7xl mx-auto px-8 md:px-16 pb-16 opacity-0"
+        className="absolute inset-0 z-10 flex flex-col items-center justify-center md:items-start md:justify-end max-w-7xl mx-auto px-6  md:px-16 pb-16 opacity-0 text-center md:text-left"
+
       >
-        <main className="grid md:grid-cols-2 items-center gap-36 w-full">
-          <div className="max-w-3xl text-left">
-            <h1 className="text-4xl lg:text-5xl font-normal leading-tight">
-              Strategic Softwares for Sustainable Growth.
+        <main className="grid md:grid-cols-2 items-center max-sm:items-start max-sm:space-x-0 space-x-24 gap-44 w-full">
+          <div className="max-w-4xl text-left">
+            <h1 className="text-4xl lg:text-5xl font-normal tracking-normal leading-tight">
+              Strategic Softwares for Sustainable Growth.    
+              Codevider is Your Partner
+
             </h1>
           </div>
-          <div className="max-w-md flex flex-col gap-y-6">
-            <p className="text-base text-gray-300 leading-tight">
+          <div className="max-w-md flex flex-col items-center gap-y-6 md:items-start">
+          <p className="text-base text-gray-300 leading-loose">
               Join us in crafting a digital experience that truly distinguishes you from others
             </p>
             <button
               id="services"
-              className="bg-white text-black font-medium py-3 px-8 rounded-md hover:brightness-110 transition-all"
+              className="bg-white w-full text-black font-medium py-3 px-8 hover:brightness-110 transition-all"
             >
               Our services
             </button>
