@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 import { HeroParallax } from '../hero-parallax';
+import Team from './Founder';
+import Contact from './ContactPage';
 
 export interface Product {
   title: string;
@@ -63,7 +65,18 @@ export const products: Product[] = [
 ];
 
 const HeroParallaxDemo: React.FC = () => {
-  return <HeroParallax products={products} />;
-};
+  return (
+    <div>
+      <HeroParallax products={products} />
+      <div className="bg-white pt-12 h-1/2">
+         {/* The next section of your page starts here immediately after the parallax */}
+         <h2 className="text-center text-3xl pt-20">
+
+{/* <Contact/> */}
+         </h2>
+      </div>
+    </div>
+  );
+}
 
 export default HeroParallaxDemo;

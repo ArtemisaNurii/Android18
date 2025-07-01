@@ -88,18 +88,9 @@ const Testimonials: React.FC = () => {
     // 5. Attach the container ref to the root element we want to observe
     <section ref={containerRef} className="relative overflow-hidden py-32 px-6 md:px-20 text-white">
       <div className="absolute inset-0 z-0 w-full h-full">
-        {/* <Spline
-          scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
-          onLoad={handleSplineLoad} // Use the updated handler
-        /> */}
-            <div className="absolute inset-0 z-0 w-full h-full">
-        <Silk
-          speed={8}
-          scale={0.9}
-          color="#152238"
-          noiseIntensity={0}
-          rotation={5.5}
-        />
+  
+            <div className="absolute bg-gradient-to-br from-black to-teal-300 inset-0 z-0 w-full h-full">
+ 
       </div>
       </div>
       
@@ -107,7 +98,7 @@ const Testimonials: React.FC = () => {
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content container */}
-      <div className="relative z-10 max-w-8xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-12">
           <p className="text-sm uppercase tracking-wide text-gray-300 pb-10">Testimonials</p>
           <h2 className="text-4xl max-sm:text-3xl leading-tight mt-2">

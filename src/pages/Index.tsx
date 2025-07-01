@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Lenis from '@studio-freight/lenis'; // <--- 1. IMPORT LENIS
 
-import Hero from '@/components/LandingComponents/Hero';
+// import Hero from '@/components/LandingComponents/Hero';
 import ServicesPage from '@/components/LandingComponents/Services';
-import Projects from '@/components/LandingComponents/Projects';
+// import Projects from '@/components/LandingComponents/Projects';
 import Testimonials from '@/components/LandingComponents/Testimonials';
 import Process from '@/components/LandingComponents/Process';
 import Contact from '@/components/LandingComponents/ContactPage';
@@ -12,6 +12,11 @@ import HeroParallaxDemo from '@/components/LandingComponents/Team';
 import Loader from '@/components/Loader/Loader';
 import NavbarVariant from '@/components/Navbar';
 import AboutUsPage from '@/components/LandingComponents/AboutUs';
+import { Benefits } from '@/components/LandingComponents/Benefits';
+import { StickyScrollGallery } from '@/components/LandingComponents/Projects';
+import { Hero } from '@/components/LandingComponents/Hero';
+import Team from '@/components/LandingComponents/Founder';
+// import Team from '@/components/LandingComponents/Founder';
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -73,10 +78,13 @@ const Index = () => {
         <section ref={heroRef}><Hero /></section>
         <section ref={aboutRef}><AboutUsPage /></section>
         <section ref={servicesRef}><ServicesPage /></section>
-        <section ref={projectsRef}><Projects /></section>
+        <Benefits />
+        <StickyScrollGallery />
         <section ref={processRef}><Process /></section>
         <section ref={testimonialsRef}><Testimonials /></section>
         <section ref={teamRef}><HeroParallaxDemo /></section>
+        <section ref={projectsRef}><Team /></section>
+
         <section ref={contactRef}><Contact /></section>
       </div>
     </div>

@@ -1,40 +1,44 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Application } from '@splinetool/runtime';
-import Silk from '../AnimatedBackground';
 
-// Lazy load the Spline component
-const LazySpline = lazy(() => import('@splinetool/react-spline'));
+// Lazy load the Spline component for better initial page load performance
 
 const Contact: React.FC = () => {
-  const [isSplineVisible, setIsSplineVisible] = useState(false);
+  const [isSplineLoaded, setIsSplineLoaded] = useState(false);
   const splineApp = useRef<Application | null>(null);
-  const containerRef = useRef<HTMLElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
+  // This effect uses IntersectionObserver to only load and play the Spline
+  // animation when the component is visible in the viewport. This is a crucial
+  // performance optimization, especially for heavy assets like 3D scenes.
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!sectionRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // FIX 2: Control animation based on visibility to improve performance
         if (entry.isIntersecting) {
-          // If it's the first time intersecting, load the Spline scene
-          if (!isSplineVisible) {
-            console.log('Contact section in view, loading Spline.');
-            setIsSplineVisible(true);
+          // If it's the first time intersecting, trigger the lazy load.
+          if (!isSplineLoaded) {
+            setIsSplineLoaded(true);
           }
-          // If the Spline app is loaded, play the animation
+          // Once the app instance is available, play the animation.
           splineApp.current?.play();
         } else {
-          // If the section is not in view and the Spline app is loaded, stop the animation
+          // Pause the animation when it goes out of view to save resources.
           splineApp.current?.stop();
         }
       },
-      { threshold: 0.1 }
+      {
+        // Start loading when the section is 10% visible
+        threshold: 0.1,
+      }
     );
 
-    observer.observe(containerRef.current);
+    observer.observe(sectionRef.current);
+
+    // Cleanup observer on component unmount
     return () => observer.disconnect();
-  }, [isSplineVisible]); // Dependency array ensures logic runs correctly around state changes
+  }, [isSplineLoaded]); // Rerun effect logic if isSplineLoaded changes
 
   const [form, setForm] = useState({
     name: '',
@@ -51,55 +55,49 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // In a real app, you would handle form submission here (e.g., API call)
     console.log('Form submitted:', form);
+    alert('Thank you for your message!');
   };
 
   return (
-    <div>
-      <section ref={containerRef} className="relative sm:h-screen overflow-hidden py-20 px-6 pb-12 md:px-20">
-    
-        {/* <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
-          {isSplineVisible && (
-            <Suspense fallback={null}>
-              <LazySpline
-                scene="https://prod.spline.design/69EEMNnKjd9kHoCE/scene.splinecode"
-                onLoad={(spline) => {
-                  splineApp.current = spline;
-                  // No need to call play() here, the IntersectionObserver will handle it
-                }}
-              />
-            </Suspense>
-          )}
-        </div> */}
-                    <div className="absolute inset-0 z-0 w-full h-full">
-        <Silk
-          speed={8}
-          scale={0.9}
-          color="#152238"
-          noiseIntensity={0}
-          rotation={5.5}
-        />
-      </div>
-      <div className="absolute inset-0 z-10 bg-black/30 backdrop-blur-sm"></div>
+    <>
+      {/* 
+        The main contact section.
+        - Uses padding instead of fixed height for flexibility.
+        - Spacing is defined mobile-first and scales up.
+      */}
+      <section
+        ref={sectionRef}
+        id="contact"
+        className="relative overflow-hidden bg-black text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
+      >
+     
 
-        {/* Content */}
-        <div  id='contact' className="relative z-10 max-w-6xl mx-auto text-white">
-          <p className="uppercase text-sm text-gray-300 mb-4">Contact Us</p>
-          <h2 className="text-4xl max-sm:text-3xl mb-16">
-            Codevider Is Just a Message Away <br /> from Your Next Big Move
-          </h2>
+        {/* Content Container */}
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <div className="text-center md:text-left">
+            <p className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-2">
+              Contact Us
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-poppins  leading-tight mb-12 md:mb-16">
+              Codevider Is Just a Message Away <br /> from Your Next Big Move
+            </h2>
+          </div>
 
+          {/* Contact Form */}
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-1 max-sm:flex max-sm:flex-col max-sm:gap-10 gap-6 max-w-3xl"
+            className="grid grid-cols-1 md:grid-cols-2 gap-y-8 max-sm:px-10 gap-x-6"
           >
+            {/* Form Fields */}
             <input
               type="text"
               name="name"
               placeholder="Full name"
               value={form.name}
               onChange={handleChange}
-              className="bg-transparent border-b border-gray-400 py-3 focus:outline-none"
+              className="bg-transparent border-b border-gray-500 py-3 focus:outline-none focus:border-white transition-colors"
               required
             />
             <input
@@ -108,7 +106,7 @@ const Contact: React.FC = () => {
               placeholder="Email address"
               value={form.email}
               onChange={handleChange}
-              className="bg-transparent border-b border-gray-400 py-3 focus:outline-none"
+              className="bg-transparent border-b border-gray-500 py-3 focus:outline-none focus:border-white transition-colors"
               required
             />
             <textarea
@@ -116,24 +114,28 @@ const Contact: React.FC = () => {
               placeholder="Project description"
               value={form.description}
               onChange={handleChange}
-              className="bg-transparent border-b border-gray-400 py-3 col-span-2 focus:outline-none resize-none"
-              rows={4}
+              className="bg-transparent border-b border-gray-500 py-3 md:col-span-2 focus:outline-none focus:border-white transition-colors resize-none"
+              rows={3}
               required
             />
             <select
               name="budget"
               value={form.budget}
               onChange={handleChange}
-              className="bg-transparent border-b border-gray-400 py-3 col-span-2 focus:outline-none text-white"
+              className="bg-transparent border-b border-gray-500 py-3 md:col-span-2 focus:outline-none focus:border-white text-gray-400 focus:text-white"
             >
+              {/* Added a disabled option as a placeholder */}
+              <option value="" disabled className="text-black">Select your budget</option>
               <option className="text-black">$500 – $1,000</option>
               <option className="text-black">$1,000 – $5,000</option>
               <option className="text-black">$5,000 – $10,000</option>
               <option className="text-black">$10,000+</option>
             </select>
+
+            {/* Submit Button */}
             <button
               type="submit"
-              className="col-span-2 bg-white text-black py-4 mb-8 sm:mb-0 text-center font-base transition-all rounded-md hover:brightness-110"
+              className="md:col-span-2 bg-white text-black py-3 px-6 text-center font-semibold rounded-lg transition-transform hover:scale-105 active:scale-100"
             >
               Send Message
             </button>
@@ -141,45 +143,61 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-white my-4 text-black py-4 sm:py-10 px-6 md:px-20">
-        <div className="max-w-6xl mx-auto flex flex-col gap-12">
-          <div className="flex flex-col md:flex-row justify-between items-center border-b pb-8">
-            <p className="text-center max-sm:text-sm md:text-left mb-4 md:mb-0">
-              Stay updated on our latest developments, insights, and opportunities by following us on LinkedIn.
+      {/* Footer Section */}
+      <footer className="bg-white text-black py-12 sm:py-16 px-4 max-sm:px-10 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Footer Top: Call to Action */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-gray-200 pb-8 mb-8">
+            <p className="text-center md:text-left text-gray-700 max-w-2xl">
+              Stay updated on our latest developments, insights, and opportunities by following us.
             </p>
-            <button className="border border-black max-sm:w-full px-6 py-2 hover:bg-black hover:text-white transition-all">
-              Let's talk
+            <button className="border border-black px-8 py-3 font-semibold rounded-lg hover:bg-black hover:text-white transition-colors w-full md:w-auto flex-shrink-0">
+              Let's Talk
             </button>
           </div>
-          <div className="grid md:grid-cols-2 max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:gap-10 gap-8 text-sm">
-            <div>
-              <p className="font-semibold mb-2">Company</p>
-              <ul className="space-y-1">
-                <li><a href="#about">About Us</a></li>
-                <li>
-                  <a href="#services-section">Services</a>
-                </li>
-                <li>
-                  <a href="#projects">Projects</a>
-                </li>
+
+          {/* Footer Links */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+            <div className="space-y-3">
+              <p className="font-bold text-base">Company</p>
+              <ul className="space-y-2 text-gray-600">
+                <li><a href="#about" className="hover:text-black">About Us</a></li>
+                <li><a href="#services-section" className="hover:text-black">Services</a></li>
+                <li><a href="#projects" className="hover:text-black">Projects</a></li>
               </ul>
             </div>
-            <div>
-              <p className="font-semibold mb-2">Social</p>
-              <ul className="space-y-1">
-                <li>Instagram</li>
-                <li>Facebook</li>
-                <li>LinkedIn</li>
+            <div className="space-y-3">
+              <p className="font-bold text-base">Social</p>
+              <ul className="space-y-2 text-gray-600">
+                <li><a href="#" className="hover:text-black">Instagram</a></li>
+                <li><a href="#" className="hover:text-black">Facebook</a></li>
+                <li><a href="#" className="hover:text-black">LinkedIn</a></li>
+              </ul>
+            </div>
+            {/* Added two more columns for a balanced footer on larger screens */}
+            <div className="space-y-3">
+              <p className="font-bold text-base">Legal</p>
+              <ul className="space-y-2 text-gray-600">
+                <li><a href="#" className="hover:text-black">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-black">Terms of Service</a></li>
+              </ul>
+            </div>
+             <div className="space-y-3">
+              <p className="font-bold text-base">Contact</p>
+              <ul className="space-y-2 text-gray-600">
+                <li><a href="mailto:hello@codevider.com" className="hover:text-black">hello@codevider.com</a></li>
+                <li><a href="#contact" className="hover:text-black">Contact Form</a></li>
               </ul>
             </div>
           </div>
-        </div>
-        <div className="mt-12 border-t pt-4">
-          <p className="text-center text-sm">© 2025 Codevider. All rights reserved.</p>
+
+          {/* Copyright */}
+          <div className="mt-12 border-t border-gray-200 pt-8 text-center">
+            <p className="text-sm text-gray-500">© {new Date().getFullYear()} Codevider. All rights reserved.</p>
+          </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
 

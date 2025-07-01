@@ -126,9 +126,9 @@ const ServicesPage: React.FC = () => {
     <div
     id="services-section"
 
-    className="relative bg-white my-20  "
+    className="relative bg-white my-20  py-16 px-4 "
   >
-    <div className="max-w-8xl mx-auto text-center mb-16">
+    <div className="max-w-8xl mx-auto text-center  mb-16">
       <p className="text-sm font-bold text-gray-500 tracking-tight mb-2">
         SERVICES
       </p>
@@ -138,39 +138,15 @@ const ServicesPage: React.FC = () => {
     </div>
 
     {/* Services Grid */}
-    <div
-
-  ref={containerRef}
-  className="
-    services-grid
-    grid
-    grid-cols-1
-    md:grid-cols-2
-    lg:grid-cols-3
-    gap-x-8
-    gap-y-16
-    max-w-7xl
-    mx-auto
-    justify-items-center
-    px-6 sm:px-4 lg:px-0
-  "
->{servicesData.map((service) => (
-        <div
-          key={service.number}
-          className="service-card flex flex-col p-6 bg-white s w-full"
-        >
-          <p className="text-sm font-bold text-blue-900 mb-4">
-            {service.number}
-          </p>
-          <h2 className="text-3xl max-sm:text-2xl text-gray-900 mb-4">
-            {service.title}
-          </h2>
-          <p className="text-gray-600 leading-relaxed text-base text-pretty">
-            {service.description}
-          </p>
+    <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-20">
+          {servicesData.map(({ number, title, description }) => (
+            <div key={number} className="space-y-4">
+              <span className="text-5xl f text-gray-200">{number}</span>
+              <h3 className="text-xl font-medium">{title}</h3>
+              <p className="text-gray-600 leading-relaxed">{description}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
   </div>
 );
 };
