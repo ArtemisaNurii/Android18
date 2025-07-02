@@ -68,7 +68,7 @@ const HeroParallaxDemo: React.FC = () => {
   return (
     <div>
       <HeroParallax products={products} />
-      <div className="bg-white pt-12 h-1/2">
+      <div className="bg-white pt-12  h-1/2">
          {/* The next section of your page starts here immediately after the parallax */}
          <h2 className="text-center text-3xl pt-20">
 

@@ -177,17 +177,18 @@ export const Hero: React.FC = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative flex items-center justify-center w-full min-h-screen px-4 py-20 overflow-hidden text-gray-100 bg-gradient-to-br from-black via-black to-teal-300 font-sans"
+      className="relative flex items-center justify-center w-full min-h-screen px-4 py-20 overflow-hidden text-gray-100 inset-0 bg-gradient-to-br from-black via-black to-teal-300 font-sans"
       style={{ perspective: '1500px' }}
-    >
+    >      <div className="absolute inset-0 bg-black/60" />
+
       <div className="absolute inset-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
       
       <div className="relative z-10 container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         
         <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
           <div className="hero-text bg-white/5 border border-white/10 rounded-full px-4 py-1.5 flex items-center gap-2.5 text-sm backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-emerald-400">Available Now</span>
+            {/* <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-emerald-400">Available Now</span> */}
           </div>
 
           <h1 className="hero-text text-5xl md:text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
@@ -199,7 +200,15 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="hero-text flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
-            <button className="bg-emerald-500 hover:bg-emerald-400 transition-all duration-300 text-black font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transform hover:scale-105">
+            <button 
+              className="bg-emerald-500 hover:bg-emerald-400 transition-all duration-300 text-black font-semibold py-3 px-6 rounded-sm flex items-center justify-center gap-2 transform hover:scale-105"
+              onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+              }}
+            >
               Get Started <FiArrowUpRight />
             </button>
           </div>
@@ -228,7 +237,6 @@ export const Hero: React.FC = () => {
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
             <div className="flex-grow h-8 bg-black/30 rounded-md ml-4 flex items-center justify-between px-3 text-sm text-gray-500">
                 <FiLock size={14} />
-                <span>https://your-dashboard.ai</span>
                 <FiRefreshCw size={14} className="hover:text-white transition-colors cursor-pointer"/>
             </div>
           </div>

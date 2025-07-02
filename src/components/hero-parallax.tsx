@@ -19,9 +19,6 @@ interface HeroParallaxProps {
 }
 
 export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
-  // --- CHANGE 2: RE-INTRODUCE THREE ROWS FOR BETTER LAYOUT ---
-  // Splitting products into three rows creates a more balanced and visually stable grid,
-  // preventing rows from becoming excessively long on wide screens.
   const firstRow = products.slice(0, 5);
   const secondRow = products.slice(5, 10);
   const thirdRow = products.slice(10, 15);
@@ -29,14 +26,11 @@ export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'], // Animate from the start of the component to the end
+    offset: ['start start', 'end start'],
   });
 
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
-  // --- CHANGE 3: ADJUST ANIMATION VALUES FOR A TIGHTER FEEL ---
-  // Reduced translation from 1000px to a more subtle 400px.
-  // This pairs with the reduced container height to make the effect feel more cohesive.
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, 400]),
     springConfig
@@ -45,31 +39,36 @@ export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
     useTransform(scrollYProgress, [0, 1], [0, -400]),
     springConfig
   );
+
+  // --- CHANGE 2: REFINE THE ENTRY ANIMATION ---
+  // We adjust the animation range to feel smoother over the new, taller container.
+  // The translateY starts from a less extreme -400px and settles at 50px for better framing.
+  const animationRange = [0, 0.3]; // Use a variable for consistency
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [15, 0]),
+    useTransform(scrollYProgress, animationRange, [15, 0]),
     springConfig
   );
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
+    useTransform(scrollYProgress, animationRange, [0.2, 1]),
     springConfig
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [20, 0]),
+    useTransform(scrollYProgress, animationRange, [20, 0]),
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 0]), // Adjusted for a smoother entry
+    useTransform(scrollYProgress, animationRange, [-400, 50]), // From -400px to 50px
     springConfig
   );
 
   return (
-    // --- CHANGE 1: REDUCE CONTAINER HEIGHT TO MINIMIZE WHITESPACE ---
-    // Switched from h-[200vh] to h-[120vh]. This is the most critical fix.
-    // It provides enough scroll distance for the parallax effect without creating
-    // a huge empty space after the content.
+    // --- CHANGE 1: INCREASE CONTAINER HEIGHT ---
+    // Switched from h-[120vh] to h-[160vh]. This is the critical fix.
+    // It provides enough scroll distance to see all three rows of content on
+    // most laptop screens without creating excessive empty space.
     <div
       ref={ref}
-      className="h-[120vh] py-20 sm:py-40 overflow-hidden antialiased relative flex flex-col self-auto items-center [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[120vh] max-md:h-[160vh] py-20 sm:py-40 overflow-hidden antialiased relative flex flex-col self-auto items-center [perspective:1000px] [transform-style:preserve-3d]"
     >
       <Header />
       <motion.div
@@ -113,10 +112,13 @@ export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
   );
 };
 
-// --- Header Component (No changes needed, it's already responsive) ---
+// --- Header Component (No changes needed) ---
 export const Header: React.FC = () => {
   return (
-    <div id="projects" className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full text-center">
+    <div
+      id="projects"
+      className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full text-center"
+    >
       <p className="text-sm uppercase tracking-wide text-gray-500 pb-10">
         PROJECTS
       </p>

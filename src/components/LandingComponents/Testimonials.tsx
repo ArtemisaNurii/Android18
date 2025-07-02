@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Marquee from 'react-fast-marquee';
-import Spline from '@splinetool/react-spline';
-// 1. Import the 'Application' type from the Spline runtime for type safety
-import { Application } from '@splinetool/runtime';
 
 // Image imports
 import sarah from '../../assets/images/sarah.jpg';
 import james from '../../assets/images/james.jpg';
 import lisa from '../../assets/images/lisa.jpg';
-import Silk from '../AnimatedBackground';
 
 interface Testimonial {
   name: string;
@@ -22,115 +18,68 @@ const testimonials: Testimonial[] = [
     name: 'Sarah Thompson',
     role: 'Trendy Store',
     image: sarah,
-    text: 'Working with Codevider transformed our online presence. Their expertise in SEO helped us climb the rankings and attract more organic traffic than ever before.'
+    text: 'Codevider transformed our online presence. Their SEO expertise boosted our rankings and brought in a flood of organic traffic we\'d never seen before.',
   },
   {
     name: 'James Carter',
     role: 'ABC Plumbing',
     image: james,
-    text: 'We saw a significant increase in our website traffic and conversions after partnering with Codevider. Their team is knowledgeable, responsive, and genuinely cares about our success.'
+    text: 'After partnering with Codevider, our traffic and conversions saw a significant increase. Their team is knowledgeable, responsive, and genuinely invested in our success.',
   },
   {
     name: 'Lisa Chen',
     role: 'Innovative Software',
     image: lisa,
-    text: 'Codevider took the time to understand our business needs and delivered results beyond our expectations. A real impact.'
-  }
+    text: 'Codevider truly understood our business, delivering results that went far beyond our expectations. Their work has made a real, measurable impact on our bottom line.',
+  },
 ];
 
 const Testimonials: React.FC = () => {
-    const [loaded, setLoaded] = useState(false);
-  
-    // 2. Create refs for the Spline app instance and the container element
-    const splineApp = useRef<Application | null>(null);
-    const containerRef = useRef<HTMLElement | null>(null);
-
-    // 3. Update the onLoad handler to capture the Spline application instance
-    const handleSplineLoad = (spline: Application) => {
-      splineApp.current = spline;
-      setLoaded(true);
-    };
-
-    // 4. useEffect to set up the Intersection Observer
-    useEffect(() => {
-        // Ensure the Spline app and container are ready
-        if (!splineApp.current || !containerRef.current) return;
-        
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    // If the section is in view, play the animation
-                    console.log('Testimonials Spline in view, playing.');
-                    splineApp.current?.play();
-                } else {
-                    // If the section is out of view, stop the animation
-                    console.log('Testimonials Spline out of view, stopping.');
-                    splineApp.current?.stop();
-                }
-            },
-            {
-                // Trigger when 25% of the element is visible
-                threshold: 0.25,
-            }
-        );
-
-        // Start observing the section container
-        observer.observe(containerRef.current);
-
-        // Cleanup: disconnect the observer when the component unmounts
-        return () => {
-            observer.disconnect();
-        };
-        
-    }, [loaded]); // Run this effect once the Spline scene has loaded
-
   return (
-    // 5. Attach the container ref to the root element we want to observe
-    <section ref={containerRef} className="relative overflow-hidden py-32 px-6 md:px-20 text-white">
-      <div className="absolute inset-0 z-0 w-full h-full">
-  
-            <div className="absolute bg-gradient-to-br from-black to-teal-300 inset-0 z-0 w-full h-full">
- 
+    <section className="relative overflow-hidden py-32 text-white">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-black to-teal-300" />
       </div>
-      </div>
-      
-      {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content container */}
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="mb-12">
-          <p className="text-sm uppercase tracking-wide text-gray-300 pb-10">Testimonials</p>
-          <h2 className="text-4xl max-sm:text-3xl leading-tight mt-2">
-            What our clients are saying:<br />
-            <span className="text-gray-400">Insights from those we've served</span>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
+        <div className="mb-16 text-center">
+          <p className="text-sm uppercase tracking-wider text-gray-300">Testimonials</p>
+          <h2 className="mt-4 text-4xl font-bold leading-tight md:text-5xl">
+            What Our Clients Say
           </h2>
+          <p className="mt-4 text-lg max-sm:px-10 text-gray-400">
+            Real insights from those we've had the pleasure to serve.
+          </p>
         </div>
 
-        <Marquee gradient={false} speed={30} className="py-6">
-          <div className="flex gap-20">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-3/4 max-w-md sm:w-auto"
-              >
-                <p className="text-lg max-sm:text-sm text-gray-200 mb-6">{testimonial.text}</p>
-                <div className="flex items-center gap-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-gray-400">{testimonial.role}</p>
+        <div className="relative">
+          <Marquee gradient={false} speed={30} className="py-4">
+            <div className="flex gap-x-8 pl-8">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="w-96 flex-shrink-0 rounded-lg bg-transparent p-8 backdrop-blur-sm"
+                >
+                  <p className="text-lg text-gray-200">"{testimonial.text}"</p>
+                  <div className="mt-6 flex items-center gap-4">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="h-14 w-14 rounded-full object-cover ring-2 ring-gray-600"
+                    />
+                    <div>
+                      <p className="font-semibold">{testimonial.name}</p>
+                      <p className="text-sm text-gray-400">{testimonial.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </Marquee>
-
+              ))}
+            </div>
+          </Marquee>
+        </div>
       </div>
     </section>
   );

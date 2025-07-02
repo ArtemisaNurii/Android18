@@ -6,10 +6,42 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Data remains the same
 const galleryData = [
-    { id: 1, title: 'Concept & Vision', description: 'We begin with the core idea, shaping a vision that is both innovative and achievable. Our process is built on a foundation of clear communication and a deep understanding of the project goals.', imageUrl: 'https://images.unsplash.com/photo-1646388286080-62887d1b34ab?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE1fHxhYnN0cmFjdCUyMGNvbG91cnxlbnwwfHwwfHx8Mg%3D%3D', credit: 'Daniel van den Berg on Unsplash' },
-    { id: 2, title: 'Architectural Design', description: 'Our designs blend form and function, creating spaces that are aesthetically pleasing and highly practical. We focus on clean lines, natural light, and sustainable materials to craft timeless structures.', imageUrl: 'https://images.unsplash.com/photo-1707386243591-786726b45d4a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fGFic3RyYWN0JTIwY29sb3VyfGVufDB8fDB8fHwy', credit: 'Sunguk Kim on Unsplash' },
-    { id: 3, title: 'Interior Details', description: 'Every detail matters. The interior is where life unfolds, so we meticulously plan every element, from the flow of movement to the texture of the surfaces, ensuring a harmonious and inviting atmosphere.', imageUrl: 'https://images.unsplash.com/photo-1669813013286-9d9be72171ee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGFic3RyYWN0JTIwY29sb3VyfGVufDB8fDB8fHwy', credit: 'Frankie Vision on Unsplash' },
-    { id: 4, title: 'Light & Shadow', description: 'The interplay of light and shadow is fundamental to our philosophy. We use it to sculpt spaces, create mood, and connect the built environment with the natural world, resulting in a dynamic experience.', imageUrl: 'https://images.unsplash.com/photo-1614851099511-773084f6911d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFic3RyYWN0JTIwY29sb3VyfGVufDB8fDB8fHwy', credit: 'Javier Martinez on Unsplash' },
+  {
+    id: 1,
+    title: 'Product Vision & Roadmap',
+    description:
+      'We kick off with discovery workshops to refine your product vision, identify core user problems, and define a phased roadmap that balances quick wins with long-term scalability.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1646388286080-62887d1b34ab?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE1fHxhYnN0cmFjdCUyMGNvbG91cnxlbnwwfHwwfHx8Mg%3D%3D',
+    credit: 'Daniel van den Berg on Unsplash',
+  },
+  {
+    id: 2,
+    title: 'System Architecture Design',
+    description:
+      'Our architects translate requirements into robust, cloud-native architectures—microservices, event-driven queues, and secure APIs—to ensure performance, resilience, and future growth.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1707386243591-786726b45d4a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fGFic3RyYWN0JTIwY29sb3VyfGVufDB8fDB8fHwy',
+    credit: 'Sunguk Kim on Unsplash',
+  },
+  {
+    id: 3,
+    title: 'UX & Interface Crafting',
+    description:
+      'Pixel-perfect designs come alive through iterative prototyping. We obsess over user flows, accessibility, and responsive layouts to deliver delightful experiences on every device.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1669813013286-9d9be72171ee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGFic3RyYWN0JTIwY29sb3VyfGVufDB8fDB8fHwy',
+    credit: 'Frankie Vision on Unsplash',
+  },
+  {
+    id: 4,
+    title: 'Deployment & Continuous Monitoring',
+    description:
+      'CI/CD pipelines automate testing and deployment, while real-time observability lets us spot issues before users do. Performance, security, and uptime are continuously tuned.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1614851099511-773084f6911d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFic3RyYWN0JTIwY29sb3VyfGVufDB8fDB8fHwy',
+    credit: 'Javier Martinez on Unsplash',
+  },
 ];
 
 export const StickyScrollGallery: React.FC = () => {
@@ -75,7 +107,7 @@ export const StickyScrollGallery: React.FC = () => {
 
   return (
     <div ref={mainRef} className="bg-white text-black font-sans">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 max-sm:px-10 lg:px-8">
         {/*
           The layout is now a single-column grid on mobile (md:grid-cols-1)
           and a two-column grid on tablet and up (md:grid-cols-2).

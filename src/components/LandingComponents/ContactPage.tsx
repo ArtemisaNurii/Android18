@@ -70,8 +70,10 @@ const Contact: React.FC = () => {
       <section
         ref={sectionRef}
         id="contact"
-        className="relative overflow-hidden bg-black text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
+        className="relative overflow-hidden  inset-0 bg-gradient-to-br from-black to-teal-300 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
       >
+              <div className="absolute inset-0 bg-black/60" />
+
      
 
         {/* Content Container */}
@@ -80,8 +82,8 @@ const Contact: React.FC = () => {
             <p className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-2">
               Contact Us
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-poppins  leading-tight mb-12 md:mb-16">
-              Codevider Is Just a Message Away <br /> from Your Next Big Move
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-poppins  font-bold leading-tight mb-12 md:mb-16">
+              Codevider Is Just a Message Away <br className='max-sm:hidden'/> from Your Next Big Move
             </h2>
           </div>
 
