@@ -93,6 +93,9 @@
 }
 
 @layer base {
+  html, body {
+    overflow-x: clip;   /* use `clip` or `hidden` – clip is the modern spec word */
+  }
   * {
     @apply border-border;
   }
