@@ -68,7 +68,7 @@ export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
     // most laptop screens without creating excessive empty space.
     <div
       ref={ref}
-      className="h-[120vh] max-md:h-[160vh] py-20 sm:py-40 overflow-hidden antialiased relative flex flex-col self-auto items-center [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[120vh] py-20 sm:py-40 overflow-hidden antialiased relative flex flex-col self-auto items-center [perspective:1000px] [transform-style:preserve-3d]"
     >
       <Header />
       <motion.div

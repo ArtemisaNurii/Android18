@@ -6,6 +6,8 @@ import {
   FiCalendar, FiBell, FiSettings, FiRefreshCw, FiLock, FiPlus
 } from 'react-icons/fi';
 import { FaPiedPiper } from "react-icons/fa";
+import Marquee from "react-fast-marquee";
+
 
 // GSAP Plugin registration
 gsap.registerPlugin(ScrollTrigger);
@@ -114,10 +116,11 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative flex items-center justify-center w-full min-h-screen px-4 py-20 overflow-hidden text-gray-100 bg-black font-sans"
-      style={{ perspective: '1500px' }} // Enables 3D transforms for child elements
+<section 
+  ref={containerRef}
+   className="relative flex items-center justify-center w-full min-h-screen py-20
+      text-gray-100 bg-black font-sans overflow-x-hidden"
+  style={{ perspective: '1500px' }}
     >
       {/* Background Styling: Subtle gradient and dot pattern for a modern, techy feel */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#0a1f18]"></div>
@@ -127,11 +130,11 @@ export const Hero: React.FC = () => {
         
         {/* Left Column: Headline, Subtext, CTA, and Social Proof */}
         <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
-          <h1 className="hero-text text-5xl md:text-6xl font-normal tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
+          <h1 className="hero-text text-3xl max-md:pt-10 md:text-6xl font-normal tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
             Strategic Softwares for Sustainable Growth.
           </h1>
 
-          <p className="hero-text text-lg text-gray-300 max-w-lg leading-relaxed">
+          <p className="hero-text text-lg text-gray-300 max-w-lg leading-relaxed max-sm:hidden">
             We don't just build software; we engineer bespoke systems that integrate seamlessly into your workflow, driving efficiency and unlocking new avenues for growth.
           </p>
 
@@ -150,16 +153,41 @@ export const Hero: React.FC = () => {
           </div>
           
           <div className="hero-text mt-12 w-full">
-            <p className="text-gray-500 text-sm tracking-widest uppercase">Trusted By</p>
-            <div className="flex items-center justify-center lg:justify-start gap-8 mt-4 flex-wrap">
-              {logos.map((name, i) => (
-                <div key={i} className="logo-item text-gray-600 hover:text-white transition-colors duration-300 flex items-center gap-2 opacity-0 grayscale hover:grayscale-0">
-                  <FaPiedPiper size={20} />
-                  <span className="font-bold tracking-widest text-sm">{name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+  <p className="text-gray-500 text-sm tracking-widest uppercase">
+    Trusted&nbsp;By
+  </p>
+
+  {/* ───── Mobile / Tablet (≤ md) ───── */}
+  <Marquee
+    gradient={false}
+    pauseOnHover
+    speed={35}
+    className="flex items-center gap-8 mt-4 md:hidden"
+  >
+    {logos.map((name, i) => (
+      <div
+        key={i}
+        className="logo-item text-gray-600 hover:text-white transition-colors duration-300 flex items-center gap-2 opacity-0 grayscale hover:grayscale-0"
+      >
+        <FaPiedPiper size={20} />
+        <span className="font-bold tracking-widest text-sm">{name}</span>
+      </div>
+    ))}
+  </Marquee>
+
+  {/* ───── Desktop (≥ md) ───── */}
+  <div className="hidden md:flex items-center justify-center lg:justify-start gap-8 mt-4 flex-wrap">
+    {logos.map((name, i) => (
+      <div
+        key={i}
+        className="logo-item text-gray-600 hover:text-white transition-colors duration-300 flex items-center gap-2 opacity-0 grayscale hover:grayscale-0"
+      >
+        <FaPiedPiper size={20} />
+        <span className="font-bold tracking-widest text-sm">{name}</span>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
 
         {/* Right Column: The Interactive Dashboard Mockup */}

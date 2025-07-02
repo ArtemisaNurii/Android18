@@ -5,6 +5,7 @@ import Marquee from 'react-fast-marquee';
 import sarah from '../../assets/images/sarah.jpg';
 import james from '../../assets/images/james.jpg';
 import lisa from '../../assets/images/lisa.jpg';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Testimonial {
   name: string;
@@ -18,7 +19,7 @@ const testimonials: Testimonial[] = [
     name: 'Sarah Thompson',
     role: 'Trendy Store',
     image: sarah,
-    text: 'Codevider transformed our online presence. Their SEO expertise boosted our rankings and brought in a flood of organic traffic we\'d never seen before.',
+    text: "Codevider transformed our online presence. Their SEO expertise boosted our rankings and brought in a flood of organic traffic we'd never seen before.",
   },
   {
     name: 'James Carter',
@@ -35,6 +36,9 @@ const testimonials: Testimonial[] = [
 ];
 
 const Testimonials: React.FC = () => {
+  // Hook to detect mobile screen size
+  const isMobile = useIsMobile();
+
   return (
     <section className="relative overflow-hidden py-32 text-white">
       {/* Background elements */}
@@ -56,12 +60,20 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="relative">
-          <Marquee gradient={false} speed={30} className="py-4">
+          <Marquee
+            gradient={false}
+            speed={30}
+            // --- KEY ADJUSTMENTS ---
+            // 1. Stop the animation on mobile
+            play={!isMobile} 
+            // 2. Add scroll behavior and hide scrollbar ONLY on mobile
+            className={isMobile ? "overflow-x-auto scrollbar-hide py-4" : "py-4"}
+          >
             <div className="flex gap-x-8 pl-8">
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="w-96 flex-shrink-0 rounded-lg bg-transparent p-8 backdrop-blur-sm"
+                  className="w-80 sm:w-96 flex-shrink-0 rounded-lg bg-transparent p-8 backdrop-blur-sm"
                 >
                   <p className="text-lg text-gray-200">"{testimonial.text}"</p>
                   <div className="mt-6 flex items-center gap-4">

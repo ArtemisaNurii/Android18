@@ -151,8 +151,10 @@ export default {
 				'sans': ['Poppins', 'sans'],
 				'serif': ['Poppins', 'serif'],
 			  },
+			  
 		}
 	},
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
-	plugins: [require("tailwindcss-animate")],
+	plugins: [    require('tailwind-scrollbar-hide')
+	],
 } satisfies Config;
