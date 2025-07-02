@@ -115,7 +115,7 @@ export const Hero: React.FC = () => {
     <section
       ref={containerRef}
       className="relative flex items-center justify-center w-full min-h-screen py-20 text-gray-100 bg-black font-sans overflow-x-hidden"
-      style={{ perspective: '1500px' }}
+     
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#0a1f18]"></div>
       <div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
