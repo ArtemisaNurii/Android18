@@ -5,7 +5,9 @@ import Marquee from 'react-fast-marquee';
 import sarah from '../../assets/images/sarah.jpg';
 import james from '../../assets/images/james.jpg';
 import lisa from '../../assets/images/lisa.jpg';
-import { useIsMobile } from '@/hooks/use-mobile';
+// The useIsMobile hook is no longer needed for the marquee's logic,
+// but you might still use it elsewhere.
+// import { useIsMobile } from '@/hooks/use-mobile'; 
 
 interface Testimonial {
   name: string;
@@ -36,8 +38,7 @@ const testimonials: Testimonial[] = [
 ];
 
 const Testimonials: React.FC = () => {
-  // Hook to detect mobile screen size
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile(); // This hook is no longer required for the marquee animation.
 
   return (
     <section className="relative overflow-hidden py-32 text-white">
@@ -60,36 +61,35 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="relative">
+          {/* --- ADJUSTED MARQUEE --- */}
           <Marquee
             gradient={false}
             speed={30}
-            // --- KEY ADJUSTMENTS ---
-            // 1. Stop the animation on mobile
-            play={!isMobile} 
-            // 2. Add scroll behavior and hide scrollbar ONLY on mobile
-            className={isMobile ? "overflow-x-auto scrollbar-hide py-4" : "py-4"}
+            // The `play` prop defaults to true, so we can remove it.
+            // The className is simplified as we no longer need mobile-specific scroll behavior.
+            className="py-4" 
           >
-            <div className="flex gap-x-8 pl-8">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="w-80 sm:w-96 flex-shrink-0 rounded-lg bg-transparent p-8 backdrop-blur-sm"
-                >
-                  <p className="text-lg text-gray-200">"{testimonial.text}"</p>
-                  <div className="mt-6 flex items-center gap-4">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="h-14 w-14 rounded-full object-cover ring-2 ring-gray-600"
-                    />
-                    <div>
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-gray-400">{testimonial.role}</p>
-                    </div>
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                // We add margin here to create the gap between items,
+                // replacing the `gap-x-8` from the deleted wrapper div.
+                className="mx-4 w-80 flex-shrink-0 rounded-lg bg-transparent p-8 backdrop-blur-sm sm:w-96"
+              >
+                <p className="text-lg text-gray-200">"{testimonial.text}"</p>
+                <div className="mt-6 flex items-center gap-4">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="h-14 w-14 rounded-full object-cover ring-2 ring-gray-600"
+                  />
+                  <div>
+                    <p className="font-semibold">{testimonial.name}</p>
+                    <p className="text-sm text-gray-400">{testimonial.role}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </Marquee>
         </div>
       </div>
