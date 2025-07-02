@@ -103,37 +103,40 @@ export const Benefits = () => {
 
   return (
     <div
-      ref={containerRef}
-      className="relative text-neutral-800 font-poppins flex  inset-0 bg-gradient-to-br from-black to-teal-300 flex-col items-center min-h-screen w-full py-24 px-4 max-sm:px-10 lg:px-8"
-    >
-      <div className="absolute inset-0 bg-black/60" />
-      
-      {/* --------- HEADER --------- */}
-      <header className="relative z-10 text-center mb-16 max-w-4xl">
-        <h1 className="header-title font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
-          The Future Is Now
-        </h1>
-        <p className="header-subtitle mt-4 text-lg text-neutral-200 max-w-2xl mx-auto">
-          A dynamic environment designed to foster learning, connection, and inspiration.
-          Exchange ideas and find new pathways for the tech landscape.
-        </p>
-      </header>
+    ref={containerRef}
+    // REMOVED `px-4 lg:px-8` from here
+    className="relative text-neutral-800 font-poppins flex flex-col items-center min-h-screen w-full py-24 bg-gradient-to-br from-black to-teal-300 px-6"
+  >
+    <div className="absolute inset-0 bg-black/60" />
 
-      {/* --------- CARDS GRID --------- */}
-      <main className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl">
-        {benefitsData.map(({ Icon, title, description, colSpan }, i) => (
-          <div
-            key={i}
-            className={`benefit-card bg-[#FEF6F8] p-8 rounded-2xl flex flex-col items-start text-left ${colSpan}`}
-          >
-            <Icon className="w-10 h-10 text-[#32446d] mb-6" />
-            <h2 className="font-mono text-2xl lg:text-3xl font-bold tracking-widest uppercase mb-3">
-              {title}
-            </h2>
-            <p className="text-neutral-600">{description}</p>
-          </div>
-        ))}
-      </main>
-    </div>
-  );
+    {/* --------- HEADER --------- */}
+    {/* ADDED `px-4 lg:px-8` here */}
+    <header className="relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
+      <h1 className="header-title font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
+        The Future Is Now
+      </h1>
+      <p className="header-subtitle mt-4 text-lg text-neutral-200 max-w-2xl mx-auto">
+        A dynamic environment designed to foster learning, connection, and inspiration.
+        Exchange ideas and find new pathways for the tech landscape.
+      </p>
+    </header>
+
+    {/* --------- CARDS GRID --------- */}
+    {/* ADDED `px-4 lg:px-8` here */}
+    <main className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl px-4 lg:px-8">
+      {benefitsData.map(({ Icon, title, description, colSpan }, i) => (
+        <div
+          key={i}
+          className={`benefit-card bg-[#FEF6F8] p-8 rounded-2xl flex flex-col items-start text-left ${colSpan}`}
+        >
+          <Icon className="w-10 h-10 text-[#32446d] mb-6" />
+          <h2 className="font-mono text-2xl lg:text-3xl font-bold tracking-widest uppercase mb-3">
+            {title}
+          </h2>
+          <p className="text-neutral-600">{description}</p>
+        </div>
+      ))}
+    </main>
+  </div>
+);
 };
