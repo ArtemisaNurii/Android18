@@ -6,7 +6,7 @@ import {
   FiCalendar, FiBell, FiSettings, FiRefreshCw, FiLock, FiPlus
 } from 'react-icons/fi';
 import { FaPiedPiper } from "react-icons/fa";
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,7 +119,7 @@ export const Hero: React.FC = () => {
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#47a893]"></div>
       <div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
-      <div className="relative z-10 container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center px- max-sm:pt-24">
+      <div className="relative z-10 container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center px-4 max-sm:pt-24">
           <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
             <div className="hero-text inline-flex items-center gap-2 bg-[#1C2320] text-emerald-300 text-sm px-3 py-1 rounded-full border border-emerald-500/30">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -147,14 +147,14 @@ export const Hero: React.FC = () => {
             </button>
           </div>
 
-          <div className="hero-text mt-12 w-full max-w-full overflow-hidden">
-            <p className="text-gray-500 text-sm tracking-widest uppercase">Trusted&nbsp;By</p>
+          <div className="hero-text mt-12 w-full max-w-full overflow-hidden max-sm:hidden">
+            <p className="text-gray-500 text-sm tracking-widest uppercase">Trusted By</p>
             <div className="mt-4 flex flex-row">
        
                 {logos.map((name, i) => (
                   <div
                     key={i}
-                    className="logo-item text-gray-600 opacity-0 mx-6 max-sm:mx-2 flex items-center gap-2 transition-opacity"
+                    className="logo-item text-gray-600 opacity-0 mx-6 max-sm:items-center  flex items-center gap-2 transition-opacity"
                   >
                     <FaPiedPiper size={20} />
                     <span className="font-bold tracking-widest text-sm">{name}</span>
@@ -167,7 +167,7 @@ export const Hero: React.FC = () => {
         <div
           ref={dashboardRef}
           style={{ transformStyle: 'preserve-3d' }}
-          className="relative w-full max-w-2xl mx-auto h-[500px] sm:h-[550px] bg-[#131313] rounded-xl border border-white/10 shadow-2xl shadow-black/40"
+          className="relative w-full max-w-2xl mx-auto h-[500px] sm:h-[400px] bg-[#131313] max-sm:px-4 rounded-xl border border-white/10 shadow-2xl shadow-black/40"
         >
           <div className="flex items-center gap-2 p-4 border-b border-white/10">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -195,9 +195,16 @@ export const Hero: React.FC = () => {
             <div className="flex-1 p-4 sm:p-6 flex flex-col gap-4 overflow-hidden">
               <h2 className="text-xl font-semibold text-white">Dashboard Overview</h2>
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {kpiData.map((kpi, i) => (
-                  <div key={i} className={`kpi-card p-3 sm:p-4 rounded-lg flex flex-col gap-2 transition-all duration-300 cursor-pointer ${i === 3 ? 'bg-transparent border border-dashed border-gray-700 hover:border-gray-500 hover:text-white justify-center items-center text-gray-600' : 'bg-[#171717] hover:shadow-lg'}`}>
+                  <div key={i} className={`kpi-card p-3 sm:p-4 rounded-lg flex flex-col gap-2 transition-all duration-300 cursor-pointer ${
+                    i === 3 
+                      ? 'bg-transparent border border-dashed border-gray-700 hover:border-gray-500 hover:text-white justify-center items-center text-gray-600' 
+                      : 'bg-[#171717] hover:shadow-lg'
+                    } ${
+                    // This logic hides the last two cards on screens smaller than the 'sm' breakpoint
+                    i >= 2 ? 'hidden sm:flex' : ''
+                  }`}>
                     {i < 3 ? (<>
                       <div className="flex justify-between items-center text-gray-400">{kpi.icon}<FiArrowUpRight className="text-emerald-400" /></div>
                       <p className="text-xl sm:text-2xl font-bold text-white">{kpi.value}</p>
