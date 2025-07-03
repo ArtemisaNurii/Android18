@@ -119,10 +119,13 @@ export const Hero: React.FC = () => {
     >
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#47a893]"></div>
       <div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
-
-      <div className="relative z-10 container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center px-4">
-        <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
-        <h1 className="hero-text text-5xl md:text-6xl font-poppins font-semibold tracking-tighter text-white/85 max-sm:pt-24">
+      <div className="relative z-10 container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center px- max-sm:pt-24">
+          <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
+            <div className="hero-text inline-flex items-center gap-2 bg-[#1C2320] text-emerald-300 text-sm px-3 py-1 rounded-full border border-emerald-500/30">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                Available Now
+            </div>
+        <h1 className="hero-text text-5xl md:text-6xl font-poppins font-semibold tracking-tighter text-white/85 ">
           CODEVIDER
         </h1>
 
@@ -138,7 +141,7 @@ export const Hero: React.FC = () => {
                   servicesSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-white hover:bg-gray-200 transition-all duration-300 text-black font-medium py-3 px-8 rounded-md flex items-center justify-center gap-2 transform hover:scale-105"
+              className="bg-emerald-600 hover:bg-gray-200 transition-all duration-300 text-black font-medium py-3 px-8 rounded-md flex items-center justify-center gap-2 transform hover:scale-105"
             >
               Our Services <FiArrowUpRight />
             </button>
@@ -151,7 +154,7 @@ export const Hero: React.FC = () => {
                 {logos.map((name, i) => (
                   <div
                     key={i}
-                    className="logo-item text-gray-600 opacity-0 mx-6 flex items-center gap-2 transition-opacity"
+                    className="logo-item text-gray-600 opacity-0 mx-6 max-sm:mx-2 flex items-center gap-2 transition-opacity"
                   >
                     <FaPiedPiper size={20} />
                     <span className="font-bold tracking-widest text-sm">{name}</span>

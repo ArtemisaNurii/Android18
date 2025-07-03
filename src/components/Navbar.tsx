@@ -108,7 +108,7 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
                 if (homeRef) {
                   homeRef.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-              }} src={logo} alt="Logo" className="h-8 w-auto cursor-pointer" />
+              }} src={logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
             </div>
 
             {/* Desktop Navigation Links (Centered) */}
