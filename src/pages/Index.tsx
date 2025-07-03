@@ -67,14 +67,7 @@ const Index = () => {
       <Loader isLoading={isPageLoading} />
 
       <div className="relative z-10">
-        <NavbarVariant
-          sections={{
-            About: aboutRef,
-            Services: servicesRef,
-            Projects: projectsRef,
-            Process: processRef,
-          }}
-        />
+
 
         <section ref={heroRef}><Hero /></section>
         <section ref={aboutRef}><AboutUsPage /></section>
@@ -83,7 +76,7 @@ const Index = () => {
         <StickyScrollGallery />
         <section ref={processRef}><Process /></section>
         <section ref={testimonialsRef}><Testimonials /></section>
-        <section ref={teamRef}><HeroParallaxDemo /></section>
+        {/* <section ref={teamRef}><HeroParallaxDemo /></section> */}
         <section ref={projectsRef}><Team /></section>
 <FaqSection/>
         <section ref={contactRef}><Contact /></section>

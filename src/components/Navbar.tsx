@@ -96,7 +96,7 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
         variants={{ visible: { y: 0 }, hidden: { y: '-100%' } }}
         transition={{ duration: 0.35, ease: 'easeInOut' }}
         className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500
-          ${isTransparent ? 'bg-transparent' : 'bg-black backdrop-blur-md '}`}
+          ${isTransparent ? 'bg-black' : 'bg-black backdrop-blur-md '}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">

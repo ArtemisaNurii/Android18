@@ -127,7 +127,9 @@ export const Hero: React.FC = () => {
           </h1>
 
           <p className="hero-text text-lg text-gray-300 max-w-lg leading-relaxed max-sm:hidden">
-            We don't just build software; we engineer bespoke systems that integrate seamlessly into your workflow, driving efficiency and unlocking new avenues for growth.
+          We develop specialized systems that
+solve challenges, serve your goals, and simplify complexity,
+exactly the way you need them!
           </p>
 
           <div className="hero-text flex flex-col sm:flex-row gap-4 mt-4 w-full max-w-xs mx-auto sm:max-w-none sm:mx-0">

@@ -5,23 +5,44 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import CaseStudyDetailPage from "./components/UserStories/StoryProfileView";
+import UserCasesPage from "./pages/UserCases";
+import NavbarVariant from "./components/Navbar";
+import { useRef } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+    const aboutRef = useRef<HTMLElement>(null);
+    const servicesRef = useRef<HTMLElement>(null);
+    const projectsRef = useRef<HTMLElement>(null);
+    const processRef = useRef<HTMLElement>(null);
+
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+          <NavbarVariant
+                sections={{
+                  About: aboutRef,
+                  Services: servicesRef,
+                  Projects: projectsRef,
+                  Process: processRef,
+                }}
+              />
+            <Routes>
+       
+              <Route path="/" element={<Index />} />
+              <Route path="/projects" element={<UserCasesPage />} />
+              <Route path="/projects/:id" element={<CaseStudyDetailPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    );
+};
 
 export default App;
