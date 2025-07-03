@@ -16,7 +16,7 @@ const kpiData = [
   { icon: <FiMessageSquare />, value: "5h", label: "Hours saved per day" },
   { icon: <FiPlus />, value: "", label: "Add new metric" }
 ];
-const logos = ["LOREM", "IPSUM", "LOGO", "GENESY", "PIPER"];
+const logos = ["LOREM", "IPSUM", "LOGO"];
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,18 +117,18 @@ export const Hero: React.FC = () => {
       className="relative flex items-center justify-center w-full min-h-screen py-20 text-gray-100 bg-black font-sans overflow-x-hidden"
      
     >
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#0a1f18]"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#47a893]"></div>
       <div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
 
       <div className="relative z-10 container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center px-4">
         <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
-          <h1 className="hero-text text-3xl max-md:pt-10 md:text-6xl font-normal tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
-            Strategic Softwares for Sustainable Growth.
-          </h1>
+        <h1 className="hero-text text-5xl md:text-6xl font-poppins font-semibold tracking-tighter text-white/85 max-sm:pt-24">
+          CODEVIDER
+        </h1>
 
-          <p className="hero-text text-lg text-gray-300 max-w-lg leading-relaxed max-sm:hidden">
-            We don't just build software; we engineer bespoke systems that integrate seamlessly into your workflow, driving efficiency and unlocking new avenues for growth.
-          </p>
+            <p className="hero-text text-lg text-gray-300 max-w-lg leading-relaxed tracking-wide text-left max-sm:text-center max-sm:px-4">
+              Supercharge your workflow with our solutions. We build systems that think, learn, and perform.
+            </p>
 
           <div className="hero-text flex flex-col sm:flex-row gap-4 mt-4 w-full max-w-xs mx-auto sm:max-w-none sm:mx-0">
             <button
@@ -146,14 +146,8 @@ export const Hero: React.FC = () => {
 
           <div className="hero-text mt-12 w-full max-w-full overflow-hidden">
             <p className="text-gray-500 text-sm tracking-widest uppercase">Trusted&nbsp;By</p>
-            <div className="mt-4">
-              <Marquee
-                key={marqueeKey}
-                autoFill
-                gradient={false}
-                speed={35}
-                className="w-2/3 flex items-center"
-              >
+            <div className="mt-4 flex flex-row">
+       
                 {logos.map((name, i) => (
                   <div
                     key={i}
@@ -163,7 +157,6 @@ export const Hero: React.FC = () => {
                     <span className="font-bold tracking-widest text-sm">{name}</span>
                   </div>
                 ))}
-              </Marquee>
             </div>
           </div>
         </div>
@@ -215,7 +208,7 @@ export const Hero: React.FC = () => {
                 <div className="flex-1 grid grid-cols-5 gap-3 sm:gap-4 items-end">
                   {[1, 0.7, 0.8, 0.5, 0.9].map((h, i) => (
                     <div key={i} className="text-center group flex flex-col h-full justify-end">
-                      <div className="chart-bar bg-gradient-to-t from-emerald-600/30 to-emerald-500/0 group-hover:from-emerald-500 group-hover:to-emerald-400/90 transition-colors duration-300 rounded-t-md" style={{ height: `${h * 100}%` }}></div>
+                      <div className="chart-bar bg-gradient-to-t from-emerald-600/30 to-emerald-500/0 group-hover:from-emerald-500 g transition-colors duration-300 rounded-t-md" style={{ height: `${h * 100}%` }}></div>
                       <p className="text-xs text-gray-500 group-hover:text-white transition-colors duration-300 mt-2">{['Jan', 'Feb', 'Mar', 'Apr', 'May'][i]}</p>
                     </div>
                   ))}
