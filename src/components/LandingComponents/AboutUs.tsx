@@ -57,7 +57,7 @@ const AboutUsPage: React.FC = () => {
     <p>
         Our dedicated teams of 25+ senior developers are masters of the modern tech stack. We embed into your project with an agile, sprint-based workflow, ensuring transparent communication and on-time delivery. From requirements gathering and expert team selection to daily stand-ups, weekly progress reports, seamless deployment, and 24/7 maintenance, we provide end-to-end project management and scalable support.
     </p>
-    <ul className="list-disc list-inside space-y-2 pl-4">
+    <ul className=" space-y-2 ">
         <li><strong>Full-Stack Development:</strong> Node.js, Python, PHP, React.js, Vue.js</li>
         <li><strong>Cloud-Native Solutions:</strong> Scalable and resilient microservices.</li>
         <li><strong>AI & Integrations:</strong> Future-proofing your platform with smart technology.</li>
