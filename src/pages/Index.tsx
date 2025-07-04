@@ -13,9 +13,9 @@ import Loader from '@/components/Loader/Loader';
 import NavbarVariant from '@/components/Navbar';
 import AboutUsPage from '@/components/LandingComponents/AboutUs';
 import { Benefits } from '@/components/LandingComponents/Benefits';
-import { StickyScrollGallery } from '@/components/LandingComponents/Projects';
+import { Map } from '@/components/LandingComponents/Projects';
 import { Hero } from '@/components/LandingComponents/Hero';
-import Team from '@/components/LandingComponents/Founder';
+// import Team from '@/components/LandingComponents/Founder';
 import FaqSection from '@/components/LandingComponents/Faq';
 // import Team from '@/components/LandingComponents/Founder';
 
@@ -80,11 +80,11 @@ const Index = () => {
         <section ref={aboutRef}><AboutUsPage /></section>
         <section ref={servicesRef}><ServicesPage /></section>
         <Benefits />
-        <StickyScrollGallery />
         <section ref={processRef}><Process /></section>
+        <Map />
+
         <section ref={testimonialsRef}><Testimonials /></section>
         <section ref={teamRef}><HeroParallaxDemo /></section>
-        <section ref={projectsRef}><Team /></section>
 <FaqSection/>
         <section ref={contactRef}><Contact /></section>
       </div>

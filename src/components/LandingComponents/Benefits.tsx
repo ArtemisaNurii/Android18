@@ -2,8 +2,20 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
 
-const LearnIcon = ({ className }: { className?: string }) => (
+// --- NEW ICONS TAILORED TO CODEVIDER'S BRAND ---
+
+// Icon representing high-quality code and engineering
+const EngineeringIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+// Icon representing partnership and collaboration
+const PartnershipIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
     <circle cx="9" cy="7" r="4" />
@@ -12,60 +24,57 @@ const LearnIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const ConnectIcon = ({ className }: { className?: string }) => (
+// Icon representing speed, acceleration, and value
+const AccelerateIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8.9V7a2 2 0 0 0-2-2h-3.42" />
-    <path d="M8 15.1V17a2 2 0 0 0 2 2h3.42" />
-    <path d="m8 8.9 4 4 4-4" />
-    <path d="m16 15.1-4-4-4 4" />
+    <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.88l-8.57 8.57" />
   </svg>
 );
 
-const GrowIcon = ({ className }: { className?: string }) => (
+// Icon representing business growth and scalability
+const GrowthIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12.93 15.63 10 14l-2.93 1.63a1 1 0 0 1-1.45-1.05l.56-3.23-2.34-2.28a1 1 0 0 1 .55-1.7h3.38l1.52-3.06a1 1 0 0 1 1.78 0l1.52 3.06h3.38a1 1 0 0 1 .55 1.7l-2.34 2.28.56 3.23a1 1 0 0 1-1.45 1.05Z"/>
-    <path d="M18 6h-3"/>
-    <path d="M21 9h-3"/>
+    <line x1="12" y1="20" x2="12" y2="4" />
+    <polyline points="6 14 12 20 18 14" />
   </svg>
 );
 
-// --- Data for the Benefit Cards ---
-const benefitsData = [
+
+// --- NEW DATA REFLECTING CODEVIDER'S CORE VALUES ---
+const codeviderPrinciples = [
     {
-      Icon: LearnIcon,
-      title: "LEARN FROM OTHERS",
-      description: "Hear from experts and peers and get new ideas. See how others tackle similar challenges, and gain fresh perspectives on your own work. Share experiences and learn together.",
-      colSpan: "md:col-span-3", // This card will span 3 of 5 columns on medium screens+
+      Icon: EngineeringIcon,
+      title: "TECHNICAL EXCELLENCE",
+      description: "We provide access to the top 1% of nearshore tech talent. Our senior developers are not just coders; they are architects and problem-solvers dedicated to building clean, scalable, and maintainable software.",
+      colSpan: "md:col-span-3",
     },
     {
-      Icon: ConnectIcon,
-      title: "CONNECT",
-      description: "Connect with like-minded people. Build relationships that last beyond the event. Help grow your network for future opportunities.",
-      colSpan: "md:col-span-2", // This card will span 2 of 5 columns
+      Icon: PartnershipIcon,
+      title: "SEAMLESS PARTNERSHIP",
+      description: "Your success is our success. We integrate directly into your workflow, adopting your tools and culture. Think of us not as an external agency, but as a dedicated extension of your own team.",
+      colSpan: "md:col-span-2",
     },
     {
-      Icon: GrowIcon,
-      title: "GROW",
-      description: "Gain new skills, insights, and strategies to move forward. Apply what you learn, improve your work, and grow as an individual.",
-      colSpan: "md:col-span-2", // This card will span 2 of 5 columns
+      Icon: AccelerateIcon,
+      title: "STRATEGIC VALUE",
+      description: "Accelerate your time-to-market and significantly reduce development costs. Our nearshore model delivers exceptional quality and efficiency, providing a powerful return on your investment.",
+      colSpan: "md:col-span-2",
     },
     {
-      Icon: LearnIcon, 
-      title: "GET INSPIRED",
-      description: "Hear stories, ideas, and experiences that spark creativity. Walk away with fresh motivation and the energy to tackle new challenges with confidence.",
-      colSpan: "md:col-span-3", // This card will span 3 of 5 columns
+      Icon: GrowthIcon, 
+      title: "FUTURE-READY GROWTH",
+      description: "We don't just build for today; we architect for tomorrow. Our solutions are designed to be scalable, adaptable, and robust, ensuring your technology evolves seamlessly with your business.",
+      colSpan: "md:col-span-3",
     },
   ];
-// --- The Main Benefits Component ---
 
+// --- The Main Component (Renamed to "OurApproach") ---
 export const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     const ctx = gsap.context(() => {
-      /* Header slides in once the section itself is 60% visible */
+      // Header animation
       gsap.from(['.header-title', '.header-subtitle'], {
         y: 40,
         opacity: 0,
@@ -78,8 +87,8 @@ export const Benefits = () => {
         },
       });
 
-      /* Card-by-card reveal on scroll */
-      const cards = gsap.utils.toArray<HTMLElement>('.benefit-card');
+      // Card-by-card reveal animation
+      const cards = gsap.utils.toArray<HTMLElement>('.principle-card');
       cards.forEach((card) => {
         gsap.from(card, {
           yPercent: 20,
@@ -103,40 +112,36 @@ export const Benefits = () => {
 
   return (
     <div
-    ref={containerRef}
-    // REMOVED `px-4 lg:px-8` from here
-    className="relative text-neutral-800 font-poppins flex flex-col items-center min-h-screen w-full py-24 bg-gradient-to-br from-black to-teal-300 px-6"
-  >
-    <div className="absolute inset-0 bg-black/60" />
+      ref={containerRef}
+      className="relative text-neutral-800 font-poppins flex flex-col items-center min-h-screen w-full py-24 bg-gradient-to-br from-black to-teal-400 px-6"
+    >
+      <div className="absolute inset-0 bg-black/70" />
 
-    {/* --------- HEADER --------- */}
-    {/* ADDED `px-4 lg:px-8` here */}
-    <header className="relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
-      <h1 className="header-title font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
-        The Future Is Now
-      </h1>
-      <p className="header-subtitle mt-4 text-lg text-neutral-200 max-w-2xl mx-auto">
-        A dynamic environment designed to foster learning, connection, and inspiration.
-        Exchange ideas and find new pathways for the tech landscape.
-      </p>
-    </header>
+      {/* --------- HEADER (UPDATED COPY) --------- */}
+      <header className="relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
+        <h1 className="header-title font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
+          BEYOND THE CODE
+        </h1>
+        <p className="header-subtitle mt-4 text-lg text-neutral-200 max-w-2xl mx-auto">
+          We believe true partnership goes beyond lines of code. It's about shared goals, transparent collaboration, and building technology that drives tangible business growth.
+        </p>
+      </header>
 
-    {/* --------- CARDS GRID --------- */}
-    {/* ADDED `px-4 lg:px-8` here */}
-    <main className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl px-4 lg:px-8">
-      {benefitsData.map(({ Icon, title, description, colSpan }, i) => (
-        <div
-          key={i}
-          className={`benefit-card bg-[#FEF6F8] p-8 rounded-2xl flex flex-col items-start text-left ${colSpan}`}
-        >
-          <Icon className="w-10 h-10 text-[#32446d] mb-6" />
-          <h2 className="font-mono text-2xl lg:text-3xl font-bold tracking-widest uppercase mb-3">
-            {title}
-          </h2>
-          <p className="text-neutral-600">{description}</p>
-        </div>
-      ))}
-    </main>
-  </div>
-);
+      {/* --------- CARDS GRID (UPDATED CONTENT) --------- */}
+      <main className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl px-4 lg:px-8">
+        {codeviderPrinciples.map(({ Icon, title, description, colSpan }, i) => (
+          <div
+            key={i}
+            className={`principle-card bg-white/95 backdrop-blur-sm p-8 rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
+          >
+            <Icon className="w-10 h-10 text-teal-600 mb-6" />
+            <h2 className="font-mono text-xl lg:text-2xl font-bold tracking-widest uppercase text-gray-800 mb-3">
+              {title}
+            </h2>
+            <p className="text-neutral-600">{description}</p>
+          </div>
+        ))}
+      </main>
+    </div>
+  );
 };

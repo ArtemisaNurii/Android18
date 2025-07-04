@@ -82,7 +82,7 @@ const FaqSection = () => {
               inView ? 'animate-fade-in-up' : 'opacity-0'
             }`}
           >
-            <h2 className="text-4xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-800">
               Frequently Asked Questions
             </h2>
             <p className="mt-4 text-gray-500">

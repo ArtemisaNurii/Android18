@@ -117,7 +117,7 @@ export const HeroParallax: React.FC<HeroParallaxProps> = ({ products }) => {
 
 export const Header: React.FC = () => (
   <header className="relative z-10 mx-auto w-full max-w-7xl px-4 text-center">
-    <h1 className="text-3xl font-bold dark:text-white md:text-5xl lg:text-6xl">
+    <h1 className="text-3xl font-bold text-gray-800 dark:text-white md:text-5xl lg:text-6xl">
      Our Projects
     </h1>
     <p className="mx-auto mt-6 max-w-2xl text-base text-neutral-600 dark:text-neutral-300 md:text-xl">
