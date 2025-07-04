@@ -158,7 +158,6 @@ export const Map: React.FC = () => {
         {/* This overlay sits on top of the map */}
         {/* <div className="absolute inset-0 bg-black/30 z-10" /> */}
 
-        {/* Text container */} 
    
       </section>
 
