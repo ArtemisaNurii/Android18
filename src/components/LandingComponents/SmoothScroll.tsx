@@ -41,113 +41,116 @@ const projects = [
   },
 ];
 
-// --- The Main Component ---
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
   const cardRef = useRef(null);
 
-  // --- GSAP Animation ---
+  // GSAP animation on index change
   useEffect(() => {
     const cardWidth = cardRef.current?.offsetWidth || 0;
-    const gap = 32; // Corresponds to gap-8 in Tailwind
+    const gap = window.innerWidth < 640 ? 16 : 32; // gap-4 mobile, gap-8 desktop
 
     gsap.to(sliderRef.current, {
       x: -currentIndex * (cardWidth + gap),
-      duration: 1.2,
+      duration: 1,
       ease: 'power3.inOut',
     });
   }, [currentIndex]);
 
-  // --- Navigation Handlers ---
+  // Navigation handlers
   const handleNext = () => {
-    if (currentIndex < projects.length - 1) {
+    if (currentIndex < projects.length - visibleCards) {
       setCurrentIndex(currentIndex + 1);
     }
   };
-
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     }
   };
 
-  const visibleCards = 3;
+  // Determine visible cards based on screen width
+  const visibleCards =
+    window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
 
   return (
-    <section id="projects" className="bg-white text-black min-h-screen w-full p-8 md:p-16 lg:p-24 flex flex-col justify-center font-sans overflow-hidden">
-      <div className="max-w-screen-xl mx-auto w-full">
-        
-        {/* Header Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-end">
-          {/* Left Side: Title and Description */}
+    <section id="projects" className="bg-white text-black w-full p-4 sm:p-8 md:p-16 lg:p-24 font-sans">
+      <div className="max-w-screen-xl mx-auto">
+        {/* Header */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 md:mb-12">
           <div>
-            <p className="text-emerald-500 mb-2 text-sm tracking-widest uppercase">Our Projects</p>
-            <h1 className="text-5xl sm:text-4xl md:text-5xl   font-semibold leading-tight mt-2  tracking-tight text-gray-900 ">
-             Explore our recent <br />
-              <span className="">works  from thought to</span> <br />
-               implementation
+            <p className="text-emerald-500 mb-1 text-xs sm:text-sm uppercase tracking-widest">
+              Our Projects
+            </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-gray-900">
+              Explore our recent <br />
+              <span>works from thought to</span> <br />
+              implementation
             </h1>
           </div>
-          
-          {/* Right Side: Paragraph and View All */}
-          <div className="flex flex-col items-start md:items-end justify-between h-full">
-             <p className=" md:text-right mb-8 md:mb-0 text-lg leading-8 text-gray-600">
-              Each application we build demonstrates our commitment to delivering robust, scalable solutions that empower your business.
+          <div className="flex flex-col items-start md:items-end justify-between">
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-600 mb-4 md:mb-0">
+              Each application we build demonstrates our commitment to delivering robust,
+              scalable solutions that empower your business.
             </p>
-             <a href="#" className="text-emerald-500 tracking-widest text-sm font-semibold border-b border-emerald-400 pb-1 hover:bg-emerald-400 hover:text-zinc-900 transition-all duration-300">
+            <a
+              href="#"
+              className="text-black text-xs sm:text-sm font-semibold tracking-widest border-b border-emerald-400 pb-1 hover:text-emerald-600 transition-all duration-300"
+            >
               VIEW ALL
             </a>
           </div>
         </div>
-        
-        {/* Carousel Navigation */}
-        <div className="flex items-center justify-between mb-8">
-            <div className="flex space-x-4">
-                <button 
-                    onClick={handlePrev} 
-                    className={`text-gray-500 text-2xl p-2 transition-all duration-300 ${currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:text-emerald-500 hover:scale-110'}`}
-                    aria-label="Previous Project"
-                    disabled={currentIndex === 0}
-                >
-                    <FaArrowLeft />
-                </button>
-                <button 
-                    onClick={handleNext} 
-                    className={`text-gray-500 text-2xl p-2 transition-all duration-300 ${currentIndex >= projects.length - visibleCards ? 'opacity-30 cursor-not-allowed' : 'hover:text-emerald-500 hover:scale-110'}`}
-                    aria-label="Next Project"
-                    disabled={currentIndex >= projects.length - visibleCards}
-                >
-                    <FaArrowRight />
-                </button>
-            </div>
-        </div>
 
-        {/* Carousel Slider */}
-        <div className="w-full overflow-hidden">
-          <div ref={sliderRef} className="flex gap-8">
-            {projects.map((project, index) => (
-              <div 
-                key={index} 
-                ref={index === 0 ? cardRef : null}
-                className="relative bg-cover bg-center rounded-2xl flex-shrink-0 w-[300px] md:w-[350px] h-[450px] text-white flex flex-col justify-end p-6 overflow-hidden group shadow-lg transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
-                style={{ backgroundImage: `url(${project.image})` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/80 group-hover:via-black/40"></div>
-                <div className="absolute top-6 right-6 z-10 text-white text-2xl opacity-0 group-hover:opacity-100 transform -translate-x-4 translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500">
-                    <FaArrowRight />
+        {/* Slider with arrow controls */}
+        <div className="relative">
+          {/* Prev Arrow */}
+          <button
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/60 hover:bg-white p-2 rounded-full shadow transition-opacity duration-300"
+          >
+            <FaArrowLeft className={currentIndex === 0 ? 'opacity-30' : 'opacity-100'} />
+          </button>
+
+          {/* Next Arrow */}
+          <button
+            onClick={handleNext}
+            disabled={currentIndex >= projects.length - visibleCards}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/60 hover:bg-white p-2 rounded-full shadow transition-opacity duration-300"
+          >
+            <FaArrowRight className={currentIndex >= projects.length - visibleCards ? 'opacity-30' : 'opacity-100'} />
+          </button>
+
+          {/* Carousel Slider */}
+          <div className="w-full overflow-x-auto sm:overflow-hidden">
+            <div
+              ref={sliderRef}
+              className="flex gap-4 sm:gap-8 pb-4 sm:pb-0"
+              style={{ cursor: 'grab' }}
+            >
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  ref={index === 0 ? cardRef : null}
+                  className="relative bg-cover bg-center rounded-xl flex-shrink-0 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] h-64 sm:h-80 md:h-[450px] text-white p-4 sm:p-6 overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105"
+                  style={{ backgroundImage: `url(${project.image})` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-300"></div>
+                  <div className="relative z-10">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed max-h-20 overflow-hidden">
+                      {project.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="relative z-10 transform transition-all duration-500 group-hover:-translate-y-4">
-                  <h3 className="text-3xl font-serif font-bold mb-2">{project.title}</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-full transition-all duration-500">
-                    {project.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );

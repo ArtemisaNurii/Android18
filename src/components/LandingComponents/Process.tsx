@@ -138,7 +138,7 @@ const Process: React.FC = () => {
                       : 'md:mr-auto md:text-left')
                   }
                 >
-                  <span className="inline-block bg-teal-100 text-gray-600 text-xs font-medium px-3 py-1  mb-3">
+                  <span className="inline-block bg-transparent text-gray-600 text-xs font-medium px-3 py-1  mb-3">
                     {step.duration}
                   </span>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-2">
