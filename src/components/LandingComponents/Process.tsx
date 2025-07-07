@@ -102,7 +102,7 @@ const Process: React.FC = () => {
   }, []);
 
   return (
-    <section className="bg-white py-24  px-6 max-sm:px-10  lg:px-20">
+    <section className="bg-white pt-24  px-6 max-sm:px-10  lg:px-20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

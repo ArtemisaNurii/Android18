@@ -13,6 +13,8 @@ import { Benefits } from '@/components/LandingComponents/Benefits';
 import { Map } from '@/components/LandingComponents/Projects';
 import { Hero } from '@/components/LandingComponents/Hero';
 import FaqSection from '@/components/LandingComponents/Faq';
+import Projects from '@/components/LandingComponents/SmoothScroll';
+import { Section } from 'lucide-react';
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -74,6 +76,7 @@ const Index = () => {
         <Benefits />
         <Map />
         <section ref={processRef}><Process /></section>
+    <section ref={projectsRef}><Projects/></section>
         <section ref={testimonialsRef}><Testimonials /></section>
         <section ref={teamRef}>      
         </section>

@@ -165,7 +165,7 @@ export const Map: React.FC = () => {
       {/* 1. MAP BANNER SECTION */}
       <header 
   
-        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] overflow-hidden max-sm:bottom-4  bottom-64"
+        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] overflow-hidden max-sm:bottom-4  md-bottom-52"
       >
         <div 
           className="
