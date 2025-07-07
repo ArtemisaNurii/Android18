@@ -74,6 +74,7 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
+				
 				dotPulse: {
 					'0%, 80%, 100%': { opacity: '0.3', transform: 'scale(0.9)' },
 					'40%': { opacity: '1', transform: 'scale(1.2)' },
@@ -150,6 +151,12 @@ export default {
 			fontFamily: {
 				'sans': ['Poppins', 'sans'],
 				'serif': ['Poppins', 'serif'],
+			  },
+			  wrapper: {
+			
+				height: "600vh",
+				
+				position: "sticky", 
 			  },
 			  
 		}

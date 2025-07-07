@@ -133,56 +133,94 @@
 //   );
 // };
 
-
 import React from 'react';
-// Assuming WorldMapDemo is exported from a file named WorldMap.tsx
 import { WorldMapDemo } from './WorldMap';
+import { Blend, ChartSpline, Code } from 'lucide-react';
 
-// Dummy data to make the component runnable
-const galleryData = [
-  { id: 1, title: 'Discovery & Strategy', description: 'We start by understanding your vision, market, and users to define a clear product roadmap.' },
-  { id: 2, title: 'UI/UX Design', description: 'Our designers craft intuitive and beautiful interfaces that deliver an exceptional user experience.' },
-  { id: 3, title: 'Engineering & Development', description: 'Our expert engineers build robust, scalable, and secure products using modern technologies.' },
-  { id: 4, title: 'Launch & Support', description: 'We ensure a smooth launch and provide ongoing support and iteration to help your product grow.' },
+const featuresData = [
+  {
+    id: 1,
+    icon: Code,
+    title: 'Code Craftsmanship',
+    description: 'We hold ourselves to the highest standards of quality, writing clean, maintainable, and well-tested code. We ensure long-term reliability and ease of future enhancements.',
+  },
+  {
+    id: 2,
+    icon: Blend,
+    title: 'Transparent Collaboration',
+    description: 'Open communication, clear priorities, and full visibility into progress and challenges keep our clients informed and engaged at every step.',
+  },
+  {
+    id: 3,
+    icon: ChartSpline,
+    title: 'Continuous Innovation',
+    description: 'We invest in learning the latest tools, frameworks, and best practices so that our solutions stay ahead of the curve.',
+  },
 ];
 
 export const Map: React.FC = () => {
   return (
-    <div className="bg-white font-sans">
-      {/* --- BANNER SECTION --- */}
-      <section className="relative h-[29vh] md:h-[40vh] min-h-[250px] md:min-h-[300px] w-full flex items-center justify-center max-sm:h-[15vh] text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 -translate-y-20 md:-translate-y-44">
+    <div className="relative bg-white font-sans">
+      
+      {/* 1. MAP BANNER SECTION */}
+      <header 
+  
+        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] overflow-hidden max-sm:bottom-4  bottom-64"
+      >
+        <div 
+          className="
+            absolute inset-0 
+            transition-transform duration-500 ease-in-out
+            
+            -translate-y-[%] 
+            
+            md:-translate-y-[15%] 
+            
+            lg:-translate-y-[10%]
+            
+            xl:translate-y-0
+            max-sm:scale-100
+          "
+        >
+          {/* The WorldMapDemo now fills its positioned wrapper */}
           <WorldMapDemo />
         </div>
+      </header>
 
-        {/* This overlay sits on top of the map */}
-        {/* <div className="absolute inset-0 bg-black/30 z-10" /> */}
-
-   
-      </section>
-
-      {/* --- FEATURES GRID --- */}
-      <section className="py-12 md:py-20 bg-white">
+      {/* 2. CONTENT SECTION */}
+      {/* This part remains the same as my previous suggestion, as it correctly handles the overlap. */}
+      <section 
+        className="relative z-10 bg-white -mt-16  max-sm:-mt-44 md:-mt-24 rounded-t-2xl pt-12 pb-16 sm:pt-16 sm:pb-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-700">
-            Outsourced Product Partner
-          </h1>
-        
-            <p className="mt-2 max-w-xs md:max-w-2xl mx-auto text-sm md:text-base lg:text-lg text-gray-900">
-            Engineering, design & support—CodeVider powers your full product lifecycle.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 items-start">
+            <div className="lg:pr-8">
+              <p className="text-sm font-semibold leading-7 text-teal-600 uppercase tracking-wider">
+                Global Partnership
+              </p>
+              <h2 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+                Outsourcing Code Company
+              </h2>
+            </div>
+            <div className="lg:pt-2">
+              <p className="text-lg leading-8 text-gray-600">
+                Unlock cost savings and expert precision, scale with agile flexibility, and focus on what you do best—outsource the rest.
+              </p>
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-            {galleryData.map(({ id, title, description }) => (
-              <div
-                key={id}
-                className="bg-slate-50 rounded-xl border border-slate-200 shadow-sm p-4 md:p-6"
-              >
-                <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-1 md:mb-2">{title}</h3>
-                <p className="text-slate-600 text-sm md:text-base">{description}</p>
-              </div>
-            ))}
+
+          <div className="mt-16 sm:mt-20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+              {featuresData.map(({ id, icon: Icon, title, description }) => (
+                <div key={id}>
+                  <div className="mb-4">
+                    <Icon className="h-8 w-8 text-teal-600" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-lg font-semibold leading-7 text-gray-900">{title}</h3>
+                  <p className="mt-2 text-base leading-7 text-gray-600">{description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -190,4 +228,4 @@ export const Map: React.FC = () => {
   );
 };
 
-export default Map; // Added default export for clarity
+export default Map;

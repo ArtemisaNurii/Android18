@@ -15,45 +15,45 @@ interface Step {
 
 const steps: Step[] = [
   {
-    duration: '1–2 DAYS',
-    title: 'Requirements & Vision Workshop',
+    duration: '1',
+    title: 'Determine Client Needs',
     description:
       'Stakeholder interviews and product-vision canvas to align goals, constraints, and success metrics.',
     bullets: ['User-story mapping', 'Prioritised feature list'],
   },
   {
-    duration: '3–5 DAYS',
-    title: 'System Architecture & Sprint Planning',
+    duration: '2',
+    title: 'Team Selection',
     description:
-      'We draft a cloud-native architecture, choose the tech stack, and slice the backlog into sprints.',
+      'Our developer skills will be matched with your requirements',
     bullets: ['High-level diagrams', 'Sprint roadmap'],
   },
   {
-    duration: '1–2 WEEKS',
-    title: 'UX/UI Design & Prototyping',
+    duration: '3',
+    title: 'Development',
     description:
-      'Clickable Figma prototypes validated with quick usability tests before any code is written.',
+      'Selected developer/s will work delicately on your project.',
     bullets: ['Design tokens & style-guide', 'Accessibility review'],
   },
   {
-    duration: '2–8 WEEKS',
-    title: 'Agile Development',
+    duration: '4',
+    title: 'Daily Meeting & Weekly Reporting',
     description:
       'Cross-functional squads ship incremental features with CI/CD, code reviews, and daily stand-ups.',
     bullets: ['Automated tests', 'Containerised environments'],
   },
   {
-    duration: '1 WEEK',
-    title: 'QA, Security & Performance',
+    duration: '5',
+    title: 'Deployment',
     description:
-      'Regression, penetration, and load testing—plus hardening and optimisation passes.',
+      'We will give you a development server when you can test your project. On your servers you will have clean code.',
     bullets: ['OWASP scan', 'Lighthouse benchmarks'],
   },
   {
-    duration: '1–2 DAYS',
-    title: 'Deployment & Knowledge Transfer',
+    duration: '6',
+    title: 'On Going & Maintenance',
     description:
-      'Blue-green/Canary deploy to production, dashboards go live, and we hand over docs & training.',
+      'You can work with the same team to get consistent Productivity..',
     bullets: ['24-hour hyper-care', 'Run-books & monitoring'],
   },
 ];

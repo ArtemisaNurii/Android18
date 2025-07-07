@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
           
           {/* Left Column: The "Why" - Persuasion & Alternative CTAs */}
           <div className="text-center lg:text-left mb-12 lg:mb-0">
-            <p className="text-sm font-semibold uppercase tracking-wider text-teal-300 mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-teal-400 mb-3">
               Let's Connect
             </p>
             <h2 className="text-4xl sm:text-5xl font-poppins font-bold leading-tight mb-6">
@@ -93,11 +93,11 @@ const Contact: React.FC = () => {
 
           {/* Right Column: The "How" - The Form in a Glassmorphism Card */}
  {/* Right Column: The "How" - A clean, elegant, and seamless form */}
-<div className="w-full">
-    <form onSubmit={handleSubmit} className="space-y-6">
+<div className="w-full ">
+    <form onSubmit={handleSubmit} className="space-y-5 pt-6">
         
         {/* Name and Email Fields */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
             <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-400">Full Name</Label>
                 <Input 
@@ -180,7 +180,10 @@ const Contact: React.FC = () => {
             <p className="text-center md:text-left text-gray-700 max-w-2xl">
               Stay updated on our latest developments, insights, and opportunities by following us.
             </p>
-            <button className="border border-black px-8 py-3 font-semibold rounded-lg hover:bg-black hover:text-white transition-colors w-full md:w-auto flex-shrink-0">
+            <button 
+              className="border border-black px-8 py-3 font-semibold rounded-lg hover:bg-black hover:text-white transition-colors w-full md:w-auto flex-shrink-0"
+              onClick={() => (window.location.href = "mailto:hr@codevider.com")}
+            >
               Let's Talk
             </button>
           </div>
@@ -191,16 +194,16 @@ const Contact: React.FC = () => {
               <p className="font-bold text-base">Company</p>
               <ul className="space-y-2 text-gray-600">
                 <li><a href="#about" className="hover:text-black">About Us</a></li>
-                <li><a href="#services-section" className="hover:text-black">Services</a></li>
+                <li><a href="#services" className="hover:text-black">Services</a></li>
                 <li><a href="#projects" className="hover:text-black">Projects</a></li>
               </ul>
             </div>
             <div className="space-y-3">
               <p className="font-bold text-base">Social</p>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-black">Instagram</a></li>
-                <li><a href="#" className="hover:text-black">Facebook</a></li>
-                <li><a href="#" className="hover:text-black">LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/codevider/?hl=en" className="hover:text-black">Instagram</a></li>
+                <li><a href="https://www.facebook.com/codevider/" className="hover:text-black">Facebook</a></li>
+                <li><a href="https://al.linkedin.com/company/codevider" className="hover:text-black">LinkedIn</a></li>
               </ul>
             </div>
             <div className="space-y-3">
@@ -213,8 +216,8 @@ const Contact: React.FC = () => {
              <div className="space-y-3">
               <p className="font-bold text-base">Contact</p>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="mailto:hello@codevider.com" className="hover:text-black">hello@codevider.com</a></li>
-                <li><a href="#contact" className="hover:text-black">Contact Form</a></li>
+                <li><a href="mailto:hello@codevider.com" className="hover:text-black">hr@codevider.com</a></li>
+                <li><a href="" className="hover:text-black"> +355 695877742</a></li>
               </ul>
             </div>
           </div>

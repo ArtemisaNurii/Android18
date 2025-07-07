@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 
 // --- Configuration ---
 const PHRASES = [
-  "AI Productions",
   "Blockchain Apps",
   "Fintech",
+  "AI Productions",
+
   "API Management"
 ];
 const TYPING_SPEED = 120; // ms per character

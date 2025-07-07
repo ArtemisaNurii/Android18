@@ -118,7 +118,7 @@ const NavbarVariant: React.FC<NavbarProps> = ({ sections }) => {
                   <li key={label}>
                     <button
                       onClick={() => handleNavClick(ref)}
-                      className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium lg:text-xl transition-colors duration-300 group"
+                      className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium lg:text-lg transition-colors duration-300 group"
                     >
                       {label}
                       {/* Animated underline effect */}

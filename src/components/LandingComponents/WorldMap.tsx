@@ -6,7 +6,7 @@ import WorldMap from '../ui/world-map';
 
 export const WorldMapDemo: React.FC = () => {
   // NEW: Define the primary location for Albania (Tirana)
-  const albaniaCoords = { lat: 41.3275, lng: 19.8187 }; // Tirana, Albania
+  const albaniaCoords = { lat: 31.3275, lng: 19.8187 }; // Tirana, Albania
 
   const sampleDots = [
     {
@@ -37,7 +37,7 @@ export const WorldMapDemo: React.FC = () => {
 
   return (
     // You can adjust the padding/background here as needed for your page layout
-    <div className="py-20 md:py-40 dark:bg-black bg-white w-full">
+    <div className="py-20 md:py-40 dark:bg-black bg-white w-full absolute inset-0 h-full object-cover">
 
       <WorldMap dots={sampleDots} lineColor="#50C878" />
     </div>
