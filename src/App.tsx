@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProjectProfile from "./components/ProjectPage.tsx/ProjectProfile";
 import NavbarVariant from "./components/Navbar";
-import ProjectsRoute from "./pages/Projects";
+import ProjectPage from "./components/ProjectPage.tsx/AllProject";
 
 const queryClient = new QueryClient();
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
             />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/projects" element={<ProjectsRoute />} />
+          <Route path="/projects" element={<ProjectPage />} />
           <Route path="/projects/:id" element={<ProjectProfile />} />
 
          
