@@ -101,6 +101,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section
+    id='hero'
       ref={containerRef}
       style={{ fontFamily: "Poppins, sans" }} 
       className="relative flex items-center justify-center w-full min-h-screen py-40  text-gray-100 bg-black font-sans overflow-hidden"

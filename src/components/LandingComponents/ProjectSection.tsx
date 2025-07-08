@@ -75,7 +75,7 @@ const Projects = () => {
     window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
 
   return (
-    <section id="projects" className="bg-white text-black w-full p-4 sm:p-8 md:p-16 lg:p-24 font-sans">
+    <section id="projects" className="bg-white text-black   w-full p-4 sm:p-8 md:p-16 lg:p-24s font-sans">
       <div className="max-w-screen-xl mx-auto">
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 md:mb-12">
@@ -95,7 +95,7 @@ const Projects = () => {
               scalable solutions that empower your business.
             </p>
             <a
-              href="#"
+              href="/projects"
               className="text-black text-xs sm:text-sm font-semibold tracking-widest border-b border-emerald-400 pb-1 hover:text-emerald-600 transition-all duration-300"
             >
               VIEW ALL
@@ -124,7 +124,7 @@ const Projects = () => {
           </button>
 
           {/* Carousel Slider */}
-          <div className="w-full overflow-x-auto sm:overflow-hidden">
+          <div className="w-full overflow-x-auto sm:overflow-hidden pt-20">
             <div
               ref={sliderRef}
               className="flex gap-4 sm:gap-8 pb-4 sm:pb-0"
@@ -142,9 +142,7 @@ const Projects = () => {
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
                       {project.title}
                     </h3>
-                    <p className="text-xs sm:text-sm md:text-base leading-relaxed max-h-20 overflow-hidden">
-                      {project.description}
-                    </p>
+            
                   </div>
                 </div>
               ))}

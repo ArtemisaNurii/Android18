@@ -113,13 +113,13 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative text-neutral-800 font-poppins flex flex-col items-center min-h-screen w-full py-24 bg-gradient-to-br from-black to-teal-400 px-6"
+      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center  w-full py-32 bg-gradient-to-br from-black to-teal-400 px-6"
     >
       <div className="absolute inset-0 bg-black/70" />
 
       {/* --------- HEADER (UPDATED COPY) --------- */}
       <header className="relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
-        <h1 className="header-title font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
+        <h1 className="header-title  mt-10  font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
           BEYOND THE CODE
         </h1>
         <p className="header-subtitle mt-4 text-lg text-neutral-200 max-w-2xl mx-auto">

@@ -1,41 +1,81 @@
 // components/Loader/Loader.tsx
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { gsap } from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
+
+gsap.registerPlugin(TextPlugin);
 
 interface LoaderProps {
-  // The only prop it needs: a boolean to tell it if it should be visible.
   isLoading: boolean;
+  // Add this new prop. It's an optional function.
+  onLoadingComplete?: () => void;
 }
 
-const Loader: React.FC<LoaderProps> = ({ isLoading }) => {
+const Loader: React.FC<LoaderProps> = ({ isLoading, onLoadingComplete }) => {
   const [shouldRender, setShouldRender] = useState(isLoading);
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
+  const cursorRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (isLoading) {
-      setShouldRender(true);
-    } else {
-      // When isLoading becomes false, wait for the fade-out animation to finish before unmounting.
-      const timer = setTimeout(() => setShouldRender(false), 500); // 500ms matches the duration
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
+    if (isLoading) setShouldRender(true);
+    const tl = gsap.timeline();
 
-  if (!shouldRender) {
-    return null;
-  }
+    if (shouldRender) {
+      if (isLoading) {
+        tl.to(loaderRef.current, {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.inOut',
+        })
+        .to(textRef.current, {
+            text: "Codevider",
+            duration: 1.5,
+            ease: 'none',
+            // --- THIS IS THE KEY CHANGE ---
+            // When this animation completes, call the function passed in via props.
+            onComplete: () => {
+              if (onLoadingComplete) {
+                // We add a small delay so the user can see the word before it vanishes
+                setTimeout(onLoadingComplete, 500);
+              }
+            },
+          },
+          '>-0.2'
+        );
+
+        gsap.to(cursorRef.current, {
+          opacity: 0,
+          repeat: -1,
+          yoyo: true,
+          duration: 0.5,
+          ease: 'power2.inOut',
+        });
+      }
+      else {
+        tl.to(loaderRef.current, {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.inOut',
+          onComplete: () => setShouldRender(false),
+        });
+      }
+    }
+
+    return () => {
+      tl.kill();
+      gsap.killTweensOf([cursorRef.current, textRef.current, loaderRef.current]);
+    };
+  }, [isLoading, shouldRender, onLoadingComplete]); // Add onLoadingComplete to dependency array
+
+  if (!shouldRender) return null;
 
   return (
-    // The opacity is now directly controlled by the isLoading prop.
-    // When isLoading is false, opacity becomes 0, triggering the fade-out.
-    <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500 ${
-        isLoading ? 'opacity-100' : 'opacity-0'
-      }`}
-    >
-      <div className="flex space-x-2">
-        <span className="w-3 h-3 rounded-full bg-white animate-dot-pulse-0" />
-        <span className="w-3 h-3 rounded-full bg-white animate-dot-pulse-1" />
-        <span className="w-3 h-3 rounded-full bg-white animate-dot-pulse-2" />
+    <div ref={loaderRef} className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950 opacity-0">
+      <div className="flex items-center">
+        <h1 ref={textRef} className="text-4xl md:text-6xl font-mono text-gray-100"></h1>
+        <span ref={cursorRef} className="ml-2 h-10 md:h-16 w-1 bg-green-400" />
       </div>
     </div>
   );
