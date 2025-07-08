@@ -75,12 +75,14 @@ const Projects = () => {
     window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
 
   return (
-    <section id="projects" className="bg-white text-black   w-full p-4 sm:p-8 md:p-16 lg:p-24s font-sans">
-      <div className="max-w-screen-xl mx-auto">
+    <section id="projects"     className="bg-white text-black w-full p-4 sm:p-10 md:p-16 pt-24 lg:pt-40 font-sans ">
+
+      <div className="max-w-screen-xl mx-auto max-sm:overflow-hidden">
         {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
           <div>
-            <p className="text-emerald-500 mb-1 text-xs sm:text-sm uppercase tracking-widest">
+            <p className="text-gray-400 mb-1 text-xs sm:text-sm uppercase tracking-widest">
               Our Projects
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-gray-900">
@@ -134,10 +136,10 @@ const Projects = () => {
                 <div
                   key={index}
                   ref={index === 0 ? cardRef : null}
-                  className="relative bg-cover bg-center rounded-xl flex-shrink-0 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] h-64 sm:h-80 md:h-[450px] text-white p-4 sm:p-6 overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105"
+                  className="relative bg-cover bg-center rounded-xl flex-shrink-0 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] h-52 sm:h-80 md:h-[350px] text-white p-4 sm:p-6 overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105"
                   style={{ backgroundImage: `url(${project.image})` }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-300"></div>
+           
                   <div className="relative z-10">
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
                       {project.title}
@@ -155,3 +157,6 @@ const Projects = () => {
 };
 
 export default Projects;
+
+
+

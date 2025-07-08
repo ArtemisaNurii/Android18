@@ -1,12 +1,11 @@
-"use client";
-
+// I took out "use client"; because we don't need it in a regular React app!
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+// See? We're back to using useNavigate from react-router-dom! It's the right tool for this project!
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import Contact from "../LandingComponents/ContactPage";
 
-// Project data with unique IDs
+// The project 'deck of cards' is still awesome.
 const projects = [
   {
     id: 1,
@@ -51,20 +50,19 @@ const projects = [
 ];
 
 const SCALE_FACTOR = 0.06;
-// Tighter separation for desktop stacking
 const CARD_SEPARATION_PERCENT = 40;
 
-// Calculate circular offset for infinite loop effect
-const getCircularOffset = (index: number, activeIndex: number, total: number) => {
+const getCircularOffset = (index, activeIndex, total) => {
   let offset = index - activeIndex;
   if (offset > total / 2) offset -= total;
   if (offset < -total / 2) offset += total;
   return offset;
 };
 
-const ProjectCarousel: React.FC = () => {
+const ProjectCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(Math.floor(projects.length / 2));
   const [direction, setDirection] = useState(0);
+  // Using useNavigate, just like you had it!
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -75,7 +73,7 @@ const ProjectCarousel: React.FC = () => {
     setDirection(-1);
     setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
-  const handleCardClick = (index: number) => {
+  const handleCardClick = (index) => {
     setDirection(index > activeIndex ? 1 : -1);
     setActiveIndex(index);
   };
@@ -83,7 +81,7 @@ const ProjectCarousel: React.FC = () => {
   const activeProject = projects[activeIndex];
 
   const mobileVariants = {
-    enter: (dir: number) => ({
+    enter: (dir) => ({
       x: dir > 0 ? "100%" : "-100%",
       opacity: 0,
     }),
@@ -92,7 +90,7 @@ const ProjectCarousel: React.FC = () => {
       x: 0,
       opacity: 1,
     },
-    exit: (dir: number) => ({
+    exit: (dir) => ({
       zIndex: 0,
       x: dir < 0 ? "100%" : "-100%",
       opacity: 0,
@@ -101,8 +99,9 @@ const ProjectCarousel: React.FC = () => {
 
   return (
     <div className="relative flex w-full flex-col items-center justify-center">
-      {/* Desktop 3D Carousel */}
-      <div className="relative hidden h-[400px] w-full max-w-4xl md:block">
+      
+   
+      <div className="relative hidden h-[450px] w-full max-w-4xl overflow-hidden md:block">
         {projects.map((project, index) => {
           const offset = getCircularOffset(index, activeIndex, projects.length);
           const isVisible = Math.abs(offset) <= 2;
@@ -123,7 +122,7 @@ const ProjectCarousel: React.FC = () => {
                 filter: `blur(${Math.abs(offset) > 0 ? 4 : 0}px)`,
                 opacity: Math.abs(offset) > 2 ? 0 : 1,
               }}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              transition={{ type: "spring", stiffness: 100, damping: 25 }}
               onClick={() => handleCardClick(index)}
             >
               <img
@@ -138,7 +137,7 @@ const ProjectCarousel: React.FC = () => {
 
       {/* Mobile Carousel */}
       <div className="w-full px-4 md:hidden">
-        <div className="relative mx-auto h-[480px] w-full max-w-sm overflow-hidden rounded-xl bg-black/10">
+        <div className="relative mx-auto h-[480px] w-full max-w-sm overflow-hidden rounded-xl bg-black/15">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={activeIndex}
@@ -153,7 +152,7 @@ const ProjectCarousel: React.FC = () => {
               }}
               className="absolute flex h-full w-full flex-col items-center justify-start p-4"
             >
-              <div className="relative h-52 w-full">
+              <div className="relative h-52 w-full flex-shrink-0">
                 <img
                   src={activeProject.image}
                   alt={activeProject.title}
@@ -172,8 +171,9 @@ const ProjectCarousel: React.FC = () => {
       </div>
 
       {/* Details & Call-to-Action */}
-      <div className="relative mt-20 sm:pb-10 w-full max-w-xl text-center">
-        <div className="hidden md:block mt-10">
+      <div className="relative mt-12 w-full max-w-xl px-4 text-center md:mt-20">
+        
+        <div className="hidden md:block">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -191,7 +191,9 @@ const ProjectCarousel: React.FC = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+        
         <button
+          // And the button is back to using navigate()! Perfect!
           onClick={() => navigate(`/projects/${activeProject.id}`)}
           className="group mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black transition-all duration-300 hover:bg-black hover:text-white hover:shadow-lg hover:shadow-emerald-500/30"
         >
@@ -221,40 +223,36 @@ const ProjectCarousel: React.FC = () => {
   );
 };
 
-const ProjectPage: React.FC = () => {
+const ProjectPage = () => {
   return (
+    // The whole page container. overflow-hidden here is like the ULTIMATE fence. Nothing gets out!
     <section
       className="
-        relative
-        w-full
-        overflow-x-hidden
-        bg-black
-        px-4 sm:px-8 md:px-10 lg:px-20
-        py-16
-        min-h-screen
-        flex flex-col justify-center
+        relative w-full overflow-hidden bg-black
+        py-16 sm:py-24
+        min-h-screen flex flex-col items-center justify-center
       "
     >
-      {/* Background Layers */}
+      {/* Background stuff */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-black to-teal-300" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-800 to-teal-400" />
         <div className="absolute inset-0 bg-black/70" />
       </div>
 
-      {/* Content Layer */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl flex flex-col items-center">
-        <div className="mb-12 sm:mb-4 text-center md:mb-16">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+      {/* Main content box */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-grow flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center sm:mb-16">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Our Work in Action
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-400 md:text-xl">
+          <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-300 md:text-xl">
             Explore how we've helped leading companies solve complex challenges
             through innovative solutions.
           </p>
         </div>
+        
         <ProjectCarousel />
       </div>
-
     </section>
   );
 };

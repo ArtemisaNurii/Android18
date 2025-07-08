@@ -72,7 +72,7 @@ const Loader: React.FC<LoaderProps> = ({ isLoading, onLoadingComplete }) => {
   if (!shouldRender) return null;
 
   return (
-    <div ref={loaderRef} className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950 opacity-0">
+    <div ref={loaderRef} className="fixed inset-0 z-50 flex items-center justify-center  bg-gradient-to-br from-black via-[#050a08] to-[#47a893] opacity-0">
       <div className="flex items-center">
         <h1 ref={textRef} className="text-4xl md:text-6xl font-mono text-gray-100"></h1>
         <span ref={cursorRef} className="ml-2 h-10 md:h-16 w-1 bg-green-400" />

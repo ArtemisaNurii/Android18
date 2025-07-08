@@ -21,22 +21,16 @@ const Index = () => {
   const projectsRef = useRef<HTMLElement>(null);
   const processRef = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
-  const teamRef = useRef<HTMLElement>(null);
+  // const teamRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
 
-  const [isPageLoading, setPageLoading] = useState(true);
 
-  // This function will be passed to the Loader and called when it's done.
-  const handleLoadingComplete = () => {
-    setPageLoading(false);
-  
-  }
+
 
   return (
     <div className="relative min-h-screen">
           <ReactLenis root>
 
-          <Loader isLoading={isPageLoading} onLoadingComplete={handleLoadingComplete} />
 
       <div className="relative z-10">
 
@@ -49,8 +43,8 @@ const Index = () => {
         <section ref={processRef}><Process /></section>
     <section ref={projectsRef}><Projects/></section>
         <section ref={testimonialsRef}><Testimonials /></section>
-        <section ref={teamRef}>      
-        </section>
+        {/* <section ref={teamRef}>  <TeamPage/>    
+        </section> */}
 <FaqSection/>
         <section ref={contactRef}><Contact /></section>
       </div>
