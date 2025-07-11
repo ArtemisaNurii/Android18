@@ -4,8 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NEW ICONS TAILORED TO CODEVIDER'S BRAND ---
-
 // Icon representing high-quality code and engineering
 const EngineeringIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
@@ -38,9 +36,7 @@ const GrowthIcon = ({ className }: { className?: string }) => (
     <polyline points="6 14 12 20 18 14" />
   </svg>
 );
-
-
-// --- NEW DATA REFLECTING CODEVIDER'S CORE VALUES ---
+// --- DATA (UNCHANGED) ---
 const codeviderPrinciples = [
     {
       Icon: EngineeringIcon,
@@ -68,13 +64,12 @@ const codeviderPrinciples = [
     },
   ];
 
-// --- The Main Component (Renamed to "OurApproach") ---
 export const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Header animation
+      // --- EXISTING INTRO ANIMATIONS (UNCHANGED) ---
       gsap.from(['.header-title', '.header-subtitle'], {
         y: 40,
         opacity: 0,
@@ -87,7 +82,6 @@ export const Benefits = () => {
         },
       });
 
-      // Card-by-card reveal animation
       const cards = gsap.utils.toArray<HTMLElement>('.principle-card');
       cards.forEach((card) => {
         gsap.from(card, {
@@ -100,11 +94,31 @@ export const Benefits = () => {
           scrollTrigger: {
             trigger: card,
             start: 'top 80%',
-            end: 'top 40%',
             toggleActions: 'play none none reverse',
           },
         });
       });
+
+      // --- 2. NEW PARALLAX ANIMATION ---
+      // This timeline will control the parallax effect for the entire section.
+      const parallaxTl = gsap.timeline({
+        ease: 'none', // Linear ease for a direct mapping to scroll
+        scrollTrigger: {
+          trigger: containerRef.current,
+          // Start the effect as soon as the section enters the viewport
+          start: 'top bottom',
+          // End the effect when the section has completely left the viewport
+          end: 'bottom top',
+          // `scrub: 1` creates a smooth, lagged link between scroll and animation
+          scrub: 1, 
+        },
+      });
+
+      // Animate the header and grid at different speeds
+      parallaxTl
+        .to('.benefits-header', { yPercent: -50 }, 0) // Header moves up faster
+        .to('.benefits-grid', { yPercent: -15 }, 0); // Grid moves up slower
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -113,12 +127,12 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center  w-full py-32 bg-gradient-to-br from-black to-teal-400 px-6"
+      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full py-32 bg-gradient-to-br from-black to-teal-400 px-6"
     >
       <div className="absolute inset-0 bg-black/70" />
 
-      {/* --------- HEADER (UPDATED COPY) --------- */}
-      <header className="relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
+      {/* --- 1. ADD CLASS NAME TO HEADER --- */}
+      <header className="benefits-header relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
         <h1 className="header-title  mt-10  font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
           BEYOND THE CODE
         </h1>
@@ -127,8 +141,8 @@ export const Benefits = () => {
         </p>
       </header>
 
-      {/* --------- CARDS GRID (UPDATED CONTENT) --------- */}
-      <main className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl px-4 lg:px-8">
+      {/* --- 1. ADD CLASS NAME TO MAIN GRID --- */}
+      <main className="benefits-grid relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl px-4 lg:px-8">
         {codeviderPrinciples.map(({ Icon, title, description, colSpan }, i) => (
           <div
             key={i}

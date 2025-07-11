@@ -137,91 +137,121 @@ import React from 'react';
 import { WorldMapDemo } from './WorldMap';
 import { Blend, ChartSpline, Code } from 'lucide-react';
 
-const featuresData = [
-  {
-    id: 1,
-    icon: Code,
-    title: 'Code Craftsmanship',
-    description: 'We hold ourselves to the highest standards of quality, writing clean, maintainable, and well-tested code. We ensure long-term reliability and ease of future enhancements.',
+// --- Import the new TextAnimation component ---
+import { motion } from 'framer-motion';
+import TextAnimation from '../ui/AnimationText';
+
+  const featuresData = [
+    {
+      id: 1,
+      icon: Code,
+      title: 'Code Craftsmanship',
+      description: 'We hold ourselves to the highest standards of quality, writing clean, maintainable, and well-tested code. We ensure long-term reliability and ease of future enhancements.',
+    },
+    {
+      id: 2,
+      icon: Blend,
+      title: 'Transparent Collaboration',
+      description: 'Open communication, clear priorities, and full visibility into progress and challenges keep our clients informed and engaged at every step.',
+    },
+    {
+      id: 3,
+      icon: ChartSpline,
+      title: 'Continuous Innovation',
+      description: 'We invest in learning the latest tools, frameworks, and best practices so that our solutions stay ahead of the curve.',
+    },
+  ];
+
+// Animation variants for the container of the feature cards
+const cardContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // This will make each card appear one after the other
+    },
   },
-  {
-    id: 2,
-    icon: Blend,
-    title: 'Transparent Collaboration',
-    description: 'Open communication, clear priorities, and full visibility into progress and challenges keep our clients informed and engaged at every step.',
+};
+
+// Animation variants for each individual feature card
+const cardItemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    },
   },
-  {
-    id: 3,
-    icon: ChartSpline,
-    title: 'Continuous Innovation',
-    description: 'We invest in learning the latest tools, frameworks, and best practices so that our solutions stay ahead of the curve.',
-  },
-];
+};
 
 export const Map: React.FC = () => {
   return (
     <div className="relative bg-white font-sans">
       
-      {/* 1. MAP BANNER SECTION */}
+      {/* 1. MAP BANNER SECTION (No changes here) */}
       <header 
-  
-        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] overflow-hidden max-sm:bottom-4  md-bottom-52"
+        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] overflow-hidden max-sm:bottom-4 md-bottom-52"
       >
         <div 
           className="
             absolute inset-0 
             transition-transform duration-500 ease-in-out
-            
-            -translate-y-[%] 
-            
-            md:-translate-y-[15%] 
-            
-            lg:-translate-y-[10%]
-            
-            xl:translate-y-0
-            max-sm:scale-100
+            -translate-y-[%] md:-translate-y-[15%] lg:-translate-y-[10%]
+            xl:translate-y-0 max-sm:scale-100
           "
         >
-          {/* The WorldMapDemo now fills its positioned wrapper */}
           <WorldMapDemo />
         </div>
       </header>
 
-      {/* 2. CONTENT SECTION */}
-      {/* This part remains the same as my previous suggestion, as it correctly handles the overlap. */}
+      {/* 2. CONTENT SECTION (Now with TextAnimation) */}
       <section 
-        className="relative z-10 bg-white -mt-16  max-sm:-mt-44 md:-mt-24 rounded-t-2xl pt-12 pb-16 sm:pt-16 sm:pb-24"
+        className="relative z-10 bg-white -mt-16 max-sm:-mt-44 md:-mt-24 rounded-t-2xl pt-12 pb-16 sm:pt-16 sm:pb-24"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 items-start">
             <div className="lg:pr-8">
-              <p className="text-sm font-semibold leading-7 text-teal-600 uppercase tracking-wider">
-                Global Partnership
-              </p>
-              <h2 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Outsourcing Code Company
-              </h2>
+              <TextAnimation
+                as="p"
+                text="Global Partnership"
+                classname="text-sm font-semibold leading-7 text-teal-600 uppercase tracking-wider"
+              />
+              <TextAnimation
+                as="h2"
+                text="Outsourcing Code Company"
+                classname="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+              />
             </div>
             <div className="lg:pt-2">
-              <p className="text-lg leading-8 text-gray-600">
-                Unlock cost savings and expert precision, scale with agile flexibility, and focus on what you do best—outsource the rest.
-              </p>
+              <TextAnimation
+                as="p"
+                text="Unlock cost savings and expert precision, scale with agile flexibility, and focus on what you do best—outsource the rest."
+                classname="text-lg leading-8 text-gray-600"
+              />
             </div>
           </div>
 
-          <div className="mt-16 sm:mt-20">
+          <motion.div 
+            className="mt-16 sm:mt-20"
+            variants={cardContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }} // Trigger when 30% of the container is in view
+          >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
               {featuresData.map(({ id, icon: Icon, title, description }) => (
-                <div key={id}>
+                <motion.div key={id} >
                   <div className="mb-4">
                     <Icon className="h-8 w-8 text-teal-600" aria-hidden="true" />
                   </div>
                   <h3 className="text-lg font-semibold leading-7 text-gray-900">{title}</h3>
                   <p className="mt-2 text-base leading-7 text-gray-600">{description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
@@ -229,3 +259,5 @@ export const Map: React.FC = () => {
 };
 
 export default Map;
+
+{/* <motion.div key={id} variants={cardItemVariants}> */}

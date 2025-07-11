@@ -45,7 +45,7 @@ const Testimonials: React.FC = () => (
     <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
       <div className="mb-16 text-center">
         <p className="text-sm uppercase tracking-wider text-gray-300">Testimonials</p>
-        <h2 className="mt-4 text-4xl font-bold leading-tight md:text-5xl">What Our Clients Say</h2>
+        <h2 className="mt-4  font-bold leading-tight md:text-4xl">What Our Clients Say</h2>
         <p className="mt-4 text-lg max-sm:px-10 text-gray-400">Real insights from those we’ve had the pleasure to serve.</p>
       </div>
 

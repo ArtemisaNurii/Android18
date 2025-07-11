@@ -113,10 +113,10 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
   
       {/* Content overlays */}
       <div className="relative z-10 max-w-4xl">
-        <span className="mb-2 block text-sm font-semibold uppercase tracking-widest text-teal-400">
+        <span className="mb-2 block text-sm font-semibold uppercase tracking-widest text-emerald-400">
           Case Study
         </span>
-        <h1 className="font-serif text-4xl font-bold leading-tight md:text-4xl lg:text-5xl">
+        <h1 className="font-serif text-4xl font-bold leading-tight md:text-4xl l">
           {title}
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-slate-200 md:text-xl">

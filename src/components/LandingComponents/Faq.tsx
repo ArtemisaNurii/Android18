@@ -1,8 +1,37 @@
 import { useState } from 'react';
 import FaqItem from './FaqItem';
-import { useInView } from 'react-intersection-observer'; // Import the hook
 
-// Define the FAQ data structure
+// --- Import the animation components ---
+import { motion } from 'framer-motion';
+import TextAnimation from '../ui/AnimationText';
+
+// --- Reusable Variants ---
+// A container variant for staggering children's animations
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08, // The delay between each child animating in
+    },
+  },
+};
+
+// A variant for individual items in a staggered list
+const staggerItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut' as const,
+    },
+  },
+};
+
+
+// --- FAQ Data (remains the same) ---
 const faqData = [
   {
     id: 1,
@@ -51,68 +80,70 @@ const faqData = [
     question: 'Can you work with an existing or legacy codebase?',
     answer:
       'Definitely. We start with a code audit to map dependencies and technical debt, then create a phased refactor or feature-addition plan that minimises risk and downtime.',
-  },
-];
+  },];
 
 const FaqSection = () => {
-  // State to track the currently open FAQ item. Starts with the first item open.
+  // State for the accordion (remains the same)
   const [openItemId, setOpenItemId] = useState<number | null>(faqData[0].id);
 
-  // Hook to detect when the component is in view
-  const { ref, inView } = useInView({
-    triggerOnce: true, // Animate only once when it comes into view
-    threshold: 0.1, // Trigger when 10% of the component is visible
-  });
+  // We no longer need the useInView hook. It's handled by Framer Motion's `whileInView`.
 
-  // Function to toggle FAQ items
   const handleToggle = (id: number) => {
     setOpenItemId((prevId) => (prevId === id ? null : id));
   };
 
   return (
-    // Attach the ref to the main container of the section
-    <div ref={ref} className="bg-white font-sans">
+    <div className="bg-white font-sans">
       <div className="container mx-auto max-w-6xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8 max-sm:px-10 ">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8">
           
           {/* Left Column: Title and Contact */}
-          {/* Conditionally apply animation classes based on `inView` status */}
-          <div
-            className={`lg:col-span-1 transition-opacity duration-1000 ${
-              inView ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
-          >
-            <h2 className="text-4xl font-bold tracking-tight text-gray-800">
-              Frequently Asked Questions
-            </h2>
-            <p className="mt-4 text-gray-500">
-              In a creative workplace, employees with responsibly try different solutions
-            </p>
-            <a
+          <div className="lg:col-span-1">
+            <TextAnimation
+              as="h2"
+              text="Frequently Asked Questions"
+              classname="text-4xl font-bold tracking-tight text-gray-800"
+            />
+            <TextAnimation
+              as="p"
+              text="In a creative workplace, employees with responsibly try different solutions"
+              classname="mt-4 text-gray-500"
+            />
+            {/* Animate the link as a single block for a clean effect */}
+            <motion.a
               href="#contact"
+              variants={staggerItem} // We can reuse the item variant
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ delay: 0.2 }} // Add a slight delay to have it appear last
               className="inline-block mt-10 text-black font-medium border-b-2 border-black pb-1 hover:border-gray-500 hover:text-gray-500 transition-colors"
             >
               Contact support
-            </a>
+            </motion.a>
           </div>
 
           {/* Right Column: Accordion */}
-          {/* Add a delay to this column for a staggered effect */}
-          <div
-            className={`lg:col-span-2 transition-opacity duration-1000 ${
-              inView ? 'animate-fade-in-up [animation-delay:200ms]' : 'opacity-0'
-            }`}
+          {/* This motion.div will act as the staggering container */}
+          <motion.div
+            className="lg:col-span-2"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }} // Trigger when 10% of the list is visible
           >
             {faqData.map((item) => (
-              <FaqItem
-                key={item.id}
-                question={item.question}
-                answer={item.answer}
-                isOpen={openItemId === item.id}
-                onClick={() => handleToggle(item.id)}
-              />
+              // Each item is now a motion component that inherits the stagger
+              <motion.div key={item.id} variants={staggerItem}>
+                <FaqItem
+                  question={item.question}
+                  answer={item.answer}
+                  isOpen={openItemId === item.id}
+                  onClick={() => handleToggle(item.id)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

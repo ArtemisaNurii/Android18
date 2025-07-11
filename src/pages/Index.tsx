@@ -6,7 +6,7 @@ import ServicesPage from '@/components/LandingComponents/Services';
 import Testimonials from '@/components/LandingComponents/Testimonials';
 import Process from '@/components/LandingComponents/Process';
 import Contact from '@/components/LandingComponents/ContactPage';
-import Loader from '@/components/Loader/Loader';
+// import Loader from '@/components/Loader/Loader';
 import AboutUsPage from '@/components/LandingComponents/AboutUs';
 import { Benefits } from '@/components/LandingComponents/Benefits';
 import { Map } from '@/components/LandingComponents/Projects';
@@ -42,9 +42,8 @@ const Index = () => {
         <Map />
         <section ref={processRef}><Process /></section>
     <section ref={projectsRef}><Projects/></section>
-        <section ref={testimonialsRef}><Testimonials /></section>
-        {/* <section ref={teamRef}>  <TeamPage/>    
-        </section> */}
+        <section className='' ref={testimonialsRef}><Testimonials /></section>
+  
 <FaqSection/>
         <section ref={contactRef}><Contact /></section>
       </div>

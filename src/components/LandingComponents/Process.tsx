@@ -19,7 +19,6 @@ interface Step {
   title: string;
   description: string;
   bullets: string[];
-  icon: React.ElementType; // The type for a React component
 }
 
 const steps: Step[] = [
@@ -28,42 +27,38 @@ const steps: Step[] = [
     title: 'Discovery & Needs',
     description: 'We start by understanding your vision. Stakeholder interviews and product-vision canvas sessions align goals and metrics.',
     bullets: ['User-story mapping', 'Prioritised feature list'],
-    icon: Search,
+  
   },
   {
     duration: '02',
     title: 'Team Selection',
     description: 'The perfect team, assembled for you. We match our developer skills and expertise directly to your project requirements.',
     bullets: ['High-level diagrams', 'Sprint roadmap'],
-    icon: Users,
+ 
   },
   {
     duration: '03',
     title: 'Development',
     description: 'Where the magic happens. Our developers work diligently, crafting high-quality, clean code for your project.',
     bullets: ['Design tokens & style-guide', 'Accessibility review'],
-    icon: Code,
   },
   {
     duration: '04',
     title: 'Agile Reporting',
     description: 'Stay in the loop, always. We use CI/CD, code reviews, daily stand-ups, and weekly reports to ensure transparency.',
     bullets: ['Automated tests', 'Containerised environments'],
-    icon: CalendarCheck,
   },
   {
     duration: '05',
     title: 'Deployment',
     description: 'Going live, smoothly. We provide a staging server for testing and deploy clean, optimized code to your servers.',
     bullets: ['OWASP security scan', 'Lighthouse benchmarks'],
-    icon: Server,
   },
   {
     duration: '06',
     title: 'Maintenance',
     description: 'We’re with you for the long haul. You can continue with the same team for consistent productivity and support.',
     bullets: ['24-hour hyper-care', 'Run-books & monitoring'],
-    icon: HeartPulse,
   },
 ];
 
@@ -113,7 +108,6 @@ const Process: React.FC = () => {
         <div ref={gridRef} className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => {
-              const Icon = step.icon;
               return (
                 // Each card is a "group" to allow for hover effects on child elements
                 <div key={step.title} className="group relative flex flex-col p-8 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
@@ -124,8 +118,7 @@ const Process: React.FC = () => {
                   
                   <div className="relative z-10">
                     {/* Icon */}
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-whit text-emerald-600 shadow-lg group-hover:bg-white group-hover:text-teal-500 transition-all duration-300">
-                      <Icon className="h-6 w-6" aria-hidden="true" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg group-hover:text-emerald-500 transition-all duration-300">
                     </div>
 
                     {/* Title & Description */}
@@ -141,7 +134,7 @@ const Process: React.FC = () => {
                       <ul className="space-y-2 text-sm text-gray-700">
                         {step.bullets.map((bullet, bIdx) => (
                            <li key={bIdx} className="flex items-center">
-                           <span className="h-1.5 w-1.5 rounded-full bg-teal-400 mr-3"></span>
+                           <span className="h-1.5 w-1.5 rounded-full bg-emerald-700 mr-3"></span>
                            <span>{bullet}</span>
                          </li>
                         ))}
