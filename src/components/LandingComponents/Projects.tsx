@@ -190,7 +190,7 @@ export const Map: React.FC = () => {
     <div className="relative bg-white font-sans">
       
       {/* 1. MAP BANNER SECTION - Enhanced Responsive Design */}
-      <header className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[400px] max-h-[800px] overflow-hidden">
+      <header className="relative -mt-40 md:-mt-0 first-line: w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[400px] max-h-[800px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <WorldMapDemo />
         </div>

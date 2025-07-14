@@ -163,8 +163,8 @@ const NavbarVariant: React.FC = () => {
                   onClick={() => setMobileOpen(o => !o)}
                   aria-label="Toggle menu"
                 >
-                  <div ref={line1} className="absolute w-6 h-0.5 bg-white" style={{ transform: 'translateY(-4px)' }}></div>
-                  <div ref={line2} className="absolute w-6 h-0.5 bg-white" style={{ transform: 'translateY(4px)' }}></div>
+                  <div ref={line1} className="absolute w-6 h-0.5 bg-gray-200" style={{ transform: 'translateY(-4px)' }}></div>
+                  <div ref={line2} className="absolute w-6 h-0.5 bg-gray-200" style={{ transform: 'translateY(4px)' }}></div>
                 </button>
               </div>
             </div>

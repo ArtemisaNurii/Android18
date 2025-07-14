@@ -127,9 +127,7 @@ const Process: React.FC = () => {
                   {/* Mobile Layout - Centered */}
                   <div className="flex flex-col items-center lg:hidden">
                     {/* Icon */}
-                    <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 ring-4 ring-black/30 mb-4">
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
+          
                     
                     {/* Content Card */}
                     <div className="w-full max-w-md space-y-3 rounded-xl border border-gray-200 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:bg-white/10">
@@ -142,21 +140,14 @@ const Process: React.FC = () => {
                       <p className="text-base text-gray-300 text-center">
                         {step.description}
                       </p>
-                      <ul className="space-y-2 pt-2 text-sm text-gray-400">
-                        {step.bullets.map((bullet, bIdx) => (
-                          <li key={bIdx} className="flex items-center justify-center">
-                            <span className="mr-3 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
+                 
                     </div>
                   </div>
 
                   {/* Desktop Layout - Alternating */}
                   <div className="hidden lg:flex items-center">
                     {/* Icon on the timeline */}
-                    <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 ring-8 ring-black/30 absolute left-1/2 top-4 -translate-x-1/2">
+                    <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 opacity-25 ring-8 ring-black/30 absolute left-1/2 top-4 -translate-x-1/2">
                       <Icon className="h-5 w-5 text-white" />
                     </div>
 

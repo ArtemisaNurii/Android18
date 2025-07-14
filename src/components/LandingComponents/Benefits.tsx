@@ -127,7 +127,7 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full py-32  px-6"
+      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full pt-32  px-6"
     >
 
       {/* --- 1. ADD CLASS NAME TO HEADER --- */}

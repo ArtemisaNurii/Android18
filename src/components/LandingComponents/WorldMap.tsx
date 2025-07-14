@@ -39,13 +39,11 @@ export const WorldMapDemo: React.FC = () => {
   // --- 2. State for Interactivity ---
   const [hoveredLocation, setHoveredLocation] = useState<string | null>(null);
   
-  // --- 3. Configuration for Visuals ---
-  // No need for globeConfig here as the 2D map doesn't rotate.
+
   const arcColors = ["#ffffff", "#ffffff", "#ffffff"]; // Lime, Orange, Indigo
 
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-      {/* Responsive container for the map */}
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* This div acts as our dynamic tooltip */}

@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
             
             {/* Left Column: Persuasion */}
             <div className="text-center lg:text-left mb-12 lg:mb-0">
-              <p className="text-sm font-semibold uppercase tracking-wider text-emerald-400 mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
                 Let's Connect
               </p>
               <h2 style={{fontFamily:"Poppins, sans"}} className="text-4xl sm:text-5xl font-semibold leading-tight text-gray-900 mb-6">
@@ -96,21 +96,21 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                       <div className="space-y-2">
                           <Label htmlFor="name" className="text-gray-400">Full Name</Label>
-                          <Input id="name" name="name" type="text" placeholder="John Doe" value={form.name} onChange={handleChange} required className="bg-transparent border-gray-600 focus-visible:ring-offset-0 focus-visible:ring-emerald-400"/>
+                          <Input id="name" name="name" type="text" placeholder="John Doe" value={form.name} onChange={handleChange} required className="bg-transparent border-gray-400 focus-visible:ring-offset-0 focus-visible:ring-emerald-400"/>
                       </div>
                       <div className="space-y-2">
                           <Label htmlFor="email" className="text-gray-400">Email Address</Label>
-                          <Input id="email" name="email" type="email" placeholder="john.doe@example.com" value={form.email} onChange={handleChange} required className="bg-transparent border-gray-600 focus-visible:ring-offset-0 focus-visible:ring-emerald-400"/>
+                          <Input id="email" name="email" type="email" placeholder="john.doe@example.com" value={form.email} onChange={handleChange} required className="bg-transparent border-gray-400 focus-visible:ring-offset-0 focus-visible:ring-emerald-400"/>
                       </div>
                   </div>
                   <div className="space-y-2">
                       <Label htmlFor="description" className="text-gray-400">Tell us about your project</Label>
-                      <Textarea id="description" name="description" placeholder="I'm looking to build a new web application that..." value={form.description} onChange={handleChange} required className="bg-transparent border-gray-600 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-emerald-400"/>
+                      <Textarea id="description" name="description" placeholder="I'm looking to build a new web application that..." value={form.description} onChange={handleChange} required className="bg-transparent border-gray-604 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-emerald-400"/>
                   </div>
                   <div className="space-y-2">
                       <Label htmlFor="budget" className="text-gray-400">What's your budget?</Label>
                       <Select name="budget" value={form.budget} onValueChange={handleSelectChange}>
-                          <SelectTrigger id="budget" className="w-full bg-transparent border-gray-600 focus:ring-offset-0 focus:ring-emerald-400">
+                          <SelectTrigger id="budget" className="w-full bg-transparent border-gray-604 focus:ring-offset-0 focus:ring-emerald-400">
                               <SelectValue placeholder="Select a budget range" />
                           </SelectTrigger>
                           <SelectContent>
