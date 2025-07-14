@@ -82,7 +82,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ project, index }) => 
             {/* Text Content */}
             <div className={`flex flex-col justify-center ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                 <p className="text-gray-400 font-bold tracking-widest uppercase mb-3">{project.category}</p>
-                <h3 className="text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">{project.title}</h3>
+                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">{project.title}</h3>
                 <p className="text-gray-300 text-lg leading-relaxed mb-8">{project.description}</p>
                 <div className="mb-8">
                     <p className="text-gray-400 font-semibold mb-3">Key Features & Technologies:</p>
@@ -126,7 +126,7 @@ function ProjectPage() {
             <div className="absolute inset-0 text-white z-0" />
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <header className="text-center py-24 sm:py-32">
-                    <h1 className="text-5xl sm:text-6xl font-bold font-poppins text-white">
+                    <h1 className="text-4xl font-bold font-poppins text-white">
                        Engineered Digital Solutions
                     </h1>
                     <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl text-gray-300">

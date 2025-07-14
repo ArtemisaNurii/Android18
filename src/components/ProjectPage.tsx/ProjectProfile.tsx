@@ -116,7 +116,7 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
         <span className="mb-2 block text-xs sm:text-sm font-semibold uppercase tracking-widest text-emerald-400">
           Case Study
         </span>
-        <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+        <h1 className="font-serif text-2xl s md:text-4xl lg:text-4xl font-semibold leading-tight">
           {title}
         </h1>
         <p className="mt-3 sm:mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-slate-200">
@@ -131,11 +131,11 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
 // 2. Key Metrics Bar - Enhanced responsive design
 const KeyMetricsBar = ({ metrics }: { metrics: KeyMetric[] }) => (
   <div className="bg-slate-50 ">
-    <div className="mx-auto flex max-w-7xl justify-between lg:justify-center lg:gap-8 gap-4 px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div className="mx-auto flex max-w-7xl justify-between  lg:gap-8 gap-4 px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {metrics.map((metric) => (
         <div key={metric.label} className="text-center flex-1 lg:flex-none">
           <metric.icon className="mx-auto h-6 w-6 sm:h-8 sm:w-8 text-emerald-500" aria-hidden="true" />
-          <p className="mt-2 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-black/70">{metric.value}</p>
+          <p className="mt-2 text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-black/70">{metric.value}</p>
           <p className="text-xs sm:text-sm font-medium text-black">{metric.label}</p>
         </div>
       ))}

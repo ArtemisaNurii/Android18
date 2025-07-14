@@ -11,6 +11,7 @@ import ProjectProfile from "./components/ProjectPage.tsx/ProjectProfile";
 import ProjectPage from "./components/ProjectPage.tsx/AllProject";
 import NavbarVariant from "./components/Navbar";
 import Loader from "./components/Loader/Loader";
+// import AllTeam from "./components/TeamPage/AllTeam";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ const AppContent = () => {
           <Route path="/" element={<Index />} />
           <Route path="/projects" element={<ProjectPage />} />
           <Route path="/projects/:id" element={<ProjectProfile />} />
+          {/* <Route path="/team" element={<AllTeam />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}
