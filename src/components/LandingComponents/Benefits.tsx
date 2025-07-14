@@ -127,31 +127,31 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full pt-32  px-6"
+      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full pt-16 sm:pt-24 lg:pt-32 px-4 sm:px-6"
     >
 
       {/* --- 1. ADD CLASS NAME TO HEADER --- */}
-      <header className="benefits-header relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
-        <h1 className="header-title  mt-10  font-poppins text-4xl md:text-6xl font-bold text-white tracking-[0.2em] uppercase">
+      <header className="benefits-header relative z-10 text-center mb-8 sm:mb-12 lg:mb-16 max-w-4xl w-full px-2 sm:px-4 lg:px-8">
+        <h1 className="header-title mt-4 sm:mt-6 lg:mt-10 font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] uppercase">
           BEYOND THE CODE
         </h1>
-        <p className="header-subtitle mt-4 text-lg text-neutral-200 max-w-2xl mx-auto">
+        <p className="header-subtitle mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-neutral-200 max-w-xl sm:max-w-2xl mx-auto px-2 sm:px-0">
           We believe true partnership goes beyond lines of code. It's about shared goals, transparent collaboration, and building technology that drives tangible business growth.
         </p>
       </header>
 
       {/* --- 1. ADD CLASS NAME TO MAIN GRID --- */}
-      <main className="benefits-grid relative z-10 grid grid-cols-1 md:grid-cols-5 gap-8 w-full max-w-6xl px-4 lg:px-8">
+      <main className="benefits-grid relative z-10 grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 lg:gap-8 w-full max-w-6xl px-2 sm:px-4 lg:px-8">
         {codeviderPrinciples.map(({ Icon, title, description, colSpan }, i) => (
           <div
             key={i}
-            className={`principle-card bg-white/95 backdrop-blur-sm p-8 rounded-2xl flex flex-col items-start  text-left shadow-lg ${colSpan}`}
+            className={`principle-card bg-white/95 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
           >
-            <Icon className="w-10 h-10 text-teal-600 mb-6" />
-            <h2 className="font-mono text-xl lg:text-2xl font-bold tracking-widest uppercase text-gray-700 mb-3">
+            <Icon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-teal-600 mb-3 sm:mb-4 lg:mb-6" />
+            <h2 className="font-mono text-sm sm:text-base lg:text-xl xl:text-2xl font-bold tracking-wider sm:tracking-widest uppercase text-gray-700 mb-2 sm:mb-3 leading-tight">
               {title}
             </h2>
-            <p className="text-gray-700">{description}</p>
+            <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">{description}</p>
           </div>
         ))}
       </main>
