@@ -147,7 +147,7 @@ const Process: React.FC = () => {
                   {/* Desktop Layout - Alternating */}
                   <div className="hidden lg:flex items-center">
                     {/* Icon on the timeline */}
-                    <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 opacity-25 ring-8 ring-black/30 absolute left-1/2 top-4 -translate-x-1/2">
+                    <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-emerald-400  ring-8 ring-black/30 absolute left-1/2 top-4 -translate-x-1/2">
                       <Icon className="h-5 w-5 text-white" />
                     </div>
 
