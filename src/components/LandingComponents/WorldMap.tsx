@@ -23,7 +23,7 @@ export const WorldMapDemo: React.FC = () => {
   // --- 1. Enhanced Data Structure ---
   const centralLocation: Location = {
     name: "Tirana, Albania",
-    coords: { lat: 41.3275, lng: 19.8187 },
+    coords: { lat: 33.3275, lng: 18.8187 },
   };
 
   const connections: Arc[] = [
@@ -41,25 +41,33 @@ export const WorldMapDemo: React.FC = () => {
   
   // --- 3. Configuration for Visuals ---
   // No need for globeConfig here as the 2D map doesn't rotate.
-  const arcColors = ["#0A3C30", "#0A3C30", "#0A3C30"]; // Lime, Orange, Indigo
+  const arcColors = ["#ffffff", "#ffffff", "#ffffff"]; // Lime, Orange, Indigo
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background px-4 pb-40 pt-8 md:pt-12">
-      
-      {/* This div acts as our dynamic tooltip */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-10 z-20 whitespace-nowrap text-center text-lg font-semibold text-foreground transition-opacity duration-300 sm:text-xl">
-        {/* --- SUGGESTION: Added a fallback for the tooltip to show the central location name when nothing is hovered. This improves UX. --- */}
-        {hoveredLocation || centralLocation.name}
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      {/* Responsive container for the map */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* This div acts as our dynamic tooltip */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-4 sm:bottom-6 lg:bottom-8 z-20 text-center transition-opacity duration-300">
+          <span className="inline-block px-3 py-1  rounded-full text-sm sm:text-base lg:text-lg font-semibold text-transparent">
+            {hoveredLocation || centralLocation.name}
+          </span>
+        </div>
+        
+        {/* --- The Enhanced WorldMap Component with responsive wrapper --- */}
+        <div className="relative w-full">
+          {/* Aspect ratio container to maintain proper proportions */}
+          <div className="relative w-full aspect-[2/1] max-h-[50vh] sm:max-h-[60vh] lg:max-h-[70vh]">
+            <WorldMap
+              data={connections}
+              onPointHover={(data) => setHoveredLocation(data?.name ?? null)}
+              activePoint={hoveredLocation}
+              colors={arcColors}
+            />
+          </div>
+        </div>
       </div>
-      
-      {/* --- The Enhanced WorldMap Component --- */}
-      <WorldMap
-    
-        data={connections}
-        onPointHover={(data) => setHoveredLocation(data?.name ?? null)}
-        activePoint={hoveredLocation}
-        colors={arcColors}
-      />
     </div>
   );
 };

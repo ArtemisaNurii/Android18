@@ -146,7 +146,7 @@ import TextAnimation from '../ui/AnimationText';
       id: 1,
       icon: Code,
       title: 'Code Craftsmanship',
-      description: 'We hold ourselves to the highest standards of quality, writing clean, maintainable, and well-tested code. We ensure long-term reliability and ease of future enhancements.',
+      description: 'We hold ourselves to the highest standards of quality, writing clean, maintainable, and well-tested code. We ensure long-term reliability.',
     },
     {
       id: 2,
@@ -181,7 +181,6 @@ const cardItemVariants = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
     },
   },
 };
@@ -190,18 +189,9 @@ export const Map: React.FC = () => {
   return (
     <div className="relative bg-white font-sans">
       
-      {/* 1. MAP BANNER SECTION (No changes here) */}
-      <header 
-        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] overflow-hidden max-sm:bottom-4 md-bottom-52"
-      >
-        <div 
-          className="
-            absolute inset-0 
-            transition-transform duration-500 ease-in-out
-            -translate-y-[%] md:-translate-y-[15%] lg:-translate-y-[10%]
-            xl:translate-y-0 max-sm:scale-100
-          "
-        >
+      {/* 1. MAP BANNER SECTION - Enhanced Responsive Design */}
+      <header className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[400px] max-h-[800px] overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center">
           <WorldMapDemo />
         </div>
       </header>
@@ -212,25 +202,37 @@ export const Map: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 items-start">
-            <div className="lg:pr-8">
+            <motion.div 
+              className="lg:pr-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               <TextAnimation
                 as="p"
                 text="Global Partnership"
-                classname="text-sm font-semibold leading-7 text-teal-600 uppercase tracking-wider"
+                classname="text-sm font- leading-7 text-gray-800 uppercase tracking-wider"
               />
               <TextAnimation
                 as="h2"
                 text="Outsourcing Code Company"
-                classname="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+                classname="mt-2 text-4xl sm:text-5xl font-semibold leading-tight text-gray-900"
               />
-            </div>
-            <div className="lg:pt-2">
+            </motion.div>
+            <motion.div 
+              className="lg:pt-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <TextAnimation
                 as="p"
                 text="Unlock cost savings and expert precision, scale with agile flexibility, and focus on what you do best—outsource the rest."
                 classname="text-lg leading-8 text-gray-600"
               />
-            </div>
+            </motion.div>
           </div>
 
           <motion.div 
@@ -242,12 +244,20 @@ export const Map: React.FC = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
               {featuresData.map(({ id, icon: Icon, title, description }) => (
-                <motion.div key={id} >
+                <motion.div key={id} variants={cardItemVariants}>
                   <div className="mb-4">
-                    <Icon className="h-8 w-8 text-teal-600" aria-hidden="true" />
+                    <Icon className="h-8 w-8 text-emerald-600" aria-hidden="true" />
                   </div>
-                  <h3 className="text-lg font-semibold leading-7 text-gray-900">{title}</h3>
-                  <p className="mt-2 text-base leading-7 text-gray-600">{description}</p>
+                  <TextAnimation
+                    as="h3"
+                    text={title}
+                    classname="text-lg font-semibold leading-7 text-gray-900"
+                  />
+                  <TextAnimation
+                    as="p"
+                    text={description}
+                    classname="mt-2 text-base leading-7 text-gray-600"
+                  />
                 </motion.div>
               ))}
             </div>
@@ -260,4 +270,3 @@ export const Map: React.FC = () => {
 
 export default Map;
 
-{/* <motion.div key={id} variants={cardItemVariants}> */}

@@ -37,7 +37,7 @@ const AboutUsPage: React.FC = () => {
             <TextAnimation
               as="h1"
               text="Who we are: Our story and mission"
-              classname="text-4xl lg:text-5xl font-bold max-sm:text-2xl"
+              classname="text-4xl sm:text-5xl font-semibold leading-tight text-gray-900"
             />
           </div>
 
@@ -66,7 +66,7 @@ const AboutUsPage: React.FC = () => {
               </ul>
               <p>
                 Ready to build a future-ready system that evolves with your business? <a href="#contact"
-                  className="text-emerald-900 font-semibold">Request a free consultation</a> and discover your new tech partner.
+                  className="text-emerald-400 font-semibold">Request a free consultation</a> and discover your new tech partner.
               </p>
             </motion.div>
           </div>

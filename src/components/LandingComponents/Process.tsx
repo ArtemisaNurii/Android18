@@ -6,78 +6,84 @@ import {
   CalendarCheck,
   Server,
   HeartPulse,
-  Component,
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// We'll add an 'icon' to our data structure
+// The 'icon' property has been added to the interface and data
 interface Step {
   duration: string;
   title: string;
   description: string;
   bullets: string[];
+  icon: React.ElementType; // Added icon type
 }
 
+// Data is updated with a relevant icon for each step
 const steps: Step[] = [
   {
     duration: '01',
     title: 'Discovery & Needs',
     description: 'We start by understanding your vision. Stakeholder interviews and product-vision canvas sessions align goals and metrics.',
     bullets: ['User-story mapping', 'Prioritised feature list'],
-  
+    icon: Search,
   },
   {
     duration: '02',
     title: 'Team Selection',
     description: 'The perfect team, assembled for you. We match our developer skills and expertise directly to your project requirements.',
     bullets: ['High-level diagrams', 'Sprint roadmap'],
- 
+    icon: Users,
   },
   {
     duration: '03',
     title: 'Development',
     description: 'Where the magic happens. Our developers work diligently, crafting high-quality, clean code for your project.',
     bullets: ['Design tokens & style-guide', 'Accessibility review'],
+    icon: Code,
   },
   {
     duration: '04',
     title: 'Agile Reporting',
     description: 'Stay in the loop, always. We use CI/CD, code reviews, daily stand-ups, and weekly reports to ensure transparency.',
     bullets: ['Automated tests', 'Containerised environments'],
+    icon: CalendarCheck,
   },
   {
     duration: '05',
     title: 'Deployment',
     description: 'Going live, smoothly. We provide a staging server for testing and deploy clean, optimized code to your servers.',
     bullets: ['OWASP security scan', 'Lighthouse benchmarks'],
+    icon: Server,
   },
   {
     duration: '06',
     title: 'Maintenance',
     description: 'We’re with you for the long haul. You can continue with the same team for consistent productivity and support.',
     bullets: ['24-hour hyper-care', 'Run-books & monitoring'],
+    icon: HeartPulse,
   },
 ];
 
 const Process: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Staggered card animation
-      gsap.from(gridRef.current.children!, { // Use the gridRef here
+      // Staggered item animation for the new timeline view
+      const timelineItems = gsap.utils.toArray('.timeline-item');
+      gsap.from(timelineItems, {
         opacity: 0,
-        y: 50,
-        duration: 0.6,
+        y: 100,
+        duration: 0.8,
         ease: 'power3.out',
-        stagger: 0.1, // This creates the cool staggered effect
+        stagger: 0.2,
         scrollTrigger: {
-          trigger: gridRef.current,
-          start: 'top 85%',
+          trigger: timelineRef.current,
+          start: 'top 80%',
         },
       });
     }, containerRef);
@@ -86,57 +92,94 @@ const Process: React.FC = () => {
   }, []);
 
   return (
-    <section id="process" className="relative min-h-screen flex flex-col items-center w-full py-32
-    bg-gradient-to-br from-black to-teal-400 z-1 px-6 font-poppins" ref={containerRef}>
-      <div className="absolute inset-0 bg-black/70" />
-
-      <div className="mx-auto  max-w-7xl z-20 px-6 lg:px-8">
+    <section id="process" className="relative w-full overflow-hidden py-16 sm:py-24 lg:py-32 font-poppins text-white" ref={containerRef}>
+      {/* Background Gradient */}
+      <div className="absolute inset-0 -z-10 " />
+      {/* Optional: Add a subtle noise pattern for texture */}
+      <div className="absolute inset-0 -z-10 bg-[url('/noise.png')] opacity-20 mix-blend-soft-light" />
+      
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <p className="text-base font-semibold  leading-7 text-gray-500">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm sm:text-base font- leading-7 text-gray-800">
             Our Proven Workflow
           </p>
-          <h2 className="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
             A Better Way to Build
           </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-200">
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-gray-300 max-w-2xl mx-auto">
             Our project lifecycle is designed for efficiency, transparency, and outstanding results. We turn complex problems into elegant digital solutions.
           </p>
         </div>
 
-        {/* Interactive Grid */}
-        <div ref={gridRef} className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {steps.map((step) => {
+        {/* Vertical Timeline */}
+        <div ref={timelineRef} className="relative mx-auto mt-12 sm:mt-16 lg:mt-20 max-w-4xl">
+          {/* The connecting line - hidden on mobile, shown on larger screens */}
+          <div className="absolute left-1/2 top-8 h-full w-0.5 -translate-x-1/2 bg-gray-700/50 hidden lg:block" />
+          
+          <div className="space-y-8 sm:space-y-12">
+            {steps.map((step, index) => {
+              const { icon: Icon } = step;
+              const isLeft = index % 2 === 0;
+
               return (
-                // Each card is a "group" to allow for hover effects on child elements
-                <div key={step.title} className="group relative flex flex-col p-8 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                  {/* Large background number */}
-                  <div className="absolute -top-4 -right-4 text-[120px] font-black text-slate-100/80 transition-colors duration-300 group-hover:text-teal-50 -z-0">
-                    {step.duration}
-                  </div>
-                  
-                  <div className="relative z-10">
+                <div key={step.title} className="timeline-item relative">
+                  {/* Mobile Layout - Centered */}
+                  <div className="flex flex-col items-center lg:hidden">
                     {/* Icon */}
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg group-hover:text-emerald-500 transition-all duration-300">
+                    <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 ring-4 ring-black/30 mb-4">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    
+                    {/* Content Card */}
+                    <div className="w-full max-w-md space-y-3 rounded-xl border border-gray-200 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:bg-white/10">
+                      <p className="text-sm font-semibold text-emerald-400 text-center">
+                        STEP {step.duration}
+                      </p>
+                      <h3 className="text-xl font-bold text-white text-center">
+                        {step.title}
+                      </h3>
+                      <p className="text-base text-gray-300 text-center">
+                        {step.description}
+                      </p>
+                      <ul className="space-y-2 pt-2 text-sm text-gray-400">
+                        {step.bullets.map((bullet, bIdx) => (
+                          <li key={bIdx} className="flex items-center justify-center">
+                            <span className="mr-3 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout - Alternating */}
+                  <div className="hidden lg:flex items-center">
+                    {/* Icon on the timeline */}
+                    <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 ring-8 ring-black/30 absolute left-1/2 top-4 -translate-x-1/2">
+                      <Icon className="h-5 w-5 text-white" />
                     </div>
 
-                    {/* Title & Description */}
-                    <h3 className="mt-8 text-xl font-semibold leading-7 text-gray-900">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-base leading-7 text-gray-600">
-                      {step.description}
-                    </p>
-                    
-                    {/* Hidden Bullets - revealed on hover */}
-                    <div className="mt-6 border-t border-gray-200 pt-6 opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-500 ease-in-out">
-                      <ul className="space-y-2 text-sm text-gray-700">
+                    {/* Content Card */}
+                    <div
+                      className={`w-[45%] space-y-3 rounded-xl border border-gray-200 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:bg-white/10
+                      ${isLeft ? 'mr-auto' : 'ml-auto'}`}
+                    >
+                      <p className="text-sm font- text-emerald-400">
+                        STEP {step.duration}
+                      </p>
+                      <h3 className="text-xl font-semoibold text-white">
+                        {step.title}
+                      </h3>
+                      <p className="text-base text-gray-300">
+                        {step.description}
+                      </p>
+                      <ul className="space-y-2 pt-2 text-sm text-gray-400">
                         {step.bullets.map((bullet, bIdx) => (
-                           <li key={bIdx} className="flex items-center">
-                           <span className="h-1.5 w-1.5 rounded-full bg-emerald-700 mr-3"></span>
-                           <span>{bullet}</span>
-                         </li>
+                          <li key={bIdx} className="flex items-center">
+                            <span className="mr-3 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                            <span>{bullet}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>

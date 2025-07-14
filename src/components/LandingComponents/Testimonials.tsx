@@ -38,14 +38,13 @@ const CARD_HEIGHT = 'h-80 sm:h-96';
 const Testimonials: React.FC = () => (
   <section className="relative overflow-hidden py-32 text-white">
     <div className="absolute inset-0">
-      <div className="absolute inset-0 bg-gradient-to-br from-black to-teal-300" />
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 " />
     </div>
 
     <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
       <div className="mb-16 text-center">
         <p className="text-sm uppercase tracking-wider text-gray-300">Testimonials</p>
-        <h2 className="mt-4  font-bold leading-tight md:text-4xl">What Our Clients Say</h2>
+        <h2 className="mt-4  text-4xl sm:text-5xl font-semibold leading-tight text-white">What Our Clients Say</h2>
         <p className="mt-4 text-lg max-sm:px-10 text-gray-400">Real insights from those we’ve had the pleasure to serve.</p>
       </div>
 

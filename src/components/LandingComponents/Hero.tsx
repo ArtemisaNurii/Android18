@@ -486,10 +486,10 @@ export const Hero: React.FC = () => {
       id='hero'
       ref={containerRef}
       style={{ fontFamily: "Poppins, sans" }}
-      className="relative flex items-center justify-center w-full min-h-screen py-40 text-gray-100 bg-black font-sans overflow-hidden"
+      className="relative flex items-center justify-center w-full min-h-screen py-40 text-gray-100 font-sans overflow-hidden"
     >
       <style>{shineStyle}</style>
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-[#050a08] to-[#47a893]"></div>
+      {/* Removed background gradient - now inherits from global background */}
       <div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
       
       <div className="relative z-10 container mx-auto flex flex-col items-center gap-12 px-4">

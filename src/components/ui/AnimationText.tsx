@@ -68,30 +68,38 @@ const TextAnimation: React.FC<TextAnimationProps> = ({
         </motion.span>
       );
     }
-
     if (letterAnime) {
       return text
         .split('')
         .map((letter, index) => (
-          <motion.span key={index} {...getAnimationProps(index)}>
-            {letter}
+          <motion.span
+            key={index}
+            className="inline-block"
+            {...getAnimationProps(index)}
+          >
+            {letter === ' ' ? '\u00A0' : letter}
           </motion.span>
         ));
     }
+    
 
     return text
       .split(' ')
       .map((word, index) => (
         <motion.span key={index} {...getAnimationProps(index)} className="inline-block">
           {word}
+          {index < text.split(' ').length - 1 && ' '}
         </motion.span>
       ));
   };
 
   return (
-    <Tag ref={ref} className={clsx('text-animation', classname)}>
-      {renderContent()}
-    </Tag>
+    <Tag
+    ref={ref}
+    className={clsx('text-animation whitespace-pre-wrap', classname)}
+  >
+    {renderContent()}
+  </Tag>
   );
 };
 

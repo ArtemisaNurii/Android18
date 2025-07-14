@@ -39,7 +39,7 @@ const createCurvedPath = (
 
 const WorldMap: FC<MapProps> = ({
   data = [],
-  colors = ["#00674F", "#0A3C30", "#3EBB9E"], // Default colors from demo
+  colors = ["#ffffff", "#ffffff", "#ffffff"], // Gray-900 color for connecting lines
   onPointHover = () => {},
   activePoint = null,
   theme = "light",
@@ -74,18 +74,19 @@ const WorldMap: FC<MapProps> = ({
   const centralPointData = memoizedDotsData[0]; // Assuming first item has the central start point
 
   return (
-    <div ref={ref} className="relative aspect-[2/1] w-full select-none">
+    <div ref={ref} className="relative w-full h-full select-none">
       {/* Background Dotted Map */}
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(memoizedSvgMap)}`}
-        className="pointer-events-none h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)]"
+        className="pointer-events-none absolute inset-0 w-full h-full object-contain [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)]"
         alt="world map background"
         draggable={false}
       />
       {/* SVG Overlay for Arcs and Points */}
       <svg
         viewBox="0 0 800 400"
-        className="pointer-events-none absolute inset-0 h-full w-full"
+        className="pointer-events-none absolute inset-0 w-full h-full"
+        preserveAspectRatio="xMidYMid meet"
       >
         <g>
           {/* Render all arcs */}

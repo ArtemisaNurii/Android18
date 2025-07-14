@@ -104,22 +104,22 @@ const caseStudyData: CaseStudy = {
 
 
 const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
-    <header className="relative flex h-[30vh] min-h-[500px] flex-col justify-end p-8 text-white md:p-12 lg:p-16 bg-gradient-to-br from-black to-teal-300">
+    <header className="relative flex h-[25vh] min-h-[400px] sm:h-[30vh] sm:min-h-[500px] flex-col justify-end p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 text-white">
       {/* Gradient background layer */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-black to-teal-300" />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black to-emerald-300" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
   
       {/* Content overlays */}
-      <div className="relative z-10 max-w-4xl">
-        <span className="mb-2 block text-sm font-semibold uppercase tracking-widest text-emerald-400">
+      <div className="relative z-10 max-w-4xl mx-auto w-full">
+        <span className="mb-2 block text-xs sm:text-sm font-semibold uppercase tracking-widest text-emerald-400">
           Case Study
         </span>
-        <h1 className="font-serif text-4xl font-bold leading-tight md:text-4xl l">
+        <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
           {title}
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-slate-200 md:text-xl">
+        <p className="mt-3 sm:mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-slate-200">
           {subtitle}
         </p>
       </div>
@@ -128,57 +128,57 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
   
   
 
-// 2. Key Metrics Bar - NEW COMPONENT for high-impact info
+// 2. Key Metrics Bar - Enhanced responsive design
 const KeyMetricsBar = ({ metrics }: { metrics: KeyMetric[] }) => (
-  <div className="bg-slate-50 border-b border-slate-200">
-    <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-8 sm:grid-cols-3 sm:px-6 lg:px-8">
+  <div className="bg-slate-50 ">
+    <div className="mx-auto flex max-w-7xl justify-between lg:justify-center lg:gap-8 gap-4 px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {metrics.map((metric) => (
-        <div key={metric.label} className="text-center">
-          <metric.icon className="mx-auto h-8 w-8 text-teal-500" aria-hidden="true" />
-          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900">{metric.value}</p>
-          <p className="text-sm font-medium text-slate-500">{metric.label}</p>
+        <div key={metric.label} className="text-center flex-1 lg:flex-none">
+          <metric.icon className="mx-auto h-6 w-6 sm:h-8 sm:w-8 text-emerald-500" aria-hidden="true" />
+          <p className="mt-2 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-black/70">{metric.value}</p>
+          <p className="text-xs sm:text-sm font-medium text-black">{metric.label}</p>
         </div>
       ))}
     </div>
   </div>
 );
 
-// 3. Project Info - NEW COMPONENT for scannable metadata
+// 3. Project Info - Enhanced responsive design
 const ProjectInfo = ({ info }: { info: ProjectInfo }) => (
-  <div className="mb-10 rounded-lg border border-slate-200 bg-white p-6">
-    <h3 className="text-lg font-semibold text-slate-900">Project at a Glance</h3>
-    <dl className="mt-4 space-y-4 text-sm">
+  <div className="mb-6 sm:mb-8 lg:mb-10 rounded-lg border border-gray-00 bg-white p-4 sm:p-6">
+    <h3 className="text-base sm:text-lg font-semibold text-black/70">Project at a Glance</h3>
+    <dl className="mt-3 sm:mt-4 space-y-3 sm:space-y-4 text-sm">
       <div>
         <dt className="font-medium text-slate-500">Client</dt>
-        <dd className="mt-1 text-slate-800">{info.client}</dd>
+        <dd className="mt-1 text-black/70">{info.client}</dd>
       </div>
       <div>
         <dt className="font-medium text-slate-500">Industry</dt>
-        <dd className="mt-1 text-slate-800">{info.industry}</dd>
+        <dd className="mt-1 text-black/70">{info.industry}</dd>
       </div>
       <div>
         <dt className="font-medium text-slate-500">Services</dt>
-        <dd className="mt-1 text-slate-800">{info.services.join(", ")}</dd>
+        <dd className="mt-1 text-black/70">{info.services.join(", ")}</dd>
       </div>
     </dl>
   </div>
 );
 
-// 4. Table of Contents - Refined styling
+// 4. Table of Contents - Enhanced responsive design with mobile considerations
 const TableOfContents = ({ sections, activeSection }: { sections: { id: string; title: string }[]; activeSection: string }) => (
-  <aside className="sticky top-28 hidden h-fit lg:block">
-    <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-500">
+  <aside className="sticky top-20 sm:top-24 lg:top-28 hidden lg:block h-fit">
+    <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-black/70">
       On This Page
     </h3>
-    <ul className="space-y-2">
+    <ul className="space-y-1 sm:space-y-2">
       {sections.map((section) => (
         <li key={section.id}>
           <a
             href={`#${section.id}`}
-            className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 ${
+            className={`flex items-center rounded-md px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm transition-all duration-200 ${
               activeSection === section.id
-                ? "bg-teal-50 font-semibold text-teal-700"
-                : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                ? "bg-emerald-50 font-semibold text-emerald-700"
+                : "text-black/70 hover:bg-slate-100 hover:text-emerald-700"
             }`}
           >
             {section.title}
@@ -186,47 +186,46 @@ const TableOfContents = ({ sections, activeSection }: { sections: { id: string; 
         </li>
       ))}
     </ul>
-
   </aside>
 );
 
-// 5. Main Content Section - Enhanced typography and list styles
+// 5. Main Content Section - Enhanced responsive typography and spacing
 const ContentSection = React.forwardRef<HTMLElement, { section: CaseStudyContentSection }>(
     ({ section }, ref) => (
-      <section ref={ref} id={section.id} className="scroll-mt-24 content-section">
-        <h2 className="font-serif text-3xl font-bold text-slate-900">{section.title}</h2>
-        <div className="prose prose-lg mt-4 max-w-none text-slate-600 prose-li:my-1">
-          {section.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+      <section ref={ref} id={section.id} className="scroll-mt-16 sm:scroll-mt-20 lg:scroll-mt-24 content-section">
+        <h2 className="font-serif text-2xl sm:text-2xl md:text-3xl font-bold text-black/70">{section.title}</h2>
+        <div className="prose prose-sm sm:prose-base lg:prose-lg mt-3 sm:mt-4 max-w-none text-black/70 prose-li:my-0.5 sm:prose-li:my-1">
+          {section.paragraphs.map((p, i) => <p key={i} className="mb-3 sm:mb-4">{p}</p>)}
           {section.listItems && (
-            <ul>
+            <ul className="mt-4 sm:mt-6">
               {section.listItems.map((item, i) => (
-                <li key={i} className="flex items-start">
-                  <CheckCircleIcon className="mr-3 mt-1 h-6 w-6 flex-shrink-0 text-teal-500" />
-                  <span>{item}</span>
+                <li key={i} className="flex items-start mb-2 sm:mb-3">
+                  <CheckCircleIcon className="mr-2 sm:mr-3 mt-0.5 sm:mt-1 h-4 w-4 sm:h-6 sm:w-6 flex-shrink-0 text-emerald-500" />
+                  <span className="text-sm sm:text-base">{item}</span>
                 </li>
               ))}
             </ul>
           )}
         </div>
-        <hr className="my-16 border-slate-200" />
+        <hr className="my-8 sm:my-12 lg:my-16 border-slate-200" />
       </section>
     )
 );
 ContentSection.displayName = "ContentSection";
 
-// 6. Call To Action - NEW COMPONENT to guide user's next step
+// 6. Call To Action - Enhanced responsive design
 const CallToAction = () => (
     <div className="bg-slate-50">
-        <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-24">
-            <h2 className="font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 xl:py-24 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
                 Have a similar challenge?
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
+            <p className="mt-3 sm:mt-4 text- sm:text-lg leading-7 sm:leading-8 text-black/70 max-w-2xl mx-auto">
                 Let's discuss how we can apply our expertise to elevate your project. We specialize in creating robust, scalable, and user-friendly digital solutions.
             </p>
-            <div className="mt-8 ">
+            <div className="mt-6 sm:mt-8">
             <button 
-              className="border border-black px-8 py-3 font-semibold rounded-lg hover:bg-black hover:text-white transition-colors w-full md:w-auto flex-shrink-0"
+              className="border border-black px-6 sm:px-8 py-2.5 sm:py-3 font-semibold rounded-lg hover:bg-black hover:text-white transition-colors w-full sm:w-auto flex-shrink-0 text-sm sm:text-base"
               onClick={() => (window.location.href = "mailto:hr@codevider.com")}
             >
               Let's Talk
@@ -272,34 +271,75 @@ const ProjectProfile: React.FC = () => {
 
   return (
     // Use `prose` with Tailwind Typography plugin for beautiful article styling out-of-the-box
-    <main className="bg-white font-sans">
+    <main className=" bg-[#ffffff] font-sans">
       <CaseStudyHero
         title={caseStudyData.title}
         subtitle={caseStudyData.subtitle}     />
+  <KeyMetricsBar metrics={caseStudyData.keyMetrics} />
 
-      <KeyMetricsBar metrics={caseStudyData.keyMetrics} />
+<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 xl:py-24">
+  {/* Mobile: Single column layout */}
+  <div className="lg:hidden">
+    <ProjectInfo info={caseStudyData.projectInfo} />
+    
+    {/* Mobile Table of Contents */}
+    <div className="mb-6 sm:mb-8">
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-3">
+        On This Page
+      </h3>
+      <ul className="space-y-1">
+        {caseStudyData.content.map((section) => (
+          <li key={section.id}>
+            <a
+              href={`#${section.id}`}
+              className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 ${
+                activeSection === section.id
+                  ? "bg-emerald-50 font-semibold text-emerald-700"
+                  : "text-black/70 hover:bg-gray-100 hover:text-black"
+              }`}
+            >
+              {section.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:grid lg:grid-cols-4 lg:gap-12 lg:px-8 lg:py-24">
-        {/* Left Column: Project Info & Sticky TOC */}
-        <div className="lg:col-span-1">
-            <ProjectInfo info={caseStudyData.projectInfo} />
-            <TableOfContents sections={caseStudyData.content} activeSection={activeSection} />
-        </div>
+    {/* Mobile Main Content */}
+    <article className="main-content-area">
+      {caseStudyData.content.map((section, index) => (
+        <ContentSection
+          key={section.id}
+          section={section}
+          ref={el => sectionRefs.current[index] = el}
+        />
+      ))}
+    </article>
+  </div>
 
-        {/* Right Column: Main Content */}
-        <article className="lg:col-span-3 main-content-area mt-12 lg:mt-0">
-          {caseStudyData.content.map((section, index) => (
-            <ContentSection
-              key={section.id}
-              section={section}
-              ref={el => sectionRefs.current[index] = el}
-            />
-          ))}
-        </article>
-      </div>
+  {/* Desktop: Two column layout */}
+  <div className="hidden lg:grid lg:grid-cols-4 lg:gap-8 xl:gap-12">
+    {/* Left Column: Project Info & Sticky TOC */}
+    <div className="lg:col-span-1">
+        <ProjectInfo info={caseStudyData.projectInfo} />
+        <TableOfContents sections={caseStudyData.content} activeSection={activeSection} />
+    </div>
 
-      <CallToAction />
-    </main>
+    {/* Right Column: Main Content */}
+    <article className="lg:col-span-3 main-content-area">
+      {caseStudyData.content.map((section, index) => (
+        <ContentSection
+          key={section.id}
+          section={section}
+          ref={el => sectionRefs.current[index] = el}
+        />
+      ))}
+    </article>
+  </div>
+</div>
+
+<CallToAction />
+</main>
   );
 };
 

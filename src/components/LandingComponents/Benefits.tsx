@@ -127,9 +127,8 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full py-32 bg-gradient-to-br from-black to-teal-400 px-6"
+      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full py-32  px-6"
     >
-      <div className="absolute inset-0 bg-black/70" />
 
       {/* --- 1. ADD CLASS NAME TO HEADER --- */}
       <header className="benefits-header relative z-10 text-center mb-16 max-w-4xl w-full px-4 lg:px-8">
@@ -146,13 +145,13 @@ export const Benefits = () => {
         {codeviderPrinciples.map(({ Icon, title, description, colSpan }, i) => (
           <div
             key={i}
-            className={`principle-card bg-white/95 backdrop-blur-sm p-8 rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
+            className={`principle-card bg-white/95 backdrop-blur-sm p-8 rounded-2xl flex flex-col items-start  text-left shadow-lg ${colSpan}`}
           >
             <Icon className="w-10 h-10 text-teal-600 mb-6" />
-            <h2 className="font-mono text-xl lg:text-2xl font-bold tracking-widest uppercase text-gray-800 mb-3">
+            <h2 className="font-mono text-xl lg:text-2xl font-bold tracking-widest uppercase text-gray-700 mb-3">
               {title}
             </h2>
-            <p className="text-neutral-600">{description}</p>
+            <p className="text-gray-700">{description}</p>
           </div>
         ))}
       </main>

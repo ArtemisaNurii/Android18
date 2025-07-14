@@ -104,6 +104,13 @@ const Projects = () => {
               Each application we build demonstrates our commitment to delivering robust,
               scalable solutions that empower your business.
             </p>
+            <button
+              onClick={() => window.location.href = '/projects'}
+              className="group relative text-gray-900 font-medium text-base hover:text-black transition-colors duration-300"
+            >
+              View All Projects
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            </button>
           </div>
         </div>
 

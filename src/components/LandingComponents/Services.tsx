@@ -135,7 +135,7 @@ const ServicesPage: React.FC = () => {
         {/* --- HEADER --- */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-24 services-title">
           <p className="font-semibold leading-7 text-gray-500">SERVICES</p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          <h1 className="mt-2 text-4xl sm:text-5xl font-semibold leading-tight text-gray-900">
 How Codevider Powers Your Tech          </h1>
         </div>
 
@@ -154,7 +154,7 @@ How Codevider Powers Your Tech          </h1>
               <div key={number} className="service-card relative">
                 {/* Number - absolutely positioned on desktop, static on mobile */}
                 <div className="md:absolute md:left-0 md:-translate-x-full md:top-1.5 md:pr-8">
-                  <span className="text-3xl md:text-4xl font-bold text-gray-300">
+                  <span className="text-2xl md:text-3xl font- text-emerald-400">
                     {number}
                   </span>
                 </div>
