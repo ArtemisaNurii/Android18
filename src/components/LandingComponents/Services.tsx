@@ -129,11 +129,11 @@ const ServicesPage: React.FC = () => {
     <div
       ref={mainRef}
       id="services"
-      className="bg-white py-24 sm:py-32 px-6 sm:px-8"
+      className="section-standard bg-white px-6 sm:px-8"
     >
       <div className="mx-auto max-w-7xl">
         {/* --- HEADER --- */}
-        <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-24 services-title">
+        <div className="max-w-3xl mx-auto text-center services-title">
           <p className="font-semibold leading-7 text-gray-500">SERVICES</p>
           <h1 className="mt-2 text-4xl sm:text-5xl font-semibold leading-tight text-gray-900">
 How Codevider Powers Your Tech          </h1>

@@ -36,7 +36,7 @@ const CARD_WIDTH = 'w-80 sm:w-96';
 const CARD_HEIGHT = 'h-80 sm:h-96';
 
 const Testimonials: React.FC = () => (
-  <section className="relative overflow-hidden py-32 text-white">
+  <section className="section-standard relative overflow-hidden text-white">
     <div className="absolute inset-0">
       <div className="absolute inset-0 " />
     </div>

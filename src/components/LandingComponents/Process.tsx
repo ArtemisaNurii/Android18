@@ -92,7 +92,7 @@ const Process: React.FC = () => {
   }, []);
 
   return (
-    <section id="process" className="relative w-full overflow-hidden py-16 sm:py-24 lg:py-32 font-poppins text-white" ref={containerRef}>
+    <section id="process" className="section-standard relative w-full overflow-hidden font-poppins text-white" ref={containerRef}>
       {/* Background Gradient */}
       <div className="absolute inset-0 -z-10 " />
       {/* Optional: Add a subtle noise pattern for texture */}

@@ -122,10 +122,10 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ project, index }) => 
 // --- Main Project Page Component ---
 function ProjectPage() {
     return (
-        <div className="relative overflow-hidden">
+        <div className="section-large relative overflow-hidden">
             <div className="absolute inset-0 text-white z-0" />
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-                <header className="text-center py-24 sm:py-32">
+                <header className="text-center py-8 sm:py-12">
                     <h1 className="text-4xl font-bold font-poppins text-white">
                        Engineered Digital Solutions
                     </h1>

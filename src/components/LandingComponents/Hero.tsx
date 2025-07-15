@@ -486,7 +486,7 @@ export const Hero: React.FC = () => {
       id='hero'
       ref={containerRef}
       style={{ fontFamily: "Poppins, sans" }}
-      className="relative flex items-center justify-center w-full min-h-screen py-40 text-gray-100 font-sans overflow-hidden"
+      className="section-hero relative flex items-center justify-center w-full text-gray-100 font-sans overflow-hidden"
     >
       <style>{shineStyle}</style>
       {/* Removed background gradient - now inherits from global background */}
@@ -505,57 +505,71 @@ export const Hero: React.FC = () => {
         <div
           ref={dashboardRef}
           style={{ transformStyle: 'preserve-3d' }}
-          className="relative w-full max-w-6xl mx-auto mt-8 bg-[#121212]/50 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl shadow-black/40 flex overflow-hidden shine-border hover:shadow-emerald-300/60"
+          className="relative w-full max-w-7xl mx-auto mt-6 sm:mt-8 bg-[#121212]/50 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl shadow-black/40 flex flex-col lg:flex-row overflow-hidden shine-border hover:shadow-emerald-300/60"
         >
-          <div className="hidden lg:flex w-[240px] flex-shrink-0 bg-black/20 p-4 border-r border-white/5 flex-col justify-between">
-             <div>
-              <div className="flex items-center gap-3 p-2 mb-6">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-green-500 to-teal-400 flex items-center justify-center">
-                    <FiBarChart2 size={18}/>
+          {/* Sidebar - Responsive */}
+          <div className="lg:flex w-full lg:w-[240px] xl:w-[280px] flex-shrink-0 bg-black/20 p-3 sm:p-4 border-b lg:border-b-0 lg:border-r border-white/5 flex flex-row lg:flex-col justify-between">
+             <div className="flex-1 lg:flex-none">
+              <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 mb-4 lg:mb-6">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-gradient-to-tr from-green-500 to-teal-400 flex items-center justify-center">
+                    <FiBarChart2 size={14} className="sm:hidden"/>
+                    <FiBarChart2 size={18} className="hidden sm:block"/>
                 </div>
-                <h2 className="text-xl  text-white">Codevider</h2>
+                <h2 className="text-sm sm:text-lg lg:text-xl text-white font-semibold">Codevider</h2>
               </div>
-              <nav className="flex flex-col gap-2">
-                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg bg-white/10 text-white "><FiGrid /> Dashboard</a>
-                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors"><FiUsers /> Leads</a>
-                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors"><FiBriefcase /> Companies</a>
-                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors"><FiCheckSquare /> Tasks</a>
+              <nav className="hidden lg:flex flex-col gap-2">
+                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg bg-white/10 text-white text-sm"><FiGrid size={16} /> Dashboard</a>
+                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors text-sm"><FiUsers size={16} /> Leads</a>
+                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors text-sm"><FiBriefcase size={16} /> Companies</a>
+                  <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors text-sm"><FiCheckSquare size={16} /> Tasks</a>
               </nav>
+              {/* Mobile Navigation */}
+              <div className="lg:hidden flex gap-1 overflow-x-auto">
+                  <a href="#" className="flex items-center gap-1 px-2 py-1 rounded bg-white/10 text-white text-xs whitespace-nowrap"><FiGrid size={12} /> Dashboard</a>
+                  <a href="#" className="flex items-center gap-1 px-2 py-1 rounded hover:bg-white/5 text-gray-300 text-xs whitespace-nowrap"><FiUsers size={12} /> Leads</a>
+                  <a href="#" className="flex items-center gap-1 px-2 py-1 rounded hover:bg-white/5 text-gray-300 text-xs whitespace-nowrap"><FiBriefcase size={12} /> Companies</a>
+              </div>
             </div>
-            <nav className="flex flex-col gap-2">
-                <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors"><FiUser /> Profile</a>
-                <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors"><FiSettings /> Settings</a>
-                <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors"><FiHelpCircle /> Support</a>
+            <nav className="hidden lg:flex flex-col gap-2">
+                <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors text-sm"><FiUser size={16} /> Profile</a>
+                <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors text-sm"><FiSettings size={16} /> Settings</a>
+                <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 text-gray-300 transition-colors text-sm"><FiHelpCircle size={16} /> Support</a>
             </nav>
+            {/* Mobile Icons */}
+            <div className="lg:hidden flex items-center gap-2">
+                <FiBell className="text-gray-400 hover:text-white cursor-pointer" size={16}/>
+                <FiSearch className="text-gray-400 hover:text-white cursor-pointer" size={16}/>
+            </div>
           </div>
 
-          <div className="flex-1 p-4 md:p-6">
-            <div className="flex justify-between items-center mb-6">
+          <div className="flex-1 p-3 sm:p-4 md:p-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 gap-2 sm:gap-4">
               <div>
-                <h1 className="text-xl md:text-3xl  text-white">{currentDashboardData.dashboardTitle}</h1>
+                <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-semibold">{currentDashboardData.dashboardTitle}</h1>
               </div>
-              <div className="flex items-center gap-2 md:gap-4">
-                  <FiBell className="text-gray-400 hover:text-white cursor-pointer" size={20}/>
-                  <FiSearch className="text-gray-400 hover:text-white cursor-pointer" size={20}/>
+              <div className="hidden sm:flex items-center gap-2 md:gap-4">
+                  <FiBell className="text-gray-400 hover:text-white cursor-pointer" size={18}/>
+                  <FiSearch className="text-gray-400 hover:text-white cursor-pointer" size={18}/>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="dashboard-item md:col-span-2 lg:col-span-2 bg-black/20 rounded-xl p-4 flex flex-col min-h-[250px]">
-                  <div className="flex justify-between items-start">
-                      <div>
-                          <p className="text-gray-400 text-sm">{currentDashboardData.mainStat.label}</p>
-                          <p className="text-2xl md:text-3xl font-bold text-white">
-                              {currentDashboardData.mainStat.value} <span className={`text-lg font-semibold ${currentDashboardData.mainStat.trendColor}`}>{currentDashboardData.mainStat.trend}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+              {/* Main Chart - Responsive Spanning */}
+              <div className="dashboard-item sm:col-span-2 xl:col-span-2 bg-black/20 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col min-h-[200px] sm:min-h-[250px]">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4">
+                      <div className="flex-1">
+                          <p className="text-gray-400 text-xs sm:text-sm">{currentDashboardData.mainStat.label}</p>
+                          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                              {currentDashboardData.mainStat.value} <span className={`text-sm sm:text-lg font-semibold ${currentDashboardData.mainStat.trendColor}`}>{currentDashboardData.mainStat.trend}</span>
                           </p>
                       </div>
-                      <div className="flex gap-1 bg-black/40 p-1 rounded-lg">
+                      <div className="flex gap-1 bg-black/40 p-1 rounded-lg self-start">
                            {['1D', '7D'].map(t => <button key={t} className="px-2 py-1 text-xs text-gray-400 rounded hover:bg-white/10">{t}</button>)}
                           <button className="px-2 py-1 text-xs text-black bg-white rounded font-bold">1M</button>
                       </div>
                   </div>
-                  <div className="flex-grow mt-4 -mb-2 -mx-4">
-                      <svg width="100%" height="100%" viewBox="0 0 450 150" preserveAspectRatio="none">
+                  <div className="flex-grow mt-3 sm:mt-4 -mb-2 -mx-3 sm:-mx-4">
+                      <svg width="100%" height="100%" viewBox="0 0 450 150" preserveAspectRatio="none" className="min-h-[100px] sm:min-h-[120px]">
                           <defs>
                               <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
                                   <stop offset="0%" stopColor="rgba(4,211,153,0.3)" />
@@ -567,49 +581,50 @@ export const Hero: React.FC = () => {
                   </div>
               </div>
 
-              <div className="dashboard-item lg:col-span-1 bg-black/20 rounded-xl p-4 flex flex-col gap-3 justify-center">
-                  <h3 className="font-medium text-white text-center mb-2">Quick Actions</h3>
+              {/* Quick Actions - Responsive */}
+              <div className="dashboard-item xl:col-span-1 bg-black/20 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col gap-2 sm:gap-3 justify-center">
+                  <h3 className="font-medium text-white text-center mb-1 sm:mb-2 text-sm sm:text-base">Quick Actions</h3>
                   {currentDashboardData.quickActions.map((action, index) => (
-                      <button key={index} className="group w-full text-left flex items-center gap-3 bg-white/5 hover:bg-white/10 p-3 rounded-lg font-semibold transition-all duration-200 ease-in-out">
-                          <action.icon className="text-green-400 transition-transform duration-200 ease-in-out group-hover:scale-110"/> 
-                          <span className="transition-transform duration-200 ease-in-out group-hover:translate-x-1">{action.text}</span>
+                      <button key={index} className="group w-full text-left flex items-center gap-2 sm:gap-3 bg-white/5 hover:bg-white/10 p-2 sm:p-3 rounded-lg font-semibold transition-all duration-200 ease-in-out text-xs sm:text-sm">
+                          <action.icon className="text-green-400 transition-transform duration-200 ease-in-out group-hover:scale-110 flex-shrink-0" size={16}/> 
+                          <span className="transition-transform duration-200 ease-in-out group-hover:translate-x-1 truncate">{action.text}</span>
                       </button>
                   ))}
               </div>
 
-              <div className="dashboard-item hidden md:flex flex-col md:col-span-2 lg:col-span-2 bg-black/20 rounded-xl p-4">
-                <h3 className="font-medium text-white mb-3">Recent Activity</h3>
-                <div className="flex-grow space-y-2 text-sm">
+              {/* Recent Activity - Responsive */}
+              <div className="dashboard-item sm:col-span-2 xl:col-span-2 bg-black/20 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                <h3 className="font-medium text-white mb-2 sm:mb-3 text-sm sm:text-base">Recent Activity</h3>
+                <div className="space-y-2 text-xs sm:text-sm">
                     {currentDashboardData.recentActivity.map((activity, index) => (
-                        <div key={index} className="grid grid-cols-12 items-center gap-4 p-2 rounded-lg transition-colors hover:bg-white/[0.04]">
-                            <div className="col-span-1">
-                                <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${activity.bgColor}`}>
-                                    <activity.icon className={activity.iconColor} size={18} />
+                        <div key={index} className="flex items-center gap-2 sm:gap-4 p-2 rounded-lg transition-colors hover:bg-white/[0.04]">
+                            <div className="flex-shrink-0">
+                                <div className={`w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-md sm:rounded-lg flex items-center justify-center ${activity.bgColor}`}>
+                                    <activity.icon className={activity.iconColor} size={12} />
                                 </div>
                             </div>
-                            <div className="col-span-5">
-                                <p className="font-medium text-white truncate">{activity.description}</p>
+                            <div className="flex-1 min-w-0">
+                                <p className="font-medium text-white truncate text-xs sm:text-sm">{activity.description}</p>
                             </div>
-                            <div className="col-span-2 flex justify-start">
+                            <div className="flex-shrink-0 hidden sm:block">
                                 <span className={`text-xs font-semibold px-2 py-1 rounded-full text-gray-200 ${activity.categoryColor}`}>
                                     {activity.category}
                                 </span>
                             </div>
-                            <div className="col-span-2">
-                                <p className={`font-semibold text-right ${activity.amountColor}`}>{activity.amount}</p>
-                            </div>
-                            <div className="col-span-2">
-                                <p className="text-xs text-gray-500 text-right">{activity.time}</p>
+                            <div className="flex-shrink-0 text-right">
+                                <p className={`font-semibold text-xs sm:text-sm ${activity.amountColor}`}>{activity.amount}</p>
+                                <p className="text-xs text-gray-500">{activity.time}</p>
                             </div>
                         </div>
                     ))}
                 </div>
               </div>
 
-              <div className="dashboard-item lg:col-span-1 bg-black/20 rounded-xl p-4 flex flex-col">
-                  <h3 className="font-bold text-white mb-2">{currentDashboardData.pieChart.title}</h3>
-                  <div className="flex-grow flex items-center justify-center my-4">
-                    <div className="relative w-32 h-32 md:w-40 md:h-40">
+              {/* Pie Chart - Responsive */}
+              <div className="dashboard-item xl:col-span-1 bg-black/20 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col">
+                  <h3 className="font-bold text-white mb-2 text-sm sm:text-base">{currentDashboardData.pieChart.title}</h3>
+                  <div className="flex-grow flex items-center justify-center my-2 sm:my-4">
+                    <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40">
                          <svg className="w-full h-full" viewBox="0 0 36 36" transform="rotate(-90)">
                             {pieSlices.map((slice) => (
                                 <circle 
@@ -628,7 +643,7 @@ export const Hero: React.FC = () => {
                         </svg>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3 text-sm">
+                  <div className="flex flex-col gap-2 sm:gap-3 text-xs sm:text-sm">
                        {currentDashboardData.pieChart.data.map((item) => (
                             <div 
                                 key={item.label} 
@@ -636,11 +651,11 @@ export const Hero: React.FC = () => {
                                 onMouseEnter={() => setHoveredSlice(item.label)}
                                 onMouseLeave={() => setHoveredSlice(null)}
                             >
-                                <div className="flex items-center gap-2">
-                                    <span className={`w-2.5 h-2.5 rounded-full ${item.color.replace('text-', 'bg-')}`}></span> 
-                                    <span className="text-gray-300">{item.label}</span>
+                                <div className="flex items-center gap-1 sm:gap-2 min-w-0">
+                                    <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full flex-shrink-0 ${item.color.replace('text-', 'bg-')}`}></span> 
+                                    <span className="text-gray-300 truncate">{item.label}</span>
                                 </div> 
-                                <span className="font-medium text-gray-200">{item.value}%</span>
+                                <span className="font-medium text-gray-200 ml-2">{item.value}%</span>
                             </div>
                        ))}
                   </div>

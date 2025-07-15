@@ -93,8 +93,8 @@ const FaqSection = () => {
   };
 
   return (
-    <div className="bg-white font-sans">
-      <div className="container mx-auto max-w-6xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8 max-sm:px-10 ">
+    <div className="section-standard bg-white font-sans">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 max-sm:px-10 ">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8">
           
           {/* Left Column: Title and Contact */}

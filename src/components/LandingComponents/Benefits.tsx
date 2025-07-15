@@ -127,11 +127,11 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen text-neutral-800 font-poppins flex flex-col items-center w-full pt-16 sm:pt-24 lg:pt-32 px-4 sm:px-6"
+      className="section-standard relative text-neutral-800 font-poppins flex flex-col items-center w-full px-4 sm:px-6"
     >
 
       {/* --- 1. ADD CLASS NAME TO HEADER --- */}
-      <header className="benefits-header relative z-10 text-center mb-8 sm:mb-12 lg:mb-16 max-w-4xl w-full px-2 sm:px-4 lg:px-8">
+      <header className="benefits-header relative z-10 pt-10 text-center mb-8 sm:mb-12 lg:mb-16 max-w-4xl w-full px-2 sm:px-4 lg:px-8">
         <h1 className="header-title mt-4 sm:mt-6 lg:mt-10 font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] uppercase">
           BEYOND THE CODE
         </h1>

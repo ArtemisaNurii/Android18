@@ -87,7 +87,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="bg-white text-black w-full min-h-screen flex flex-col justify-center pt-8 pb-20 md:py-20 px-4 sm:px-8 lg:px-16 font-sans">
+    <section id="projects" className="section-standard bg-white text-black w-full flex flex-col justify-center px-4 sm:px-8 lg:px-16 font-sans">
       <div className="w-full max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-end">
           <div>

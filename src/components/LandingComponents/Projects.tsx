@@ -187,7 +187,7 @@ const cardItemVariants = {
 
 export const Map: React.FC = () => {
   return (
-    <div className="relative bg-white font-sans">
+    <div className="section-compact relative bg-white font-sans">
       
       {/* 1. MAP BANNER SECTION - Enhanced Responsive Design */}
       <header className="relative -mt-40 md:-mt-0 first-line: w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[400px] max-h-[800px] overflow-hidden">
