@@ -93,7 +93,7 @@ const FaqSection = () => {
   };
 
   return (
-    <div className="section-standard bg-white font-sans">
+    <div className="-mt-44 max-sm:mt-20 bg-white font-sans">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 max-sm:px-10 ">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-8">
           
@@ -146,6 +146,7 @@ const FaqSection = () => {
           </motion.div>
         </div>
       </div>
+      <div className='p-12'></div>
     </div>
   );
 };

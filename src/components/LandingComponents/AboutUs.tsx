@@ -22,11 +22,11 @@ const AboutUsPage: React.FC = () => {
   // We no longer need the GSAP useEffect, so it has been removed.
 
   return (
-    <div id='about' className="section-standard bg-white text-gray-800 px-4 max-sm:px-10 lg:px-8">
+    <div id='about' className=" py-10  bg-white text-gray-800 px-4 max-sm:px-10 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section 1: Who we are */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-20">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-16">
           
           <div className="col-span-1">
             <TextAnimation 

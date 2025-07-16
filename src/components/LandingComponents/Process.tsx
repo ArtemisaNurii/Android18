@@ -93,7 +93,7 @@ const ProcessStep = ({ step, title, description, delay = 0 }) => {
 const Processes = () => {
   return (
     // Section container (Transparent background as requested)
-    <section className="font-sans text-white py-20 sm:py-28">
+    <section className="font-sans text-white  max-sm:mt-20 -mt-20 ">
       <div className="container mx-auto  max-w-7xl">
         
         {/* Header Section (03 Removed) */}

@@ -66,6 +66,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
           {answer}
         </p>
       </div>
+      
     </div>
   );
 };

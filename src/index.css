@@ -121,7 +121,7 @@
 
 @layer components {
   .section-standard {
-    @apply min-h-screen py-16 sm:py-20 lg:py-20 xl:py-24;
+    @apply min-h-screen py-16 sm:py-14 lg:py-16 xl:py-24;
   }
   
   .section-hero {
@@ -133,7 +133,7 @@
   }
   
   .section-large {
-    @apply min-h-[100vh] py-20 sm:py-24 lg:py-28 xl:py-32;
+    @apply min-h-[100vh] py-20 sm:py-24 lg:py-28 ;
   }
 }
 

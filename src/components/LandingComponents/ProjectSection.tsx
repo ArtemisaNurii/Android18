@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // Reusable card component to keep the main component clean and organized
 const FeatureCard = ({ id, title, description }) => {
   return (
-    <div className="rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:scale-105 bg-[#e0e0e0] text-black hover:bg-transparent hover:text-white hover:border-2 hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.6)] border-2 border-transparent">
+    <div className="rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:scale-105 bg-[#e0e0e0] text-gray-700  hover:bg-transparent hover:text-white hover:border-2 hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.6)] border-2 border-transparent">
       {/* Card Number */}
       <span className="text-sm font-medium">{id}</span>
       
@@ -48,7 +48,7 @@ const Projectss = () => {
   
 
   return (
-    <section className="section-standard w-full min-h-screen flex items-center py-16 md:py-24 justify-center">
+    <section className=" w-full min-h-screen flex items-center -mt-20  justify-center">
             <div className="container mx-auto px-4 sm:px-6 md:px-12">
         <div className="flex flex-col">
 
@@ -75,7 +75,7 @@ const Projectss = () => {
           {/* Bottom part: Feature cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {features.map((feature) => (
-              <div key={feature.id} className="h-[20rem] sm:h-[22rem] md:h-auto md:aspect-square">
+              <div key={feature.id} className="h-[20rem] sm:h-[22rem]  md:h-auto md:aspect-square">
                 <FeatureCard 
                   id={feature.id}
                   title={feature.title}

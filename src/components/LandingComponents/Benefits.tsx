@@ -4,15 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Icon representing high-quality code and engineering
+// --- ICONS (UNCHANGED) ---
 const EngineeringIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="16 18 22 12 16 6" />
     <polyline points="8 6 2 12 8 18" />
   </svg>
 );
-
-// Icon representing partnership and collaboration
 const PartnershipIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -21,21 +19,18 @@ const PartnershipIcon = ({ className }: { className?: string }) => (
     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
   </svg>
 );
-
-// Icon representing speed, acceleration, and value
 const AccelerateIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
     <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.88l-8.57 8.57" />
   </svg>
 );
-
-// Icon representing business growth and scalability
 const GrowthIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="12" y1="20" x2="12" y2="4" />
     <polyline points="6 14 12 20 18 14" />
   </svg>
 );
+
 // --- DATA (UNCHANGED) ---
 const codeviderPrinciples = [
     {
@@ -67,9 +62,9 @@ const codeviderPrinciples = [
 export const Benefits = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // --- ANIMATIONS (UNCHANGED) ---
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // --- EXISTING INTRO ANIMATIONS (UNCHANGED) ---
       gsap.from(['.header-title', '.header-subtitle'], {
         y: 40,
         opacity: 0,
@@ -101,22 +96,18 @@ export const Benefits = () => {
 
   
       const parallaxTl = gsap.timeline({
-        ease: 'none', // Linear ease for a direct mapping to scroll
+        ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
-          // Start the effect as soon as the section enters the viewport
           start: 'top bottom',
-          // End the effect when the section has completely left the viewport
           end: 'bottom top',
-          // `scrub: 1` creates a smooth, lagged link between scroll and animation
           scrub: 1, 
         },
       });
 
-      // Animate the header and grid at different speeds
       parallaxTl
-        .to('.benefits-header', { yPercent: -50 }, 0) // Header moves up faster
-        .to('.benefits-grid', { yPercent: -15 }, 0); // Grid moves up slower
+        .to('.benefits-header', { yPercent: -50 }, 0)
+        .to('.benefits-grid', { yPercent: -15 }, 0);
 
     }, containerRef);
 
@@ -126,31 +117,35 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="section-standard relative text-neutral-800 font-poppins flex flex-col items-center w-full px-4 sm:px-6"
+      className="relative text-neutral-800 font-poppins flex flex-col items-center w-full px-4 sm:px-6"
     >
-
-      {/* --- 1. ADD CLASS NAME TO HEADER --- */}
-      <header className="benefits-header relative z-10 pt-10 text-center mb-8 sm:mb-12 lg:mb-16 max-w-4xl w-full px-2 sm:px-4 lg:px-8">
-        <h1 className="header-title mt-4 sm:mt-6 lg:mt-10 font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] uppercase">
+      <header className="benefits-header relative z-10 pt-10 text-center mb-12 lg:mb-16 max-w-4xl w-full">
+        {/* BUMPED: Increased base font size from 2xl to 3xl for better mobile impact. */}
+        <h1 className="header-title mt-6 lg:mt-10 font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] uppercase">
           BEYOND THE CODE
         </h1>
-        <p className="header-subtitle mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-neutral-200 max-w-xl sm:max-w-2xl mx-auto px-2 sm:px-0">
+        {/* BUMPED: Increased base font size from sm to base for better readability. */}
+        <p className="header-subtitle mt-4 text-base lg:text-lg text-neutral-200 max-w-2xl mx-auto">
           We believe true partnership goes beyond lines of code. It's about shared goals, transparent collaboration, and building technology that drives tangible business growth.
         </p>
       </header>
 
-      {/* --- 1. ADD CLASS NAME TO MAIN GRID --- */}
-      <main className="benefits-grid relative z-10 grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 lg:gap-8 w-full max-w-6xl px-2 sm:px-4 lg:px-8">
+      {/* BUMPED: Increased gap for more breathing room on mobile */}
+      <main className="benefits-grid relative z-10 grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-8 w-full max-w-6xl">
         {codeviderPrinciples.map(({ Icon, title, description, colSpan }, i) => (
           <div
             key={i}
-            className={`principle-card bg-white/95 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-lg sm:rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
+            // BUMPED: Increased padding from p-4 to p-6 for more internal space.
+            className={`principle-card bg-white/95 backdrop-blur-sm p-6 lg:p-8 rounded-xl sm:rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
           >
-            <Icon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-[#52ca86] mb-3 sm:mb-4 lg:mb-6" />
-            <h2 className="font-mono text-sm sm:text-base lg:text-xl xl:text-2xl font-bold tracking-wider sm:tracking-widest uppercase text-gray-700 mb-2 sm:mb-3 leading-tight">
+            {/* BUMPED: Increased icon size from w-6 to w-8 on mobile. */}
+            <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-[#52ca86] mb-4 lg:mb-6" />
+            {/* BUMPED: Increased title size from sm to lg on mobile for more emphasis. */}
+            <h2 className="font-mono text-lg sm:text-xl font-bold tracking-wider uppercase text-gray-700 mb-3 leading-tight">
               {title}
             </h2>
-            <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-relaxed">{description}</p>
+            {/* BUMPED: Increased description text from xs to sm for readability. This is the most important change. */}
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{description}</p>
           </div>
         ))}
       </main>

@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -43,7 +44,7 @@ const Contact: React.FC = () => {
 
       <div
         id="contact" // Moved id here for anchor links
-        className=" section-standard relative overflow-hidden text-white"
+        className="relative overflow-hidden text-white"
       >
 
         {/* --- Contact Section --- */}
@@ -130,60 +131,68 @@ const Contact: React.FC = () => {
           </div>
         </section>
 
-        {/* --- MODIFIED Footer Section --- */}
-        {/* It is now inside the gradient wrapper and styled for a dark background */}
+  
         <footer className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/20 pb-8 mb-8">
-              <p className="text-center md:text-left text-gray-300 max-w-2xl">
-                Stay updated on our latest developments, insights, and opportunities by following us.
-              </p>
-              <button 
-                className="border border-white/80 px-8 py-3 font-semibold rounded-lg hover:bg-white hover:text-black transition-colors w-full md:w-auto flex-shrink-0"
-                onClick={() => (window.location.href = "mailto:hr@codevider.com")}
-              >
-                Let's Talk
-              </button>
-            </div>
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/20 pb-8 mb-8">
+          <p className="text-center md:text-left text-gray-300 max-w-2xl">
+            Stay updated on our latest developments, insights, and opportunities by following us.
+          </p>
+          <button
+            className="border border-white/80 px-8 py-3 font-semibold rounded-lg hover:bg-white hover:text-black transition-colors w-full md:w-auto flex-shrink-0"
+            onClick={() => (window.location.href = "mailto:hr@codevider.com")}
+          >
+            Let's Talk
+          </button>
+        </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
-              <div className="space-y-3">
-                <p className="font-bold text-base text-white">Company</p>
-                <ul className="space-y-2 text-gray-300">
-                  <li><a href="#about" className="hover:text-white">About Us</a></li>
-                  <li><a href="#services" className="hover:text-white">Services</a></li>
-                  <li><a href="#projects" className="hover:text-white">Projects</a></li>
-                </ul>
-              </div>
-              <div className="space-y-3">
-                <p className="font-bold text-base text-white">Social</p>
-                <ul className="space-y-2 text-gray-300">
-                  <li><a href="https://www.instagram.com/codevider/?hl=en" className="hover:text-white">Instagram</a></li>
-                  <li><a href="https://www.facebook.com/codevider/" className="hover:text-white">Facebook</a></li>
-                  <li><a href="https://al.linkedin.com/company/codevider" className="hover:text-white">LinkedIn</a></li>
-                </ul>
-              </div>
-              <div className="space-y-3">
-                <p className="font-bold text-base text-white">Legal</p>
-                <ul className="space-y-2 text-gray-300">
-                  <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-white">Terms of Service</a></li>
-                </ul>
-              </div>
-              <div className="space-y-3">
-                <p className="font-bold text-base text-white">Contact</p>
-                <ul className="space-y-2 text-gray-300">
-                  <li><a href="mailto:hello@codevider.com" className="hover:text-white">hr@codevider.com</a></li>
-                  <li><a href="tel:+355695877742" className="hover:text-white"> +355 695877742</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-12 border-t border-white/20 pt-8 text-center">
-              <p className="text-sm text-gray-400">© {new Date().getFullYear()} Codevider. All rights reserved.</p>
-            </div>
+        {/* --- MODIFIED GRID: Reduced to 2 columns --- */}
+        <div className="grid grid-cols-2 gap-8 text-sm">
+          <div className="space-y-3">
+            <p className="font-bold text-base text-white">Company</p>
+            <ul className="space-y-2 text-gray-300">
+              <li><a href="#about" className="hover:text-white">About Us</a></li>
+              <li><a href="#services" className="hover:text-white">Services</a></li>
+              <li><a href="#projects" className="hover:text-white">Projects</a></li>
+            </ul>
           </div>
-        </footer>
+          <div className="space-y-3">
+            <p className="font-bold text-base text-white">Contact</p>
+            <ul className="space-y-2 text-gray-300">
+              <li><a href="mailto:hello@codevider.com" className="hover:text-white">hr@codevider.com</a></li>
+              <li><a href="tel:+355695877742" className="hover:text-white"> +355 695877742</a></li>
+            </ul>
+          </div>
+          {/* Social and Legal columns have been removed from this grid */}
+        </div>
+
+        {/* --- NEW SECTION: Social Icons and Legal Links --- */}
+        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6">
+          {/* Social Icons */}
+          <div className="flex items-center gap-5">
+            <a href="https://www.instagram.com/codevider/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram className="text-gray-400 hover:text-white text-2xl transition-colors" />
+            </a>
+            <a href="https://www.facebook.com/codevider/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebook className="text-gray-400 hover:text-white text-2xl transition-colors" />
+            </a>
+            <a href="https://al.linkedin.com/company/codevider" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedin className="text-gray-400 hover:text-white text-2xl transition-colors" />
+            </a>
+          </div>
+
+          {/* Legal Links */}
+          <div className="flex items-center gap-6 text-sm">
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+          </div>
+        </div>
+
+        <div className="mt-8 border-t border-white/20 pt-8 text-center">
+          <p className="text-sm text-gray-400">© {new Date().getFullYear()} Codevider. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
       </div>
     </>
   );
