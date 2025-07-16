@@ -1,185 +1,93 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, useMemo } from 'react';
-import { gsap } from 'gsap';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
-const projects = [
-  {
-    title: "E-Commerce Platform Revamp",
-    description: "Redesigned and optimized for performance, this e-commerce platform delivers seamless shopping experiences and drives higher conversion rates.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  },
-  {
-    title: "Mobile Banking App",
-    description: "Secure and intuitive mobile banking solution with real-time transaction tracking, biometric authentication, and AI-driven financial insights.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  },
-  {
-    title: "Real-Time Analytics Dashboard",
-    description: "Interactive dashboard providing live data visualizations and custom reporting tools to drive data-driven decision-making across the organization.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  },
-  {
-    title: "CRM Integration Tool",
-    description: "Custom-built connector that seamlessly integrates existing CRM systems with third-party services, automating workflows and improving lead management.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  },
-  {
-    title: "Cloud Migration Service",
-    description: "Comprehensive planning and execution to migrate legacy infrastructure to the cloud, ensuring minimal downtime and enhanced scalability.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  },
-];
 
-const useWindowSize = () => {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener('resize', updateSize);
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// Reusable card component to keep the main component clean and organized
+const FeatureCard = ({ id, title, description }) => {
+  return (
+    <div className="rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:scale-105 bg-[#e0e0e0] text-black hover:bg-transparent hover:text-white hover:border-2 hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.6)] border-2 border-transparent">
+      {/* Card Number */}
+      <span className="text-sm font-medium">{id}</span>
+      
+      <div className="flex-grow flex items-end mt-4">
+        <h3 className="text-3xl md:text-2xl lg:text-4xl font-medium uppercase leading-tight">
+          {title}
+        </h3>
+      </div>
+      
+      <div>
+        <hr className="w-full border-t border-black/30 hover:border-white/30 my-4 transition-colors duration-300" />
+        <p className="text-sm font-normal">{description}</p>
+      </div>
+    </div>
+  );
 };
 
-const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const sliderRef = useRef(null);
-  const cardRef = useRef(null);
-  const [width] = useWindowSize();
-
-  const visibleCards = useMemo(() => {
-    if (width < 768) return 1;
-    if (width < 1280) return 2;
-    return 3;
-  }, [width]);
-
-  useEffect(() => {
-    if (cardRef.current && sliderRef.current) {
-      const cardWidth = cardRef.current.offsetWidth;
-      const gap = width < 640 ? 16 : 32;
-      gsap.to(sliderRef.current, {
-        x: -currentIndex * (cardWidth + gap),
-        duration: 0.8,
-        ease: 'power3.inOut',
-      });
-    }
-  }, [currentIndex, width]);
-
-  useEffect(() => {
-    const maxIndex = projects.length - visibleCards;
-    if (currentIndex > maxIndex) {
-      setCurrentIndex(maxIndex);
-    }
-  }, [visibleCards, currentIndex]);
+// Main Section Component
+const Projectss = () => {
+  const navigate = useNavigate();
   
-  const handleNext = () => {
-    if (currentIndex < projects.length - visibleCards) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
+  const features = [
+    {
+      id: '01',
+      title: 'Fast Delivery',
+      description: 'Optimized development pipelines and automation ensure your projects launch at record speed.',
+    },
+    {
+      id: '02',
+      title: 'Granular Access Controls',
+      description: 'Define precise user roles and permissions to keep your codebase secure and compliant.',
+    },
+    {
+      id: '03',
+      title: 'Unlimited Scalability',
+      description: 'Our modular architecture grows with you—deploy and manage applications across any number of devices effortlessly.',
+    },
+  ];
+  
 
   return (
-    <section id="projects" className="section-standard bg-white text-black w-full flex flex-col justify-center px-4 sm:px-8 lg:px-16 font-sans">
-      <div className="w-full max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-end">
-          <div>
-            <p className="text-gray-500 mb-2 text-sm uppercase tracking-widest">
-              Our Work
-            </p>
-            <h1 style={{fontFamily:"Poppins, sans"}} className="text-4xl sm:text-5xl font-semibold leading-tight text-gray-900">
-              Explore Our Recent<br />
-              Digital Solutions
-            </h1>
-          </div>
-          <div className="flex flex-col items-start md:items-end justify-between">
-            <p className="text-base leading-relaxed text-gray-600 max-w-md md:text-right mb-6">
-              Each application we build demonstrates our commitment to delivering robust,
-              scalable solutions that empower your business.
-            </p>
-            <button
-              onClick={() => window.location.href = '/projects'}
-              className="group relative text-gray-900 font-medium text-base hover:text-black transition-colors duration-300"
-            >
-              View All Projects
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-            </button>
-          </div>
-        </div>
+    <section className="section-standard w-full min-h-screen flex items-center py-16 md:py-24 justify-center">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12">
+        <div className="flex flex-col">
 
-        <div className="relative">
-          <div className="md:hidden flex justify-center gap-4 mb-6">
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className="bg-gray-100 p-3 rounded-full text-black disabled:opacity-40 transition"
-            >
-              <FiArrowLeft size={20} />
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex >= projects.length - visibleCards}
-              className="bg-gray-100 p-3 rounded-full text-black disabled:opacity-40 transition"
-            >
-              <FiArrowRight size={20} />
-            </button>
-          </div>
-          
-          <div className="w-full overflow-hidden">
-            <div
-              ref={sliderRef}
-              className="flex gap-4 md:gap-8 pb-4"
-            >
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  ref={index === 0 ? cardRef : null}
-                  className="relative group bg-cover bg-center rounded-xl flex-shrink-0 w-[85vw] sm:w-[50vw] md:w-[calc(50%-1rem)] xl:w-[calc(33.33%-1.33rem)] h-96 overflow-hidden shadow-lg transition-transform duration-300 ease-in-out hover:!scale-105"
-                  style={{ transform: "scale(1.0)" }} // Base scale for hover
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-8 sm:mb-12 lg:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold leading-tight text-white uppercase tracking-wide mb-6 lg:mb-0">
+              What makes us<br />different
+            </h1>
+            <div className="flex flex-col lg:items-end gap-4 sm:gap-6">
+              <p className="text-sm text-gray-400 max-w-sm lg:text-right">
+                Our commitment to quality and innovation is what sets us apart from the competition.
+              </p>
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => navigate('/projects')}
+                  className="bg-[#ffffff] text-[#2a2a2a] text-xs px-5 py-2 rounded-full border border-gray-700 hover:text-white hover:bg-black transition-colors uppercase"
                 >
-                   <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-end text-white">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2 transition-transform duration-300 ease-in-out group-hover:-translate-y-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-gray-200 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        {project.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                  Our projects
+                </button>
+         
+              </div>
             </div>
           </div>
-          
-          <div className="hidden md:flex absolute top-1/2 -left-20 -right-20 justify-between transform -translate-y-1/2">
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className="bg-white/70 backdrop-blur-sm p-4 rounded-full text-black shadow-lg hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              <FiArrowLeft size={24} />
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex >= projects.length - visibleCards}
-              className="bg-white/70 backdrop-blur-sm p-4 rounded-full text-black shadow-lg hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              <FiArrowRight size={24} />
-            </button>
-          </div>
 
+          {/* Bottom part: Feature cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {features.map((feature) => (
+              <div key={feature.id} className="h-[20rem] sm:h-[22rem] md:h-auto md:aspect-square">
+                <FeatureCard 
+                  id={feature.id}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Projects;
+export default Projectss;

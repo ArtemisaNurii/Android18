@@ -12,7 +12,7 @@ import { Benefits } from '@/components/LandingComponents/Benefits';
 import { Map } from '@/components/LandingComponents/Projects';
 import { Hero } from '@/components/LandingComponents/Hero';
 import FaqSection from '@/components/LandingComponents/Faq';
-import Projects from '@/components/LandingComponents/ProjectSection';
+import Projectss from '@/components/LandingComponents/ProjectSection';
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -40,8 +40,9 @@ const Index = () => {
         <section ref={servicesRef}><ServicesPage /></section>
         <Benefits />
         <Map />
-        <section ref={processRef}><Process /></section>
-    <section ref={projectsRef}><Projects/></section>
+    <section ref={projectsRef}><Projectss/></section>
+    <section ref={processRef}><Process /></section>
+
         <section className='' ref={testimonialsRef}><Testimonials /></section>
   
 <FaqSection/>

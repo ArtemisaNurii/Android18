@@ -40,10 +40,10 @@ const Contact: React.FC = () => {
 
   return (
     <>
-      {/* --- STRUCTURAL CHANGE: A new parent wrapper holds the background --- */}
+
       <div
         id="contact" // Moved id here for anchor links
-        className="relative overflow-hidden text-white"
+        className=" section-standard relative overflow-hidden text-white"
       >
 
         {/* --- Contact Section --- */}

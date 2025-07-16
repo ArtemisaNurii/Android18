@@ -99,8 +99,7 @@ export const Benefits = () => {
         });
       });
 
-      // --- 2. NEW PARALLAX ANIMATION ---
-      // This timeline will control the parallax effect for the entire section.
+  
       const parallaxTl = gsap.timeline({
         ease: 'none', // Linear ease for a direct mapping to scroll
         scrollTrigger: {
@@ -145,9 +144,9 @@ export const Benefits = () => {
         {codeviderPrinciples.map(({ Icon, title, description, colSpan }, i) => (
           <div
             key={i}
-            className={`principle-card bg-white/95 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
+            className={`principle-card bg-white/95 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-lg sm:rounded-2xl flex flex-col items-start text-left shadow-lg ${colSpan}`}
           >
-            <Icon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-teal-600 mb-3 sm:mb-4 lg:mb-6" />
+            <Icon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-[#52ca86] mb-3 sm:mb-4 lg:mb-6" />
             <h2 className="font-mono text-sm sm:text-base lg:text-xl xl:text-2xl font-bold tracking-wider sm:tracking-widest uppercase text-gray-700 mb-2 sm:mb-3 leading-tight">
               {title}
             </h2>

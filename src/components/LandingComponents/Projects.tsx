@@ -190,15 +190,14 @@ export const Map: React.FC = () => {
     <div className="section-compact relative bg-white font-sans">
       
       {/* 1. MAP BANNER SECTION - Enhanced Responsive Design */}
-      <header className="relative -mt-40 md:-mt-0 first-line: w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[400px] max-h-[800px] overflow-hidden">
+      <header className="relative -mt-40 md:-mt-0 first-line: w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[70vh] min-h-[400px] max-h-[800px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <WorldMapDemo />
         </div>
       </header>
-
-      {/* 2. CONTENT SECTION (Now with TextAnimation) */}
+<div className='p-6'></div>
       <section 
-        className="relative z-10 bg-white -mt-16 max-sm:-mt-44 md:-mt-24 rounded-t-2xl pt-12 pb-16 sm:pt-16 sm:pb-24"
+        className="relative z-10 bg-white  max-sm:-mt-44 md:-mt-8 rounded-t-2xl pt-12 pb-16 sm:pt-16 "
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 items-start">
@@ -217,7 +216,7 @@ export const Map: React.FC = () => {
               <TextAnimation
                 as="h2"
                 text="Outsourcing Code Company"
-                classname="mt-2 text-4xl sm:text-5xl font-semibold leading-tight text-gray-900"
+                classname="mt-2 text-4xl sm:text-5xl font-semibold uppercase leading-tight text-gray-900"
               />
             </motion.div>
             <motion.div 
@@ -246,7 +245,7 @@ export const Map: React.FC = () => {
               {featuresData.map(({ id, icon: Icon, title, description }) => (
                 <motion.div key={id} variants={cardItemVariants}>
                   <div className="mb-4">
-                    <Icon className="h-8 w-8 text-emerald-600" aria-hidden="true" />
+                    <Icon className="h-8 w-8 text-[#65f4a4]" aria-hidden="true" />
                   </div>
                   <TextAnimation
                     as="h3"

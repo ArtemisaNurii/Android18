@@ -135,26 +135,21 @@ const ServicesPage: React.FC = () => {
         {/* --- HEADER --- */}
         <div className="max-w-3xl mx-auto text-center services-title">
           <p className="font-semibold leading-7 text-gray-500">SERVICES</p>
-          <h1 className="mt-2 text-4xl sm:text-5xl font-semibold leading-tight text-gray-900">
+          <h1 className="mt-2 text-4xl sm:text-5xl uppercase font-semibold leading-tight text-gray-900 pb-10">
 How Codevider Powers Your Tech          </h1>
         </div>
 
-        {/* --- SERVICES GRID with Progress Line --- */}
         <div className="relative">
-          {/* 
-            FIX #2: Added the progress line back in. It's hidden on mobile (md:block) and
-            positioned to align with the numbers. The GSAP animation targets this element.
-          */}
-          
+       
           <div
-            className="services-grid grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-y-20 md:pl-28 
-                       md:gap-x-24" // FIX #1: Increased horizontal gap from 12 to 24
+            className="services-grid grid grid-cols-1 pt-10 gap-y-12 md:grid-cols-2 md:gap-y-20 md:pl-28 
+                       md:gap-x-24" 
           >
             {servicesData.map(({ number, title, description }) => (
               <div key={number} className="service-card relative">
                 {/* Number - absolutely positioned on desktop, static on mobile */}
                 <div className="md:absolute md:left-0 md:-translate-x-full md:top-1.5 md:pr-8">
-                  <span className="text-2xl md:text-3xl font- text-emerald-400">
+                  <span className="text-2xl md:text-3xl font- text-[#65f4a4]">
                     {number}
                   </span>
                 </div>

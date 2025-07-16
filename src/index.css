@@ -119,15 +119,13 @@
   }
 }
 
-/* CONSISTENT SECTION SPACING SYSTEM */
-/* This ensures all sections have equal view height and white space distribution */
 @layer components {
   .section-standard {
-    @apply min-h-screen py-16 sm:py-20 lg:py-24 xl:py-28;
+    @apply min-h-screen py-16 sm:py-20 lg:py-20 xl:py-24;
   }
   
   .section-hero {
-    @apply min-h-screen py-20 sm:py-24 lg:py-28 xl:py-32;
+    @apply min-h-screen py-20 sm:py-16  lg:py-20 xl:py-32;
   }
   
   .section-compact {
@@ -135,7 +133,7 @@
   }
   
   .section-large {
-    @apply min-h-[120vh] py-20 sm:py-24 lg:py-28 xl:py-32;
+    @apply min-h-[100vh] py-20 sm:py-24 lg:py-28 xl:py-32;
   }
 }
 
@@ -197,3 +195,17 @@ html, body {
 .hover\:bg-slate-100:hover { background: rgba(255, 255, 255, 0.1) !important; }
 .hover\:text-gray-900:hover { color: #ffffff !important; }
 .hover\:text-slate-900:hover { color: #ffffff !important; }
+
+/* Animated border effect */
+@keyframes border-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-spin {
+  animation: border-spin 3s linear infinite;
+}

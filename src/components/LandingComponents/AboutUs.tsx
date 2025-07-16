@@ -37,7 +37,7 @@ const AboutUsPage: React.FC = () => {
             <TextAnimation
               as="h1"
               text="Who we are: Our story and mission"
-              classname="text-4xl sm:text-5xl font-semibold leading-tight text-gray-900"
+              classname="text-4xl sm:text-5xl font-semibold uppercase leading-tight text-gray-900"
             />
           </div>
 
