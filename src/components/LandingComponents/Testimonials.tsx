@@ -11,6 +11,7 @@ interface Testimonial {
   text: string;
 }
 
+// Data remains the same
 const testimonials: Testimonial[] = [
   {
     name: 'Sarah Thompson',
@@ -33,33 +34,54 @@ const testimonials: Testimonial[] = [
 ];
 
 const CARD_WIDTH = 'w-80 sm:w-96';
-const CARD_HEIGHT = 'h-80 sm:h-96';
+// Adjusted height for better text fit
+const CARD_HEIGHT = 'h-auto'; 
 
 const Testimonials: React.FC = () => (
-  <section className="section-standard relative overflow-hidden text-white">
-    <div className="absolute inset-0">
-      <div className="absolute inset-0 " />
-    </div>
+  <section className="relative w-full overflow-hidden bg-[#f8f7f4]  py-20 sm:py-28">
+    {/* This is the new green/lime background "glow" element */}
+    <div
+      aria-hidden="true"
+      className="absolute max-w-7xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[550px] rounded-full bg-gradient-to-br from-green-300 to-lime-300 opacity-50 blur-3xl"
+    />
 
-    <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
+    <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
       <div className="mb-16 text-center">
-        <p className="text-sm uppercase tracking-wider text-gray-300">Testimonials</p>
-        <h2 className="mt-4  text-4xl sm:text-5xl font-semibold leading-tight uppercase text-white">What Our Clients Say</h2>
-        <p className="mt-4 text-lg max-sm:px-10 text-gray-400">Real insights from those we’ve had the pleasure to serve.</p>
+        <p className="text-sm font-semibold uppercase tracking-wider text-green-700">Testimonials</p>
+        <h2 className="mt-4 text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
+          What Our Clients Say
+        </h2>
+        <p className="mt-4 text-lg text-gray-700">
+          Real insights from those we’ve had the pleasure to serve.
+        </p>
       </div>
 
       <Marquee gradient={false} speed={30} className="py-4">
         {testimonials.map((t, idx) => (
           <article
             key={idx}
-            className={`relative mx-4 flex ${CARD_WIDTH} ${CARD_HEIGHT} flex-shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-black/20 p-8 shadow-lg backdrop-blur-md`}
+            className={`
+              relative mx-4 flex ${CARD_WIDTH} ${CARD_HEIGHT}
+              flex-shrink-0 flex-col justify-between rounded-2xl 
+              border border-white/30 bg-white/20 p-8 
+              shadow-lg backdrop-blur-lg
+            `}
           >
-            <p className="text-lg leading-relaxed text-gray-200 line-clamp-5">{t.text}</p>
-            <footer className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-              <img src={t.image} alt={t.name} className="h-14 w-14 rounded-full object-cover ring-2 ring-gray-600" />
+            {/* Main testimonial text with updated color for contrast */}
+            <blockquote className="text-lg leading-relaxed text-gray-700">
+              "{t.text}"
+            </blockquote>
+            
+            {/* Footer with updated colors and border */}
+            <footer className="mt-8 flex items-center gap-4 border-t border-gray-900/10 pt-6">
+              <img 
+                src={t.image} 
+                alt={t.name} 
+                className="h-14 w-14 rounded-full object-cover ring-2 ring-white/50" 
+              />
               <div>
-                <p className="font-semibold">{t.name}</p>
-                <p className="text-sm text-gray-400">{t.role}</p>
+                <p className="font-semibold text-gray-900">{t.name}</p>
+                <p className="text-sm text-gray-700">{t.role}</p>
               </div>
             </footer>
           </article>

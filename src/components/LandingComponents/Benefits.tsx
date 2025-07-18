@@ -117,15 +117,13 @@ export const Benefits = () => {
   return (
     <div
       ref={containerRef}
-      className="relative text-neutral-800 font-poppins flex flex-col items-center w-full px-4 sm:px-6"
+      className="relative  text-gray-700 pt-10     bg-[#f8f7f4] flex flex-col items-center w-full px-4 sm:px-6"
     >
       <header className="benefits-header relative z-10 pt-10 text-center mb-12 lg:mb-16 max-w-4xl w-full">
-        {/* BUMPED: Increased base font size from 2xl to 3xl for better mobile impact. */}
-        <h1 className="header-title mt-6 lg:mt-10 font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] uppercase">
+        <h1 className="header-title mt-6 lg:mt-10 font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold  text-gray-700  tracking-[0.1em] sm:tracking-[0.15em]  ">
           BEYOND THE CODE
         </h1>
-        {/* BUMPED: Increased base font size from sm to base for better readability. */}
-        <p className="header-subtitle mt-4 text-base lg:text-lg text-neutral-200 max-w-2xl mx-auto">
+        <p className="header-subtitle mt-4 text-base lg:text-lg  text-gray-700  max-w-2xl mx-auto">
           We believe true partnership goes beyond lines of code. It's about shared goals, transparent collaboration, and building technology that drives tangible business growth.
         </p>
       </header>

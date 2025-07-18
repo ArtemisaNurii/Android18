@@ -25,7 +25,7 @@ const listItemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      ease: 'circOut',
+      ease: [0.175, 0.885, 0.32, 1.275],
       duration: 0.4,
     },
   },
@@ -37,11 +37,13 @@ const NavbarVariant: React.FC = () => {
 
   // 3. DEFINE navigation items directly inside the component.
   // The `targetId` must match the 'id' attribute of your section elements.
+  // Use `isRoute: true` for page navigation instead of section scrolling.
   const navItems = [
-    { label: 'Home', targetId: 'hero' },
-    { label: 'About', targetId: 'about' },
-    { label: 'Projects', targetId: 'projects' },
-    { label: 'Process', targetId: 'process' },
+    { label: 'Home', targetId: 'hero', isRoute: false },
+    { label: 'About', targetId: 'about', isRoute: false },
+    { label: 'Services', targetId: 'services', isRoute: false },
+    { label: 'Projects', targetId: '/projects', isRoute: true },
+    { label: 'Process', targetId: 'process', isRoute: false },
   ];
 
   // State and refs are unchanged
@@ -85,22 +87,27 @@ const NavbarVariant: React.FC = () => {
     };
   }, []); // The dependency array is now empty.
 
-  // 5. REWRITTEN click handler. It now finds the element by ID.
-  const handleNavClick = (targetId: string) => {
+  // 5. REWRITTEN click handler to handle both routes and sections.
+  const handleNavClick = (targetId: string, isRoute: boolean = false) => {
     setMobileOpen(false);
 
-    // Update the URL with useNavigate
-    const path = targetId === 'hero' ? '/' : `/#${targetId}`;
-    navigate(path);
+    if (isRoute) {
+      // Navigate to a different page/route
+      navigate(targetId);
+    } else {
+      // Navigate to a section on the current page
+      const path = targetId === 'hero' ? '/' : `/#${targetId}`;
+      navigate(path);
 
-    // Find the target element on the page and scroll to it
-    setTimeout(() => {
-      const element = document.getElementById(targetId);
-      if (element) {
-        // Use `block: 'start'` to align the top of the section with the top of the viewport
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 150); // Delay allows menu to start closing
+      // Find the target element on the page and scroll to it
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          // Use `block: 'start'` to align the top of the section with the top of the viewport
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50); // Reduced delay for faster navigation
+    }
   };
 
   return (
@@ -119,17 +126,17 @@ const NavbarVariant: React.FC = () => {
 
             {/* Logo */}
             <div className="flex-shrink-0">
-              <img onClick={() => handleNavClick('hero')} src={logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
+              <img onClick={() => handleNavClick('hero', false)} src={logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
             </div>
 
             {/* Desktop Navigation Links (Centered) */}
             <div className="hidden md:flex md:justify-center md:flex-1">
               <ul className="flex items-center space-x-8">
                 {/* 6. RENDER links by mapping over our new navItems array */}
-                {navItems.map(({ label, targetId }) => (
+                {navItems.map(({ label, targetId, isRoute }) => (
                   <li key={label}>
                     <button
-                      onClick={() => handleNavClick(targetId)}
+                      onClick={() => handleNavClick(targetId, isRoute)}
                       className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium lg:text-lg transition-colors duration-300 group"
                     >
                       {label}
@@ -148,7 +155,7 @@ const NavbarVariant: React.FC = () => {
                   href="#contact"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('contact');
+                    handleNavClick('contact', false);
                   }}
                   className="px-4 py-2 text-white border border-white/50 rounded-md text-sm font-medium transition-colors hover:bg-white hover:text-black"
                 >
@@ -193,10 +200,10 @@ const NavbarVariant: React.FC = () => {
               animate="visible"
             >
               {/* 7. RENDER mobile links using the same navItems array */}
-              {navItems.map(({ label, targetId }) => (
-                <motion.li key={label} >
+              {navItems.map(({ label, targetId, isRoute }) => (
+                <motion.li key={label}>
                   <button
-                    onClick={() => handleNavClick(targetId)}
+                    onClick={() => handleNavClick(targetId, isRoute)}
                     className="block text-gray-300 hover:text-white py-2 text-3xl font-light transition-colors"
                   >
                     {label}
@@ -214,7 +221,7 @@ const NavbarVariant: React.FC = () => {
                   href="#contact"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('contact');
+                    handleNavClick('contact', false);
                   }}
                   className="inline-block w-full max-w-xs px-6 py-3 mb-8 text-white border border-white/50 rounded-md text-lg font-medium transition-colors hover:bg-white hover:text-black"
                 >

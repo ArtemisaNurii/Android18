@@ -216,8 +216,8 @@ ContentSection.displayName = "ContentSection";
 // 6. Call To Action - Enhanced responsive design
 const CallToAction = () => (
     <div className="bg-slate-50">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 xl:py-24 text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+        <div className="mx-auto max-w-4xl  p-4 sm:p-6 lg:p-8 pl-6 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black/70 ">
                 Have a similar challenge?
             </h2>
             <p className="mt-3 sm:mt-4 text- sm:text-lg leading-7 sm:leading-8 text-black/70 max-w-2xl mx-auto">

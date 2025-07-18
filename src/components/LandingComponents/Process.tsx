@@ -81,11 +81,11 @@ const ProcessStep = ({ step, title, description, delay = 0 }) => {
         transitionDelay: hasAnimated ? `${delay}ms` : '0ms',
       }}
     >
-      <p className="text-sm font-semibold text-[#65f4a4] tracking-[0.2em] uppercase">{step}</p>
-      <h3 className="text-base font-medium text-gray-100 uppercase tracking-wider mt-4 mb-3">{title}</h3>
+      <p className="text-sm font-semibold text-[#36c574] tracking-[0.2em] uppercase">{step}</p>
+      <h3 className="text-base font-medium  text-gray-700uppercase tracking-wider mt-4 mb-3">{title}</h3>
       {/* The short green divider line */}
-      <div className="border-b border-[#65f4a4] w-1/4 mb-4"></div>
-      <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+      <div className="border-b border-[#36c574] w-1/4 mb-4"></div>
+      <p className=" text-black/60  text-sm leading-relaxed">{description}</p>
     </div>
   );
 };
@@ -93,7 +93,8 @@ const ProcessStep = ({ step, title, description, delay = 0 }) => {
 const Processes = () => {
   return (
     // Section container (Transparent background as requested)
-    <section className="font-sans text-white  max-sm:mt-20 -mt-20 ">
+    <section className="font-sans  text-gray-700  bg-[#f8f7f4] max-sm:pt-10  pb-20">
+      <div className='p-10 max-sm:p-0'></div>
       <div className="container mx-auto  max-w-7xl">
         
         {/* Header Section (03 Removed) */}
@@ -103,7 +104,7 @@ const Processes = () => {
               Process
             </h2>
           </div>
-          <div className="lg:col-span-3 text-gray-300 text-base leading-relaxed space-y-4 pt-2">
+          <div className="lg:col-span-3  text-gray-700 text-base leading-relaxed space-y-4 pt-2">
           <p>
   Our clients’ needs guide every step. We begin with a hands‑on discovery phase-aligning on goals, defining the product vision, and documenting core assumptions in a shared worksheet.
 </p>

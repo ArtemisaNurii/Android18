@@ -103,6 +103,9 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* ---- Lenis Smooth Scroll Styles ---- */
@@ -137,7 +140,6 @@
   }
 }
 
-/* Global Hero Background */
 html, body {
   background: linear-gradient(to bottom right, #000000, #050a08, #47a893);
   background-attachment: fixed;

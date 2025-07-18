@@ -40,7 +40,7 @@ export const WorldMapDemo: React.FC = () => {
   const [hoveredLocation, setHoveredLocation] = useState<string | null>(null);
   
 
-  const arcColors = ["#ffffff", "#ffffff", "#ffffff"]; // Lime, Orange, Indigo
+  const arcColors = ["#10B981", "#10B981", "#10B981"]; // Emerald color
 
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
@@ -53,7 +53,6 @@ export const WorldMapDemo: React.FC = () => {
           </span>
         </div>
         
-        {/* --- The Enhanced WorldMap Component with responsive wrapper --- */}
         <div className="relative w-full">
           {/* Aspect ratio container to maintain proper proportions */}
           <div className="relative w-full aspect-[2/1] max-h-[50vh] sm:max-h-[60vh] lg:max-h-[70vh]">

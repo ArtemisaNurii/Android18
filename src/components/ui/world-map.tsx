@@ -52,7 +52,7 @@ const WorldMap: FC<MapProps> = ({
     const map = new DottedMap({ height: 100, grid: "diagonal" });
     return map.getSVG({
       radius: 0.22,
-      color: theme === "dark" ? "#3EBB9E" : "#d1d5db", // Softer dot colors
+      color: theme === "dark" ? "#34d399" : "#10b981", // Emerald dot colors
       shape: "circle",
       backgroundColor: "transparent",
     });

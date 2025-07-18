@@ -50,11 +50,11 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
         className="w-full flex justify-between items-center text-left py-6"
         aria-expanded={isOpen}
       >
-        <span className="textmd font-normal text-gray-800">{question}</span>
+        <span className="textmd font-normal text-black/80">{question}</span>
         {/* The 'x' in the original is created by rotating a '+' */}
         <div ref={iconRef} className="relative w-6 h-6 flex-shrink-0">
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-0.5 bg-emerald-400"></span>
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-4 bg-emerald-400"></span>
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-0.5 bg-[#36c574]"></span>
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-4 bg-[#36c574]"></span>
         </div>
       </button>
       <div
@@ -62,7 +62,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
         className="overflow-hidden h-0 opacity-0"
         style={{ willChange: 'height, opacity' }} // Optimize for animation
       >
-        <p className="pb-6 text-gray-600">
+        <p className="pb-6 text-black/70">
           {answer}
         </p>
       </div>

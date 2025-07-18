@@ -187,7 +187,7 @@ const cardItemVariants = {
 
 export const Map: React.FC = () => {
   return (
-    <div className="section-compact relative bg-white font-sans">
+    <div className="section-compact relative bg-[#f8f7f4] font-sans">
       
       {/* 1. MAP BANNER SECTION - Enhanced Responsive Design */}
       <header className="relative -mt-40 md:-mt-0 first-line: w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[70vh] min-h-[400px] max-h-[800px] overflow-hidden">
@@ -211,12 +211,12 @@ export const Map: React.FC = () => {
               <TextAnimation
                 as="p"
                 text="Global Partnership"
-                classname="text-sm font- leading-7 text-gray-800 uppercase tracking-wider"
+                classname="text-sm font- leading-7 text-gray-700 uppercase tracking-wider"
               />
               <TextAnimation
                 as="h2"
-                text="Outsourcing Code Company"
-                classname="mt-2 text-4xl sm:text-5xl font-semibold uppercase leading-tight text-gray-900"
+                text="Your Trusted Outsorcing Company"
+                classname="mt-2 text-4xl sm:text-5xl font-semibold  leading-tight text-gray-700"
               />
             </motion.div>
             <motion.div 
@@ -229,7 +229,7 @@ export const Map: React.FC = () => {
               <TextAnimation
                 as="p"
                 text="Unlock cost savings and expert precision, scale with agile flexibility, and focus on what you do best—outsource the rest."
-                classname="text-lg leading-8 text-gray-600"
+                classname="text-lg leading-8 text-gray-700"
               />
             </motion.div>
           </div>
@@ -245,17 +245,17 @@ export const Map: React.FC = () => {
               {featuresData.map(({ id, icon: Icon, title, description }) => (
                 <motion.div key={id} variants={cardItemVariants}>
                   <div className="mb-4">
-                    <Icon className="h-8 w-8 text-[#65f4a4]" aria-hidden="true" />
+                    <Icon className="h-8 w-8 text-[#65e6b4]" aria-hidden="true" />
                   </div>
                   <TextAnimation
                     as="h3"
                     text={title}
-                    classname="text-lg font-semibold leading-7 text-gray-900"
+                    classname="text-lg font-semibold leading-7 text-gray-700"
                   />
                   <TextAnimation
                     as="p"
                     text={description}
-                    classname="mt-2 text-base leading-7 text-gray-600"
+                    classname="mt-2 text-base leading-7 text-gray-700"
                   />
                 </motion.div>
               ))}

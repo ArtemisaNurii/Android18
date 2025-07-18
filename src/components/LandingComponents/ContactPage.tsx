@@ -146,8 +146,8 @@ const Contact: React.FC = () => {
           </button>
         </div>
 
-        {/* --- MODIFIED GRID: Reduced to 2 columns --- */}
-        <div className="grid grid-cols-2 gap-8 text-sm">
+        {/* --- MODIFIED LAYOUT: Two columns positioned at start and end --- */}
+        <div className="flex justify-between text-sm">
           <div className="space-y-3">
             <p className="font-bold text-base text-white">Company</p>
             <ul className="space-y-2 text-gray-300">
@@ -163,7 +163,6 @@ const Contact: React.FC = () => {
               <li><a href="tel:+355695877742" className="hover:text-white"> +355 695877742</a></li>
             </ul>
           </div>
-          {/* Social and Legal columns have been removed from this grid */}
         </div>
 
         {/* --- NEW SECTION: Social Icons and Legal Links --- */}
